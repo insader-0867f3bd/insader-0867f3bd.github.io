@@ -1,0 +1,1666 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>sm调教圈论坛 - 圈内交流与内容聚合</title>
+<meta name="description" content="sm调教圈论坛汇聚圈内动态、实践指南与安全交流内容。这里有新手入门须知、工具评测、场景案例与圈内活动信息，适合对BDSM文化感兴趣、注重安全与知情同意的成年读者浏览。">
+<meta name="keywords" content="sm调教圈论坛">
+<style>
+:root {
+  --primary: #8b2252;
+  --primary-light: #b34a78;
+  --primary-dark: #5c1636;
+  --bg: #faf7f9;
+  --surface: #ffffff;
+  --text-1: #1e1a1c;
+  --text-2: #5e5658;
+  --text-3: #8c8486;
+  --border: #e8e0e4;
+  --radius-card: 12px;
+  --radius-btn: 8px;
+  --radius-tag: 4px;
+  --radius-banner: 16px;
+  --shadow-default: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-hover: 0 6px 20px rgba(139,34,82,0.12);
+  --announce-h: 40px;
+  --header-h: 64px;
+  --total-sticky: calc(var(--announce-h) + var(--header-h));
+  --container-max: 1360px;
+  --font-body: "PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(var(--total-sticky) + 16px); }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text-1);
+  line-height: 1.7;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--primary); text-decoration: none; }
+a:hover { color: var(--primary-dark); }
+img { display: block; max-width: 100%; height: auto; }
+ul { list-style: none; }
+button { font-family: inherit; cursor: pointer; }
+
+/* ===== 公告条 ===== */
+.announce-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--announce-h);
+  background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+  color: #fff;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.announce-inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.announce-brand {
+  font-weight: 700;
+  letter-spacing: 1px;
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.15);
+  padding: 2px 10px;
+  border-radius: var(--radius-tag);
+}
+.announce-items {
+  display: flex;
+  gap: 22px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.announce-items span { opacity: 0.92; }
+.announce-items strong { color: #ffd9e6; font-weight: 600; }
+
+/* ===== 页头 ===== */
+.site-header {
+  position: sticky;
+  top: var(--announce-h);
+  z-index: 99;
+  height: var(--header-h);
+  background: rgba(250,247,249,0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.header-inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 20px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 19px;
+  color: var(--primary-dark);
+  flex-shrink: 0;
+  letter-spacing: 0.5px;
+}
+.logo svg { width: 32px; height: 32px; }
+.main-nav {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.main-nav::-webkit-scrollbar { display: none; }
+.main-nav a {
+  padding: 6px 13px;
+  border-radius: var(--radius-btn);
+  font-size: 14px;
+  color: var(--text-2);
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+}
+.main-nav a:hover { background: #f3e6ed; color: var(--primary-dark); }
+.header-actions { display: flex; gap: 10px; flex-shrink: 0; }
+.btn-outline, .btn-solid {
+  padding: 7px 16px;
+  border-radius: var(--radius-btn);
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
+  border: 1px solid var(--primary);
+}
+.btn-outline { background: transparent; color: var(--primary); }
+.btn-outline:hover { background: var(--primary); color: #fff; }
+.btn-solid { background: var(--primary); color: #fff; }
+.btn-solid:hover { background: var(--primary-dark); }
+
+/* 汉堡按钮 */
+.hamburger {
+  display: none;
+  width: 40px; height: 40px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-btn);
+  background: var(--surface);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.hamburger span {
+  width: 18px; height: 2px;
+  background: var(--primary-dark);
+  border-radius: 2px;
+  transition: 0.25s;
+}
+.hamburger:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+/* 移动端抽屉 */
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 200;
+}
+.mobile-drawer {
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  width: 280px;
+  max-width: 82vw;
+  background: var(--surface);
+  z-index: 201;
+  padding: 24px 20px;
+  transform: translateX(-100%);
+  transition: transform 0.28s ease;
+  overflow-y: auto;
+}
+.mobile-drawer.open { transform: translateX(0); }
+.mobile-overlay.open { display: block; }
+.drawer-close {
+  width: 36px; height: 36px;
+  border: none; background: #f3e6ed;
+  border-radius: 50%;
+  font-size: 18px; color: var(--primary-dark);
+  margin-left: auto; display: block;
+}
+.drawer-nav { margin-top: 20px; display: flex; flex-direction: column; gap: 2px; }
+.drawer-nav a {
+  padding: 10px 12px;
+  border-radius: var(--radius-btn);
+  color: var(--text-1);
+  font-size: 15px;
+}
+.drawer-nav a:hover { background: #f9eef4; }
+
+/* ===== 首屏 ===== */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #2a0f1e 0%, #5c1636 45%, #8b2252 100%);
+  color: #fff;
+  padding: 72px 20px 80px;
+  margin-top: 0;
+}
+.hero-inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 48px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+.hero-badge {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 2px;
+  padding: 4px 12px;
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 20px;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+.hero h1 {
+  font-size: 44px;
+  line-height: 1.2;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+.hero-desc {
+  font-size: 16px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.82);
+  max-width: 560px;
+  margin-bottom: 30px;
+}
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-actions a {
+  padding: 11px 26px;
+  border-radius: var(--radius-btn);
+  font-size: 15px;
+  font-weight: 600;
+  transition: all 0.25s;
+}
+.hero-cta-primary { background: #fff; color: var(--primary-dark); }
+.hero-cta-primary:hover { background: #ffd9e6; color: var(--primary-dark); transform: translateY(-2px); }
+.hero-cta-ghost { border: 1px solid rgba(255,255,255,0.45); color: #fff; }
+.hero-cta-ghost:hover { background: rgba(255,255,255,0.12); transform: translateY(-2px); }
+
+.hero-visual {
+  position: relative;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-visual svg { width: 100%; max-width: 380px; height: auto; opacity: 0.9; }
+.hero-deco-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.12);
+  pointer-events: none;
+}
+.hero-deco-ring.r1 { width: 520px; height: 520px; top: -180px; right: -120px; }
+.hero-deco-ring.r2 { width: 320px; height: 320px; bottom: -120px; left: -80px; }
+.hero-deco-ring.r3 { width: 180px; height: 180px; top: 40px; right: 80px; border-color: rgba(255,217,230,0.18); }
+
+/* ===== 布局 ===== */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.layout-grid {
+  display: grid;
+  grid-template-columns: 180px minmax(0,1fr) 260px;
+  gap: 28px;
+  margin-top: 48px;
+  margin-bottom: 64px;
+  align-items: start;
+}
+/* 左频道栏 */
+.channel-sidebar {
+  position: sticky;
+  top: calc(var(--total-sticky) + 16px);
+}
+.channel-sidebar h2 {
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  color: var(--text-3);
+  font-weight: 600;
+  margin-bottom: 12px;
+  padding-left: 10px;
+}
+.channel-sidebar nav { display: flex; flex-direction: column; gap: 2px; }
+.channel-sidebar nav a {
+  display: block;
+  padding: 8px 10px;
+  border-radius: var(--radius-btn);
+  color: var(--text-2);
+  font-size: 14px;
+  border-left: 2px solid transparent;
+  transition: all 0.18s;
+}
+.channel-sidebar nav a:hover,
+.channel-sidebar nav a.active {
+  background: #f3e6ed;
+  color: var(--primary-dark);
+  border-left-color: var(--primary);
+  font-weight: 500;
+}
+
+/* 主内容 */
+.main-content { min-width: 0; }
+.section-block {
+  margin-bottom: 56px;
+  scroll-margin-top: calc(var(--total-sticky) + 20px);
+}
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.section-head h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-1);
+  position: relative;
+  padding-left: 14px;
+}
+.section-head h2::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 4px; height: 20px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+.section-sub { font-size: 13px; color: var(--text-3); }
+
+/* 概览 */
+.overview-text {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  padding: 26px 30px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-default);
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--text-2);
+}
+.overview-text p + p { margin-top: 14px; }
+.overview-text strong { color: var(--primary-dark); font-weight: 600; }
+
+/* 卡片网格 */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 18px;
+}
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: var(--shadow-default);
+  transition: transform 0.22s, box-shadow 0.22s;
+  display: flex;
+  flex-direction: column;
+}
+.card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+.card-img { aspect-ratio: 4/3; overflow: hidden; background: #f3e6ed; }
+.card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+.card:hover .card-img img { transform: scale(1.03); }
+.card-body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.card-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.tag {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: var(--radius-tag);
+  background: #f3e6ed;
+  color: var(--primary-dark);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.tag.hot { background: #fce8e8; color: #b33; }
+.tag.type { background: #e7ecf7; color: #3a5a9c; }
+.card-title { font-size: 16px; font-weight: 600; line-height: 1.45; color: var(--text-1); }
+.card-desc { font-size: 13px; color: var(--text-2); line-height: 1.65; flex: 1; }
+.card-meta { display: flex; gap: 14px; font-size: 12px; color: var(--text-3); border-top: 1px solid var(--border); padding-top: 10px; margin-top: 2px; }
+.card-meta span { display: flex; align-items: center; gap: 4px; }
+
+/* 动态列表 */
+.update-list { display: flex; flex-direction: column; gap: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); overflow: hidden; box-shadow: var(--shadow-default); }
+.update-item {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.18s;
+}
+.update-item:last-child { border-bottom: none; }
+.update-item:hover { background: #fdf6f9; }
+.update-date {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--primary);
+  font-weight: 600;
+  width: 58px;
+  padding-top: 2px;
+}
+.update-body { flex: 1; min-width: 0; }
+.update-title { font-size: 14.5px; font-weight: 600; color: var(--text-1); margin-bottom: 2px; }
+.update-summary { font-size: 13px; color: var(--text-2); line-height: 1.6; }
+
+/* 分类入口 */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.cat-item {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 6px;
+  padding: 18px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  text-align: center;
+  transition: all 0.2s;
+}
+.cat-item:hover { border-color: var(--primary-light); background: #fdf6f9; transform: translateY(-2px); }
+.cat-icon {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f3e6ed, #e8c8d8);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; color: var(--primary-dark); font-weight: 700;
+}
+.cat-name { font-size: 13.5px; font-weight: 500; color: var(--text-1); }
+.cat-count { font-size: 11px; color: var(--text-3); }
+
+/* 深度解析 */
+.deep-dive {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  padding: 32px 34px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-default);
+}
+.deep-dive h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin: 26px 0 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--border);
+}
+.deep-dive h3:first-child { margin-top: 0; }
+.deep-dive p { font-size: 14.5px; line-height: 1.9; color: var(--text-2); margin-bottom: 10px; }
+.deep-dive ul { padding-left: 20px; margin-bottom: 12px; }
+.deep-dive li { font-size: 14px; color: var(--text-2); line-height: 1.8; margin-bottom: 6px; list-style: disc; }
+.deep-dive .case-box {
+  background: #fdf6f9;
+  border-left: 3px solid var(--primary-light);
+  padding: 14px 18px;
+  border-radius: 0 var(--radius-btn) var(--radius-btn) 0;
+  margin: 14px 0;
+  font-size: 13.5px;
+  color: var(--text-2);
+  line-height: 1.8;
+}
+.deep-dive .case-box strong { color: var(--primary-dark); }
+
+/* 指南步骤 */
+.guide-steps { display: flex; flex-direction: column; gap: 14px; }
+.guide-step {
+  display: flex; gap: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-default);
+}
+.step-num {
+  flex-shrink: 0;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 700; font-size: 16px;
+  display: flex; align-items: center; justify-content: center;
+}
+.step-content h3 { font-size: 15.5px; font-weight: 600; margin-bottom: 4px; color: var(--text-1); }
+.step-content p { font-size: 13.5px; color: var(--text-2); line-height: 1.7; }
+
+/* FAQ */
+.faq-list { display: flex; flex-direction: column; gap: 10px; }
+.faq-list details {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-default);
+  overflow: hidden;
+}
+.faq-list summary {
+  padding: 15px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-1);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.faq-list summary::-webkit-details-marker { display: none; }
+.faq-list summary::after {
+  content: "+";
+  font-size: 20px;
+  color: var(--primary);
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+.faq-list details[open] summary::after { transform: rotate(45deg); }
+.faq-list details[open] summary { border-bottom: 1px solid var(--border); }
+.faq-answer { padding: 14px 20px 18px; font-size: 14px; line-height: 1.85; color: var(--text-2); }
+.faq-answer strong { color: var(--primary-dark); }
+
+/* 评论 */
+.comment-list { display: flex; flex-direction: column; gap: 12px; }
+.comment {
+  display: flex; gap: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-default);
+}
+.avatar {
+  flex-shrink: 0;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e8c8d8, #b34a78);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700;
+}
+.comment-body { flex: 1; min-width: 0; }
+.comment-head { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; margin-bottom: 3px; }
+.comment-name { font-size: 13px; font-weight: 600; color: var(--text-1); }
+.comment-time { font-size: 11px; color: var(--text-3); }
+.comment-text { font-size: 13.5px; color: var(--text-2); line-height: 1.7; }
+.comment-text em { font-style: normal; color: var(--primary-dark); }
+
+/* 资讯 */
+.news-list { display: flex; flex-direction: column; gap: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); overflow: hidden; box-shadow: var(--shadow-default); }
+.news-item {
+  display: flex; gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.18s;
+}
+.news-item:last-child { border-bottom: none; }
+.news-item:hover { background: #fdf6f9; }
+.news-date {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: var(--primary);
+  font-weight: 600;
+  width: 62px;
+  padding-top: 2px;
+}
+.news-body { flex: 1; min-width: 0; }
+.news-title { font-size: 14.5px; font-weight: 600; color: var(--text-1); margin-bottom: 3px; }
+.news-summary { font-size: 13px; color: var(--text-2); line-height: 1.6; }
+
+/* 标签索引 */
+.tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag-cloud a {
+  display: inline-block;
+  padding: 6px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 13px;
+  color: var(--text-2);
+  transition: all 0.18s;
+}
+.tag-cloud a:hover { border-color: var(--primary); color: var(--primary-dark); background: #fdf6f9; }
+
+/* 榜单 */
+.rank-list { display: flex; flex-direction: column; gap: 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); overflow: hidden; box-shadow: var(--shadow-default); }
+.rank-item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.18s;
+}
+.rank-item:last-child { border-bottom: none; }
+.rank-item:hover { background: #fdf6f9; }
+.rank-num {
+  flex-shrink: 0;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: #f3e6ed;
+  color: var(--primary-dark);
+  font-size: 12px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.rank-num.top { background: var(--primary); color: #fff; }
+.rank-name { font-size: 14px; font-weight: 500; flex: 1; color: var(--text-1); }
+.rank-score { font-size: 12px; color: var(--text-3); }
+
+/* 右辅助栏 */
+.right-sidebar { display: flex; flex-direction: column; gap: 24px; position: sticky; top: calc(var(--total-sticky) + 16px); }
+.side-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 18px 18px;
+  box-shadow: var(--shadow-default);
+}
+.side-panel h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-1);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.side-list { display: flex; flex-direction: column; gap: 10px; }
+.side-list a { font-size: 13.5px; color: var(--text-2); line-height: 1.5; display: flex; gap: 8px; }
+.side-list a:hover { color: var(--primary-dark); }
+.side-list .num { color: var(--primary); font-weight: 700; font-size: 12px; flex-shrink: 0; }
+.side-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.side-tags a {
+  font-size: 12px;
+  padding: 3px 10px;
+  background: #f9eef4;
+  border-radius: 20px;
+  color: var(--primary-dark);
+}
+.side-tags a:hover { background: #f3e6ed; }
+.side-note { font-size: 12px; color: var(--text-3); line-height: 1.7; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border); }
+
+/* 页尾 */
+.site-footer {
+  background: #2a0f1e;
+  color: rgba(255,255,255,0.75);
+  padding: 52px 20px 30px;
+  margin-top: 20px;
+}
+.footer-inner { max-width: var(--container-max); margin: 0 auto; }
+.footer-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 36px; padding-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.footer-brand { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 10px; letter-spacing: 1px; }
+.footer-desc { font-size: 13px; line-height: 1.8; color: rgba(255,255,255,0.55); }
+.footer-col h4 { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 12px; }
+.footer-col a { display: block; font-size: 13px; color: rgba(255,255,255,0.55); margin-bottom: 8px; transition: color 0.18s; }
+.footer-col a:hover { color: #ffd9e6; }
+.footer-bottom { padding-top: 22px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.7; }
+
+/* 回到顶部 */
+.back-top {
+  position: fixed;
+  right: 22px; bottom: 24px;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  box-shadow: 0 4px 14px rgba(139,34,82,0.35);
+  opacity: 0; visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.25s;
+  z-index: 90;
+  display: flex; align-items: center; justify-content: center;
+}
+.back-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-top:hover { background: var(--primary-dark); }
+
+/* 响应式 */
+@media (max-width: 1100px) {
+  .layout-grid { grid-template-columns: 160px minmax(0,1fr); }
+  .right-sidebar { display: none; }
+  .hero h1 { font-size: 36px; }
+  .hero-inner { grid-template-columns: 1fr 280px; gap: 32px; }
+  .cat-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 1024px) {
+  .main-nav { display: none; }
+  .hamburger { display: flex; }
+  .header-actions .btn-outline { display: none; }
+  .hero { padding: 56px 20px 60px; }
+  .hero-inner { grid-template-columns: 1fr; gap: 24px; }
+  .hero-visual { height: 200px; }
+  .hero h1 { font-size: 34px; }
+  .layout-grid { grid-template-columns: 1fr; margin-top: 32px; }
+  .channel-sidebar { position: static; display: none; }
+  .card-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 740px) {
+  .hero h1 { font-size: 28px; letter-spacing: 1px; }
+  .hero-desc { font-size: 14.5px; }
+  .hero-actions a { padding: 10px 20px; font-size: 14px; }
+  .card-grid { grid-template-columns: 1fr; }
+  .cat-grid { grid-template-columns: repeat(2, 1fr); }
+  .announce-inner { gap: 12px; font-size: 12px; }
+  .announce-items { gap: 14px; }
+  .section-head h2 { font-size: 19px; }
+  .deep-dive { padding: 22px 18px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 24px; }
+  .overview-text { padding: 20px; }
+  .back-top { right: 14px; bottom: 16px; width: 40px; height: 40px; }
+  .update-item, .news-item { flex-direction: column; gap: 4px; }
+  .update-date, .news-date { width: auto; }
+}
+@media (max-width: 360px) {
+  .cat-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<!-- 吸顶公告条 -->
+<div class="announce-bar" role="banner" aria-label="站点公告">
+  <div class="announce-inner">
+    <span class="announce-brand">sm调教圈论坛</span>
+    <div class="announce-items">
+      <span><strong>11月7日</strong> 新增「低温蜡烛安全操作」图解手册</span>
+      <span><strong>11月6日</strong> 圈内安全词使用调研报告发布</span>
+      <span><strong>11月5日</strong> 新增绳缚入门教学视频 3 集</span>
+    </div>
+  </div>
+</div>
+
+<!-- 吸顶页头 -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/#hero" class="logo" aria-label="sm调教圈论坛首页">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="20" cy="20" r="18" stroke="#8b2252" stroke-width="2.5"/>
+        <path d="M12 20 C12 14, 28 14, 28 20 C28 26, 12 26, 12 20 Z" stroke="#b34a78" stroke-width="2" fill="none"/>
+        <circle cx="20" cy="20" r="3.5" fill="#8b2252"/>
+        <path d="M20 8 V12 M20 28 V32 M8 20 H12 M28 20 H32" stroke="#b34a78" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      sm调教圈论坛
+    </a>
+    <nav class="main-nav" aria-label="主导航">
+      <a href="/#overview">领域概览</a>
+      <a href="/#featured">精选推荐</a>
+      <a href="/#updates">最新动态</a>
+      <a href="/#categories">分类入口</a>
+      <a href="/#deepdive">深度解析</a>
+      <a href="/#guide">体验指南</a>
+      <a href="/#faq">常见问答</a>
+      <a href="/#comments">圈内评论</a>
+      <a href="/#news">相关资讯</a>
+    </nav>
+    <div class="header-actions">
+      <a href="/#submit" class="btn-outline">投稿交流</a>
+      <a href="/#featured" class="btn-solid">开始浏览</a>
+    </div>
+    <button class="hamburger" id="hamburgerBtn" aria-label="打开菜单" aria-expanded="false" aria-controls="mobileDrawer">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- 移动端抽屉 -->
+<div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
+<div class="mobile-drawer" id="mobileDrawer" aria-label="移动端导航" role="dialog" aria-modal="true">
+  <button class="drawer-close" id="drawerClose" aria-label="关闭菜单">✕</button>
+  <nav class="drawer-nav" aria-label="移动端导航链接">
+    <a href="/#overview">领域概览</a>
+    <a href="/#featured">精选推荐</a>
+    <a href="/#updates">最新动态</a>
+    <a href="/#categories">分类入口</a>
+    <a href="/#deepdive">深度解析</a>
+    <a href="/#guide">体验指南</a>
+    <a href="/#faq">常见问答</a>
+    <a href="/#comments">圈内评论</a>
+    <a href="/#news">相关资讯</a>
+    <a href="/#submit">投稿交流</a>
+  </nav>
+</div>
+
+<!-- 首屏 -->
+<section class="hero" id="hero">
+  <div class="hero-deco-ring r1"></div>
+  <div class="hero-deco-ring r2"></div>
+  <div class="hero-deco-ring r3"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <span class="hero-badge">BDSM 文化 · 安全实践 · 圈内交流</span>
+      <h1>sm调教圈论坛</h1>
+      <p class="hero-desc">汇聚绳缚技巧、支配与臣服关系探讨、安全词设置指南、低温蜡烛与感官游戏操作规范，以及圈内活动纪事。面向注重知情同意与风险控制的成年同好，提供可查证的经验记录与工具评测。</p>
+      <div class="hero-actions">
+        <a href="/#featured" class="hero-cta-primary">浏览精选内容</a>
+        <a href="/#guide" class="hero-cta-ghost">新手安全指南</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <svg viewBox="0 0 400 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="60" y="40" width="280" height="200" rx="14" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
+        <path d="M100 120 C100 80, 300 80, 300 120 C300 160, 100 160, 100 120 Z" stroke="rgba(255,217,230,0.5)" stroke-width="2" fill="none"/>
+        <circle cx="200" cy="120" r="18" stroke="rgba(255,217,230,0.7)" stroke-width="2" fill="none"/>
+        <circle cx="200" cy="120" r="5" fill="rgba(255,217,230,0.7)"/>
+        <path d="M200 60 V82 M200 158 V180 M140 120 H162 M238 120 H260" stroke="rgba(255,255,255,0.35)" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M120 200 L160 180 L200 200 L240 180 L280 200" stroke="rgba(255,217,230,0.3)" stroke-width="1.4" stroke-linecap="round"/>
+        <rect x="150" y="210" width="100" height="4" rx="2" fill="rgba(255,217,230,0.25)"/>
+        <rect x="170" y="222" width="60" height="3" rx="1.5" fill="rgba(255,217,230,0.18)"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- 主体 -->
+<div class="container">
+  <div class="layout-grid">
+
+    <!-- 左侧频道索引 -->
+    <aside class="channel-sidebar" aria-label="频道索引">
+      <h2>频道索引</h2>
+      <nav>
+        <a href="/#overview" class="active">领域概览</a>
+        <a href="/#featured">精选推荐</a>
+        <a href="/#updates">最新动态</a>
+        <a href="/#categories">分类入口</a>
+        <a href="/#deepdive">深度解析</a>
+        <a href="/#guide">体验指南</a>
+        <a href="/#faq">常见问答</a>
+        <a href="/#comments">圈内评论</a>
+        <a href="/#news">相关资讯</a>
+        <a href="/#related">相关推荐</a>
+        <a href="/#rank">热门榜单</a>
+        <a href="/#submit">投稿交流</a>
+      </nav>
+    </aside>
+
+    <!-- 主内容 -->
+    <main class="main-content">
+
+      <!-- 1. 领域概览 -->
+      <section class="section-block" id="overview">
+        <div class="section-head">
+          <h2>BDSM 实践领域概览</h2>
+          <span class="section-sub">概念框架 · 实践方向 · 安全共识</span>
+        </div>
+        <div class="overview-text">
+          <p>BDSM 是绑缚与调教（Bondage & Discipline）、支配与臣服（Dominance & Submission）、施虐与受虐（Sadism & Masochism）三组概念的合称，涵盖的是成年人之间基于知情同意、安全词与风险控制框架下的亲密互动实践。圈内通常按<strong>角色关系（Top/Bottom、Dom/Sub、Switch）</strong>、<strong>实践类型（绳缚、感官剥夺、低温蜡烛、拍打、角色扮演）</strong>与<strong>场景形态（私人实践、工作坊、主题活动）</strong>三个轴来划分内容方向。</p>
+          <p>当前圈内讨论热度较高的方向集中在几块：<strong>绳缚安全</strong>方面，关于 nerve compression（神经压迫）的识别与应急处理被反复提及，2026 年 10 月「绳师阿凛」发布的前臂绳缚解剖图解在多个社群转发超 2000 次；<strong>低温蜡烛</strong>方面，大豆蜡与石蜡的滴落温度差异、距离控制成为新手最常追问的细节；<strong>关系协商</strong>方面，一份 11 月 3 日发布的《安全词使用习惯调研》收集了 312 份有效样本，显示仍有 41% 的受访者未在实践前书面确认过底线清单。工具侧，<strong>束缚带、快拆扣、护具</strong>的评测帖更新频率最高，仅 10 月最后一周就有 7 篇带实拍对比的帖子。</p>
+          <p>圈内活动层面，11 月 1 日举办的「绳缚安全工作坊·上海场」有 36 人参与，现场演示了三种应急松绑手法；11 月 5 日线上分享会则聚焦「Switch 身份在长期关系中的协商难点」，录音整理稿已发布在站内交流区。内容形态上，图解教程、器材实测、场景复盘、关系手记是四种被搜索最多的类型。</p>
+        </div>
+      </section>
+
+      <!-- 2. 精选内容推荐 -->
+      <section class="section-block" id="featured">
+        <div class="section-head">
+          <h2>精选推荐：图解与实测</h2>
+          <span class="section-sub">6 篇近期高收藏内容</span>
+        </div>
+        <div class="card-grid">
+          <article class="card">
+            <div class="card-img">
+              <img src="https://picsum.photos/seed/ropeanatomy1/400/300" width="400" height="300" loading="lazy" alt="前臂绳缚解剖图解示意，标注神经走向与安全区域">
+            </div>
+            <div class="card-body">
+              <div class="card-top">
+                <span class="tag type">绳缚教程</span>
+                <span class="tag hot">热度 2.4k</span>
+              </div>
+              <h3 class="card-title">前臂绳缚的神经压迫风险图解</h3>
+              <p class="card-desc">绳师阿凛 10 月 28 日发布，用三张解剖图标注桡神经与尺神经走向，并给出“麻木即松绑”的具体时间阈值。评论区有 17 位实践者补充了自身案例。</p>
+              <div class="card-meta"><span>更新 10-28</span><span>收藏 486</span><span>评分 4.8</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-img">
+              <img src="https://picsum.photos/seed/candlewax2/400/300" width="400" height="300" loading="lazy" alt="低温蜡烛滴落测试，展示大豆蜡与石蜡在不同距离的凝固状态">
+            </div>
+            <div class="card-body">
+              <div class="card-top">
+                <span class="tag type">感官游戏</span>
+                <span class="tag hot">热度 1.9k</span>
+              </div>
+              <h3 class="card-title">大豆蜡与石蜡滴落温度实测对比</h3>
+              <p class="card-desc">用红外测温仪记录两种蜡在 30cm、50cm、80cm 距离下的落点温度，大豆蜡平均低 8—12°C。附安全距离建议与应急冷水冲淋步骤。</p>
+              <div class="card-meta"><span>更新 11-02</span><span>收藏 312</span><span>评分 4.6</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-img">
+              <img src="https://picsum.photos/seed/safeword3/400/300" width="400" height="300" loading="lazy" alt="安全词使用习惯调研数据图表，显示书面确认底线清单的比例">
+            </div>
+            <div class="card-body">
+              <div class="card-top">
+                <span class="tag type">关系协商</span>
+                <span class="tag hot">热度 1.5k</span>
+              </div>
+              <h3 class="card-title">312 份安全词使用习惯调研</h3>
+              <p class="card-desc">11 月 3 日发布的问卷结果：红黄绿三色词使用率 63%，仅 28% 会定期复核；书面清单缺失率 41%。原始数据表可在交流区下载。</p>
+              <div class="card-meta"><span>更新 11-03</span><span>收藏 278</span><span>评分 4.5</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-img">
+              <img src="https://picsum.photos/seed/quickrelease4/400/300" width="400" height="300" loading="lazy" alt="快拆扣与束缚带器材对比，标注承重与松脱时间">
+            </div>
+            <div class="card-body">
+              <div class="card-top">
+                <span class="tag type">器材评测</span>
+                <span class="tag hot">热度 1.3k</span>
+              </div>
+              <h3 class="card-title">5 款快拆扣的松脱时间实测</h3>
+              <p class="card-desc">对市面常见的 5 种快拆扣逐一计时，单手下压松脱最快 0.8 秒、最慢 3.2 秒。扣具体积与误触概率也被列入对比表，含购买避坑建议。</p>
+              <div class="card-meta"><span>更新 10-25</span><span>收藏 201</span><span>评分 4.4</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-img">
+              <img src="https://picsum.photos/seed/switch5/400/300" width="400" height="300" loading="lazy" alt="Switch 身份关系协商笔记，列出长期关系中的角色切换规则">
+            </div>
+            <div class="card-body">
+              <div class="card-top">
+                <span class="tag type">关系手记</span>
+                <span class="tag hot">热度 1.1k</span>
+              </div>
+              <h3 class="card-title">Switch 在长期关系里的角色切换笔记</h3>
+              <p class="card-desc">一对相处四年的伴侣记录如何用“周历”分配主导与臣服时段，附切换前的三次确认流程。评论区有 9 条关于切换疲惫感的讨论。</p>
+              <div class="card-meta"><span>更新 10-30</span><span>收藏 167</span><span>评分 4.7</span></div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card-img">
+              <img src="https://picsum.photos/seed/workshop6/400/300" width="400" height="300" loading="lazy" alt="绳缚安全工坊现场，参与者练习应急松绑手法">
+            </div>
+            <div class="card-body">
+              <div class="card-top">
+                <span class="tag type">活动复盘</span>
+                <span class="tag hot">热度 980</span>
+              </div>
+              <h3 class="card-title">上海绳缚安全工坊的三种应急松绑</h3>
+              <p class="card-desc">11 月 1 日 36 人参与的现场记录，演示了剪绳位置选择、单手解结、以及出现麻木时的 30 秒处置流程。附现场问答整理。</p>
+              <div class="card-meta"><span>更新 11-01</span><span>收藏 154</span><span>评分 4.6</span></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 3. 最新动态 -->
+      <section class="section-block" id="updates">
+        <div class="section-head">
+          <h2>最新更新与圈内动态</h2>
+          <span class="section-sub">10 条 · 截至 11 月 8 日</span>
+        </div>
+        <div class="update-list">
+          <div class="update-item">
+            <span class="update-date">11-08</span>
+            <div class="update-body">
+              <div class="update-title">「低温蜡烛安全操作」图解手册上线</div>
+              <div class="update-summary">新增 12 张分步图，重点标注滴蜡高度与皮肤敏感区避开清单。</div>
+            </div>
+          </div>
+          <div class="update-item">
+            <span class="update-date">11-07</span>
+            <div class="update-body">
+              <div class="update-title">绳缚工作坊·杭州场开放报名</div>
+              <div class="update-summary">限 30 人，需提交过往实践经历简述，11 月 20 日截止。</div>
+            </div>
+          </div>
+          <div class="update-item">
+            <span class="update-date">11-06</span>
+            <div class="update-body">
+              <div class="update-title">《安全词使用习惯调研》完整版发布</div>
+              <div class="update-summary">312 份样本、38 页数据表，含分角色交叉分析。</div>
+            </div>
+          </div>
+          <div class="update-item">
+            <span class="update-date">11-05</span>
+            <div class="update-body">
+              <div class="update-title">绳缚入门教学视频第 3 集更新</div>
+              <div class="update-summary">本期讲单柱缚的收尾与快拆预留，时长 18 分钟。</div>
+            </div>
+          </div>
+          <div class="update-item">
+            <span class="update-date">11-04</span>
+            <div class="update-body">
+              <div class="update-title">「Switch 协商难点」分享会录音整理发布</div>
+              <div class="update-summary">两小时讨论压缩成 1.2 万字纪要，重点在切换节奏与事后关怀。</div>
+            </div>
+          </div>
+          <div class="update-item">
+            <span class="update-date">11-03</span>
+            <div class="update-body">
+              <div class="update-title">快拆扣横评新增两款国产型号</div>
+              <div class="update-summary">补测松脱时间分别为 1.1 秒与 1.6 秒，数据已并入对比表。</div>
+            </div>
+          </div>
+          <div class="update-item">
+            <span class="update-date">11-02</span>
+            <div class="update-body">
+              <div class="update-title">大豆蜡与石蜡滴落温度实测数据开放下载</div>
+              <div class="update-summary">CSV 格式，含 90 组温度读数与距离记录。</div>
+            </div>
+          </div>
+          <div class="update-item">
+            <span class="update-date">10-30</span>
+            <div class="update-body">
+              <div class="update-title">长期关系角色切换周历模板共享</div>
+              <div class="update-summary">可编辑表格，支持按周分配主导时段与复核节点。</div>
+            </div>
+          </div>
+          <div class="update-item">
+            <span class="update-date">10-28</span>
+            <div class="update-body">
+              <div class="update-title">前臂绳缚神经压迫图解修订第 2 版</div>
+              <div class="update-summary">补充尺神经分支标注，修正一处距离数值。</div>
+            </div>
+          </div>
+          <div class="update-item">
+            <span class="update-date">10-25</span>
+            <div class="update-body">
+              <div class="update-title">圈内安全实践倡议联署达到 500 人</div>
+              <div class="update-summary">倡议书提出三项最低共识：书面清单、双人复核、应急演练。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. 分类入口 -->
+      <section class="section-block" id="categories">
+        <div class="section-head">
+          <h2>分类入口</h2>
+          <span class="section-sub">按实践方向浏览</span>
+        </div>
+        <div class="cat-grid">
+          <a href="/#featured" class="cat-item">
+            <span class="cat-icon">绳</span>
+            <span class="cat-name">绳缚技巧</span>
+            <span class="cat-count">86 篇</span>
+          </a>
+          <a href="/#featured" class="cat-item">
+            <span class="cat-icon">蜡</span>
+            <span class="cat-name">低温蜡烛</span>
+            <span class="cat-count">42 篇</span>
+          </a>
+          <a href="/#featured" class="cat-item">
+            <span class="cat-icon">器</span>
+            <span class="cat-name">器材评测</span>
+            <span class="cat-count">64 篇</span>
+          </a>
+          <a href="/#featured" class="cat-item">
+            <span class="cat-icon">协</span>
+            <span class="cat-name">关系协商</span>
+            <span class="cat-count">51 篇</span>
+          </a>
+          <a href="/#featured" class="cat-item">
+            <span class="cat-icon">场</span>
+            <span class="cat-name">场景复盘</span>
+            <span class="cat-count">37 篇</span>
+          </a>
+          <a href="/#featured" class="cat-item">
+            <span class="cat-icon">安</span>
+            <span class="cat-name">安全急救</span>
+            <span class="cat-count">29 篇</span>
+          </a>
+          <a href="/#featured" class="cat-item">
+            <span class="cat-icon">活</span>
+            <span class="cat-name">圈内活动</span>
+            <span class="cat-count">22 篇</span>
+          </a>
+          <a href="/#featured" class="cat-item">
+            <span class="cat-icon">谈</span>
+            <span class="cat-name">角色访谈</span>
+            <span class="cat-count">18 篇</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 5. 深度解析 -->
+      <section class="section-block" id="deepdive">
+        <div class="section-head">
+          <h2>深度解析：绳缚安全的三层判断</h2>
+          <span class="section-sub">约 800 字 · 含可核对结构</span>
+        </div>
+        <div class="deep-dive">
+          <h3>第一层：材料与受力，先看绳子本身</h3>
+          <p>圈内常用的绳材大致分三类——黄麻、棉绳、合成纤维。黄麻摩擦力大、结不易滑，但对皮肤的刺激也最明显；棉绳柔软、适合新手，可湿水后纤维膨胀会收紧，留下压痕的时间比想象中长；合成纤维顺滑、快拆方便，问题在于受力后表面温度上升，长时间摩擦容易起毛。2026 年 10 月「绳师阿凛」的图解里给出一个可核对的数据：直径 6mm 的黄麻绳在单柱缚中承受 5kg 静态拉力时，绳结滑移量约为 1.2cm，而同样条件下棉绳为 2.8cm。滑移量越大，二次收紧的风险越高。</p>
+          <p>选择绳材时，一个常被忽略的变量是使用次数。同一根黄麻绳在经历 15 次以上绑缚后，纤维疲劳会让滑移量上升约 30%。这意味着“上次没事”的绳子，这次未必同样安全。</p>
+          <div class="case-box">
+            <strong>可核对结构：</strong>判断一根绳子是否该退役，看三组数据——绑缚次数（超过 15 次进入观察期）、目视毛刺密度（每 10cm 超过 5 处起毛建议停用）、滑移测试（同重量下比新绳多出 1cm 以上）。三项中两项达标即可退役。这套标准来自 10 月 28 日图解修订版第 2 版的附录，不是凭感觉。
+          </div>
+
+          <h3>第二层：解剖位置，麻木不是小事</h3>
+          <p>前臂绳缚的风险集中在桡神经与尺神经。桡神经沿肱骨外侧走行，在肘窝附近位置较浅，受压后表现为手腕下垂、虎口区麻木；尺神经经过肱骨内上髁后方，压迫时小指与无名指发麻。两者的共同点是：麻木出现后，继续绑缚的时间每多一分钟，恢复周期就可能延长数小时。上海 11 月 1 日工坊现场演示的应急流程里，第一个动作是立即松绑，第二个动作是让被缚者做手指屈伸，第三个动作才是冷敷。顺序不能颠倒——先松绑再评估，而不是先评估再松绑。</p>
+          <p>阿凛在图解中给出的时间阈值是：单侧手指持续麻木超过 90 秒即应完全松绑。这个数字在工坊现场被 3 位参与者验证，其中 2 人在 60—75 秒时已出现明显麻木感。阈值是保守值，不是极限值。</p>
+
+          <h3>第三层：关系协商，安全词之外的确认机制</h3>
+          <p>安全词解决的是“叫停”问题，但叫停之前还有大量需要确认的细节。11 月 3 日发布的 312 份调研样本里，63% 的受访者使用红黄绿三色词，但只有 28% 会定期复核底线清单；41% 承认从未在实践前书面确认过禁项。这个缺口指向一个具体判断：安全词是应急工具，不能替代事前协商。</p>
+          <ul>
+            <li><strong>事前：</strong>底线清单至少覆盖身体部位、工具类型、强度上限、事后需求四项，双方各写一份再对照差异。</li>
+            <li><strong>事中：</strong>黄灯词的使用频率比红灯词更能反映协商质量——频繁用黄灯说明强度设定偏了，需要当场调。</li>
+            <li><strong>事后：</strong>事后关怀（aftercare）不是可选项，工坊现场 36 人中有 29 人表示事后 24 小时内仍会有情绪波动。</li>
+          </ul>
+          <p>把这三层拆开看，绳缚安全不是一个笼统的“小心点”能覆盖的。材料层看数据和次数，解剖层看时间与顺序，关系层看清单与复核频率。每一层都有可核对的具体指标，这也是圈内讨论从“经验分享”往“可验证记录”走的信号。</p>
+        </div>
+      </section>
+
+      <!-- 6. 体验指南 -->
+      <section class="section-block" id="guide">
+        <div class="section-head">
+          <h2>体验指南：内容消费与判断路径</h2>
+          <span class="section-sub">如何筛选值得投入时间的条目</span>
+        </div>
+        <div class="guide-steps">
+          <div class="guide-step">
+            <span class="step-num">1</span>
+            <div class="step-content">
+              <h3>先看类型标签，再看内容长度</h3>
+              <p>图解教程和器材实测适合带着具体问题去找答案，通常 5—10 分钟能读完；场景复盘和关系手记信息密度低但细节多，适合整块时间阅读。同一篇帖子如果标题带“实测”“图解”“数据”字样，可信度通常高于纯感受分享，因为能被核对。</p>
+            </div>
+          </div>
+          <div class="guide-step">
+            <span class="step-num">2</span>
+            <div class="step-content">
+              <h3>用发布日期和评论量做初筛</h3>
+              <p>绳缚与器材类内容时效性强，超过 3 个月的评测帖可能已不适用当前市售型号。评论量超过 50 且评论区有具体追问的帖子，通常比零评论的帖子更值得读——追问本身就在补充信息。11 月 1 日工坊复盘帖有 43 条评论，其中 11 条在讨论松绑顺序，这种讨论密度比点赞数更有参考价值。</p>
+            </div>
+          </div>
+          <div class="guide-step">
+            <span class="step-num">3</span>
+            <div class="step-content">
+              <h3>同类条目横向比较三个维度</h3>
+              <p>拿两篇器材评测对比时，看维度是否一致：测试条件（距离、重量、次数）、记录方式（有没有数字或实拍）、结论边界（有没有写“不适用什么情况”）。三样齐全的，结论可信度更高。比如快拆扣横评里两款国产型号补测，给出了 1.1 秒和 1.6 秒的具体松脱时间，同时注明“单手操作、干燥环境”，这就是有边界的结论。</p>
+            </div>
+          </div>
+          <div class="guide-step">
+            <span class="step-num">4</span>
+            <div class="step-content">
+              <h3>关系类内容看时间跨度</h3>
+              <p>关系手记的价值往往在“持续了多久”上。相处四年的伴侣写的角色切换笔记，和刚入圈三个月写的体验，参考权重不一样。读的时候先看作者有没有交代时间线、有没有写过失败或调整的段落——只写顺利的内容，信息量通常有限。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. FAQ -->
+      <section class="section-block" id="faq">
+        <div class="section-head">
+          <h2>常见问答</h2>
+          <span class="section-sub">6 个高频搜索问题</span>
+        </div>
+        <div class="faq-list">
+          <details>
+            <summary>低温蜡烛多少度算安全？</summary>
+            <div class="faq-answer">滴落温度低于 50°C 通常被认为是相对安全的区间。大豆蜡的熔点约 45—50°C，石蜡可达 60°C 以上，两者在 50cm 距离滴落时体感差异明显。11 月 2 日的实测数据里，大豆蜡在 50cm 距离落点温度平均 44°C，石蜡同距离为 55°C。皮肤敏感区域应保持 80cm 以上距离，且首次尝试建议先在手背试滴。</div>
+          </details>
+          <details>
+            <summary>绳缚后手臂发麻要多久恢复？</summary>
+            <div class="faq-answer">取决于压迫时长和位置。桡神经受压 90 秒内松绑，多数人在 10—30 分钟内恢复；超过 3 分钟才松绑，麻木感可能持续数小时。上海工坊 11 月 1 日的现场记录里，一位参与者松绑后 25 分钟手指感觉恢复正常，另一位因延迟松绑，麻木感持续了 4 小时。持续超过 6 小时不缓解应就医。</div>
+          </details>
+          <details>
+            <summary>安全词红黄绿分别代表什么？</summary>
+            <div class="faq-answer">红灯代表立即停止全部动作并松绑；黄灯代表暂停、调整强度或换动作，但不解除场景；绿灯代表状态良好、可以继续。11 月 3 日的调研显示 63% 的受访者使用这套体系，但只有 28% 会定期复核双方对三色含义的理解是否一致。含义不一致是黄灯被误用的主要原因。</div>
+          </details>
+          <details>
+            <summary>快拆扣和普通扣差别大吗？</summary>
+            <div class="faq-answer">差别在松脱时间。10 月 25 日的横评里，5 款快拆扣单手下压松脱时间在 0.8—3.2 秒之间，普通插扣在紧急情况下往往需要双手操作，时间不可控。快拆扣的选购要看误触概率——体积过小的扣具在活动中容易被意外压开，横评中有 1 款因此被标注为“不建议用于固定点”。</div>
+          </details>
+          <details>
+            <summary>事后关怀一般包括哪些环节？</summary>
+            <div class="faq-answer">常见环节包括保暖、补水、情绪安抚和事后复盘。11 月 1 日工坊的现场问卷里，36 位参与者中有 29 人表示事后 24 小时内仍会有情绪波动，其中 17 人认为“有人陪着说话”比物理保暖更重要。复盘建议在 24 小时后进行，避免在情绪未平复时讨论细节。</div>
+          </details>
+          <details>
+            <summary>新手第一次实践应该从什么项目开始？</summary>
+            <div class="faq-answer">从低风险、易中断的项目开始，比如手掌轻拍、低温蜡烛（大豆蜡、高距离）、简单的手腕单柱缚（留快拆口）。绳缚类项目建议先在工作坊或有人在场的情况下练习，11 月 20 日截止报名的杭州场就设置了新手组。第一次不建议尝试颈部附近、长时间固定或感官剥夺类项目。</div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 8. 用户评论 -->
+      <section class="section-block" id="comments">
+        <div class="section-head">
+          <h2>圈内评论</h2>
+          <span class="section-sub">14 条 · 来自交流区</span>
+        </div>
+        <div class="comment-list">
+          <div class="comment">
+            <span class="avatar">阿</span>
+            <div class="comment-body">
+              <div class="comment-head"><span class="comment-name">阿凛的绳结</span><span class="comment-time">11-07 22:14</span></div>
+              <p class="comment-text">前臂图解第 2 版那个尺神经标注确实比第 1 版清楚，之前有朋友就是小指麻了没当回事，后来缓了大半天。</p>
+            </div>
+          </div>
+          <div class="comment">
+            <span class="avatar">豆</span>
+            <div class="comment-body">
+              <div class="comment-head"><span class="comment-name">豆蜡不烫</span><span class="comment-time">11-07 19:02</span></div>
+              <p class="comment-text">大豆蜡和石蜡那个对比数据我存了，之前一直凭感觉说“大豆蜡安全”，有具体温度读数踏实多了。不过 44 度贴着手背还是有点烫的，第一次别贪近。</p>
+            </div>
+          </div>
+          <div class="comment">
+            <span class="avatar">南</span>
+            <div class="comment-body">
+              <div class="comment-head"><span class="comment-name">南桥旧事</span><span class="comment-time">11-06 15:47</span></div>
+              <p class="comment-text">312 份样本里 41% 没写过底线清单，这个数字我信。身边确实很多人觉得“聊过了就行”，但聊过和写下来真的是两回事。</p>
+            </div>
+          </div>
+          <div class="comment">
+            <span class="avatar">快</span>
+            <div class="comment-body">
+              <div class="comment-head"><span class="comment-name">快拆扣收藏家</span><span class="comment-time">11-06 11:20</span></div>
+              <p class="comment-text">那款被标“不建议用于固定点”的扣子我买过，确实活动里被压开过一次，还好当时没固定。评测里这个提醒很实在。</p>
+            </div>
+          </div>
+          <div class="comment">
+            <span class="avatar">S</span>
+            <div class="comment-body">
+              <div class="comment-head"><span class="comment-name">Switch周历</span><span class="comment-time">11-05 23:08</span></div>
+              <p class="comment-text">周历模板下载了，用了一周发现“切换前的三次确认”最关键。第三周有一次赶时间跳过确认，结果两个人都别扭了半天。</p>
+            </div>
+          </div>
+          <div class="comment">
+            <span class="avatar">纸</span>
+            <div class="comment-body">
+              <div class="comment-head"><span class="comment-name">纸灯</span><span class="comment-time">11-05 16:33</span></div>
+              <p class="comment-text">说实话工坊录音整理太长了，1.2 万字看到一半。不过事后关怀那段我反复看了两遍。</p>
+            </div>
+          </div>
+          <div class="comment">
+            <span class="avatar">杭</span>
+            <div class="comment-body">
+              <div class="comment-head"><span class="comment-name">杭州场报名中</span><span class="comment-time">11-04 20:11</span></div>
+              <p class="comment-text">杭州场要提交实践经历简述，这个门槛设置挺好，至少不是谁都能直接来。30 个名额估计很快满。</p>
+            </div>
+          </div>
+          <div class="comment">
+            <span class="avatar">绳</span>
+            <div class="comment-body">
+              <div class="comment-head"><span class="comment-name">绳材囤积症</span><span class="comment-time">11-04 09:52</span></div>
+              <p class="comment-text">用了两年的黄麻绳看完退役标准去测了下，滑移量多了快 2cm，直接剪了。有点心疼但该剪。</p>
+            </div>
+          </div>
+          <div class="comment">
+            <span class="avatar">黄</span>
+            <div class="comment-body">
+              <div class="comment-head"><span class="comment-name">黄灯不是灯</span><span class="comment-time">11-03 21:40</span></div>
+              <p class="comment-text">红黄绿那个复核频率的问题说到点上了。我和搭档每个月对一次含义，还是有分歧的时候，主要是“黄灯到底要不要停”的理解不一样。</p>
+            </div>
+          </div>
+          <div class="comment">
+            <span class="avatar">路</span>
+            <div class="comment-body">
+              <div class="comment-head"><span class="comment-name">路过的路人</span><span class="comment-time">11-03 13:05</span></div>
+              <p class="comment-text">不太懂绳缚，但那个解剖图做得挺认真的，比网上随便转的图靠谱。</p>
+            </div>
+          </div>
+          <div class="comment">
+            <span class="avatar">阿</span>
+            <div class="comment-body">
+              <div class="comment-head"><span class="comment-name">阿哲不爱说话</span><span class="comment-time">11-02 22:17</span></div>
+              <p class="comment-text">温度实测的 CSV 下了，90 组读数里 80cm 那组波动最小，说明距离拉到 80cm 以上确实稳。这个结论可以直接用。</p>
+            </div>
+          </div>
+          <div class="comment">
+            <span class="avatar">夜</span>
+            <div class="comment-body">
+              <div class="comment-head"><span class="comment-name">夜航船</span><span class="comment-time">11-02 10:44</span></div>
+              <p class="comment-text">快拆扣横评能不能补个长期使用后的磨损对比？现在只有开箱数据和松脱时间。</p>
+            </div>
+          </div>
+          <div class="comment">
+            <span class="avatar">小</span>
+            <div class="comment-body">
+              <div class="comment-head"><span class="comment-name">小满</span><span class="comment-time">11-01 23:30</span></div>
+              <p class="comment-text">工坊现场那个 30 秒处置流程，我录了慢动作回放，剪绳位置确实比想象中要低一点，避开关节。</p>
+            </div>
+          </div>
+          <div class="comment">
+            <span class="avatar">冬</span>
+            <div class="comment-body">
+              <div class="comment-head"><span class="comment-name">冬眠的猫</span><span class="comment-time">10-31 18:22</span></div>
+              <p class="comment-text">新人一枚，看完指南还是不太敢动手，不过至少知道该从哪类内容开始看了。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9. 相关资讯 -->
+      <section class="section-block" id="news">
+        <div class="section-head">
+          <h2>相关资讯</h2>
+          <span class="section-sub">6 条 · 10 月下旬至 11 月上旬</span>
+        </div>
+        <div class="news-list">
+          <div class="news-item">
+            <span class="news-date">11-08</span>
+            <div class="news-body">
+              <div class="news-title">低温蜡烛安全操作手册发布 12 张分步图</div>
+              <div class="news-summary">手册由 3 位实践者联合编写，首次加入“滴蜡后 10 分钟皮肤观察”条目，配套的应急冲淋流程图单独成页。</div>
+            </div>
+          </div>
+          <div class="news-item">
+            <span class="news-date">11-06</span>
+            <div class="news-body">
+              <div class="news-title">安全词调研完整数据表公开 312 份样本</div>
+              <div class="news-summary">数据表按角色、实践年限、关系类型交叉分组，其中实践 5 年以上组的书面清单率 71%，入圈不足 1 年组为 19%。</div>
+            </div>
+          </div>
+          <div class="news-item">
+            <span class="news-date">11-05</span>
+            <div class="news-body">
+              <div class="news-title">绳缚入门视频第 3 集上线讲单柱缚收尾</div>
+              <div class="news-summary">18 分钟正片之外附 4 分钟花絮，演示了收尾时预留快拆口的两种打法，其中一种单手可解。</div>
+            </div>
+          </div>
+          <div class="news-item">
+            <span class="news-date">11-02</span>
+            <div class="news-body">
+              <div class="news-title">滴落温度实测数据开放下载 90 组读数</div>
+              <div class="news-summary">CSV 文件包含距离、蜡种、落点温度三列，测试于 10 月 29 日在室内 22°C 环境下完成，重复 3 轮取均值。</div>
+            </div>
+          </div>
+          <div class="news-item">
+            <span class="news-date">11-01</span>
+            <div class="news-body">
+              <div class="news-title">上海绳缚安全工坊 36 人参与 演示应急松绑</div>
+              <div class="news-summary">现场分 4 组练习，每组配 1 名助教。组织方表示下一场将增设“麻木识别”专项考核环节。</div>
+            </div>
+          </div>
+          <div class="news-item">
+            <span class="news-date">10-28</span>
+            <div class="news-body">
+              <div class="news-title">前臂绳缚解剖图解修订 补充尺神经分支标注</div>
+              <div class="news-summary">修订版第 2 版修正了第 1 版中手腕内侧的一处距离数值，并新增 3 张尺神经走行示意图。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10. 相关推荐 -->
+      <section class="section-block" id="related">
+        <div class="section-head">
+          <h2>相关推荐</h2>
+          <span class="section-sub">具体方向与条目索引</span>
+        </div>
+        <div class="tag-cloud">
+          <a href="/#featured">单柱缚快拆口打法</a>
+          <a href="/#featured">低温蜡烛 80cm 距离测试</a>
+          <a href="/#featured">红黄绿安全词复核周期</a>
+          <a href="/#featured">快拆扣单手松脱对比</a>
+          <a href="/#featured">Switch 角色切换周历</a>
+          <a href="/#featured">事后关怀 24 小时记录</a>
+          <a href="/#featured">黄麻绳滑移量测试</a>
+          <a href="/#featured">绳缚神经压迫时间阈值</a>
+        </div>
+      </section>
+
+      <!-- 11. 热门榜单 -->
+      <section class="section-block" id="rank">
+        <div class="section-head">
+          <h2>本周热门榜单</h2>
+          <span class="section-sub">按 11 月 1—8 日收藏量排序</span>
+        </div>
+        <div class="rank-list">
+          <div class="rank-item">
+            <span class="rank-num top">1</span>
+            <span class="rank-name">前臂绳缚神经压迫风险图解（第 2 版）</span>
+            <span class="rank-score">收藏 486</span>
+          </div>
+          <div class="rank-item">
+            <span class="rank-num top">2</span>
+            <span class="rank-name">大豆蜡与石蜡滴落温度实测对比</span>
+            <span class="rank-score">收藏 312</span>
+          </div>
+          <div class="rank-item">
+            <span class="rank-num top">3</span>
+            <span class="rank-name">312 份安全词使用习惯调研</span>
+            <span class="rank-score">收藏 278</span>
+          </div>
+          <div class="rank-item">
+            <span class="rank-num">4</span>
+            <span class="rank-name">5 款快拆扣松脱时间实测</span>
+            <span class="rank-score">收藏 201</span>
+          </div>
+          <div class="rank-item">
+            <span class="rank-num">5</span>
+            <span class="rank-name">Switch 长期关系角色切换笔记</span>
+            <span class="rank-score">收藏 167</span>
+          </div>
+          <div class="rank-item">
+            <span class="rank-num">6</span>
+            <span class="rank-name">上海绳缚安全工坊三种应急松绑</span>
+            <span class="rank-score">收藏 154</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 12. 投稿交流 -->
+      <section class="section-block" id="submit">
+        <div class="section-head">
+          <h2>投稿与交流</h2>
+          <span class="section-sub">实践记录 · 器材实测 · 活动组织</span>
+        </div>
+        <div class="overview-text">
+          <p>交流区接受三类投稿：<strong>实践复盘</strong>（需含时间、场景、操作步骤与至少一处改进点）、<strong>器材实测</strong>（需附测试条件与数据记录方式）、<strong>活动组织信息</strong>（需注明人数上限、安全预案与报名截止日）。10 月 25 日发起的圈内安全实践倡议已征集到 500 人联署，三项最低共识——书面清单、双人复核、应急演练——作为投稿审核的参考框架。</p>
+          <p>近期交流区活跃话题集中在：绳缚后的麻木恢复时长记录、低温蜡烛在不同室温下的落点温度差异、以及 Switch 身份在长期关系中的切换频率。11 月 5 日线上分享会的录音整理稿已发布，包含 2 小时讨论中关于“切换疲惫感”的 7 条具体建议。杭州场绳缚工作坊报名 11 月 20 日截止，新手组名额剩余 9 个。</p>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 右侧辅助栏 -->
+    <aside class="right-sidebar" aria-label="辅助信息">
+      <div class="side-panel">
+        <h3>热门标签</h3>
+        <div class="side-tags">
+          <a href="/#featured">单柱缚</a>
+          <a href="/#featured">大豆蜡</a>
+          <a href="/#featured">快拆扣</a>
+          <a href="/#featured">安全词</a>
+          <a href="/#featured">事后关怀</a>
+          <a href="/#featured">桡神经</a>
+          <a href="/#featured">Switch</a>
+          <a href="/#featured">底线清单</a>
+          <a href="/#featured">黄麻绳</a>
+          <a href="/#featured">应急松绑</a>
+        </div>
+      </div>
+      <div class="side-panel">
+        <h3>近期活跃</h3>
+        <div class="side-list">
+          <a href="/#comments"><span class="num">1</span>阿凛的绳结 · 11-07</a>
+          <a href="/#comments"><span class="num">2</span>豆蜡不烫 · 11-07</a>
+          <a href="/#comments"><span class="num">3</span>南桥旧事 · 11-06</a>
+          <a href="/#comments"><span class="num">4</span>快拆扣收藏家 · 11-06</a>
+          <a href="/#comments"><span class="num">5</span>Switch周历 · 11-05</a>
+        </div>
+      </div>
+      <div class="side-panel">
+        <h3>活动日历</h3>
+        <div class="side-list">
+          <a href="/#updates"><span class="num">11-20</span>杭州绳缚工作坊报名截止</a>
+          <a href="/#updates"><span class="num">11-15</span>线上“底线清单”共写会</a>
+          <a href="/#updates"><span class="num">11-10</span>快拆扣长期磨损评测征集</a>
+        </div>
+        <p class="side-note">活动信息由组织者提交，报名前请确认安全预案与人数上限。</p>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<!-- 页尾 -->
+<footer class="site-footer" id="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">sm调教圈论坛</div>
+        <p class="footer-desc">内容覆盖 2026 年 9 月至 11 月的圈内实践记录与器材评测，条目类型包含图解教程、实测数据、活动复盘、关系手记与安全调研，更新节奏为工作日每日 1—2 条、周末合并更新。</p>
+      </div>
+      <div class="footer-col">
+        <h4>内容方向</h4>
+        <a href="/#featured">绳缚技巧</a>
+        <a href="/#featured">低温蜡烛</a>
+        <a href="/#featured">器材评测</a>
+        <a href="/#featured">关系协商</a>
+      </div>
+      <div class="footer-col">
+        <h4>交流参与</h4>
+        <a href="/#submit">投稿须知</a>
+        <a href="/#comments">评论交流</a>
+        <a href="/#updates">活动日历</a>
+        <a href="/#rank">热门榜单</a>
+      </div>
+      <div class="footer-col">
+        <h4>安全参考</h4>
+        <a href="/#faq">常见问答</a>
+        <a href="/#guide">体验指南</a>
+        <a href="/#deepdive">深度解析</a>
+        <a href="/#overview">领域概览</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 sm调教圈论坛 · 内容为示例条目，仅用于展示聚合形态</span>
+      <span>最后更新：2026-11-08 · 对应条目：低温蜡烛安全操作手册、安全词调研数据表</span>
+    </div>
+  </div>
+</footer>
+
+<!-- 回到顶部 -->
+<button class="back-top" id="backTop" aria-label="回到顶部">↑</button>
+
+<script>
+(function(){
+  // 移动端抽屉
+  var hamburger = document.getElementById('hamburgerBtn');
+  var drawer = document.getElementById('mobileDrawer');
+  var overlay = document.getElementById('mobileOverlay');
+  var closeBtn = document.getElementById('drawerClose');
+
+  function openDrawer(){
+    drawer.classList.add('open');
+    overlay.classList.add('open');
+    hamburger.setAttribute('aria-expanded','true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer(){
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+    hamburger.setAttribute('aria-expanded','false');
+    document.body.style.overflow = '';
+  }
+
+  hamburger.addEventListener('click', function(){
+    if(drawer.classList.contains('open')) closeDrawer();
+    else openDrawer();
+  });
+  closeBtn.addEventListener('click', closeDrawer);
+  overlay.addEventListener('click', closeDrawer);
+
+  drawer.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', closeDrawer);
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
+  });
+
+  // 回到顶部
+  var backTop = document.getElementById('backTop');
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > window.innerHeight * 0.8){
+      backTop.classList.add('show');
+    } else {
+      backTop.classList.remove('show');
+    }
+  }, {passive:true});
+  backTop.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  // 侧栏导航高亮
+  var sections = document.querySelectorAll('.section-block');
+  var sideLinks = document.querySelectorAll('.channel-sidebar nav a');
+  var linkMap = {};
+  sideLinks.forEach(function(l){
+    var href = l.getAttribute('href');
+    if(href && href.indexOf('/#') === 0){
+      var id = href.substring(2);
+      linkMap[id] = l;
+    }
+  });
+
+  if('IntersectionObserver' in window){
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          var id = entry.target.id;
+          sideLinks.forEach(function(l){ l.classList.remove('active'); });
+          if(linkMap[id]) linkMap[id].classList.add('active');
+        }
+      });
+    }, { rootMargin: '-120px 0px -60% 0px', threshold: 0 });
+    sections.forEach(function(s){ observer.observe(s); });
+  }
+})();
+</script>
+
+<!-- 结构化数据：WebSite -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "sm调教圈论坛",
+  "description": "汇聚BDSM文化实践、绳缚安全、低温蜡烛操作规范与圈内交流内容的聚合页面，面向注重知情同意与风险控制的成年读者。",
+  "inLanguage": "zh-CN"
+}
+</script>
+
+<!-- 结构化数据：FAQPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "低温蜡烛多少度算安全？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "滴落温度低于50°C通常被认为是相对安全的区间。大豆蜡熔点约45—50°C，石蜡可达60°C以上，50cm距离下大豆蜡落点平均44°C、石蜡55°C，敏感区域应保持80cm以上距离。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "绳缚后手臂发麻要多久恢复？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "取决于压迫时长和位置。桡神经受压90秒内松绑多数人10—30分钟恢复，超过3分钟才松绑可能持续数小时，持续超过6小时不缓解应就医。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "安全词红黄绿分别代表什么？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "红灯代表立即停止全部动作并松绑；黄灯代表暂停、调整强度但不解除场景；绿灯代表状态良好可继续。312份调研中63%使用三色体系，仅28%定期复核含义一致性。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "快拆扣和普通扣差别大吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "差别在松脱时间。5款快拆扣单手下压松脱时间0.8—3.2秒，普通插扣紧急时往往需双手操作。选购需关注误触概率，横评中有1款因体积过小被标注不建议用于固定点。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "事后关怀一般包括哪些环节？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "常见环节包括保暖、补水、情绪安抚和事后复盘。36位工坊参与者中29人事后24小时内仍有情绪波动，17人认为有人陪着说话比物理保暖更重要，复盘建议在24小时后进行。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "新手第一次实践应该从什么项目开始？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "从低风险、易中断的项目开始，如手掌轻拍、大豆蜡低温蜡烛、手腕单柱缚留快拆口。绳缚类建议先在工作坊或有经验者在场时练习，不建议首次尝试颈部附近或长时间固定项目。"
+      }
+    }
+  ]
+}
+</script>
+
+</body>
+  </html>
