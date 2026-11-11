@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>wwww.disise.com 蜜桃网图片区 - 高清图集与视觉作品聚合</title>
+  <meta name="description" content="wwww.disise.com 蜜桃网图片区汇聚人像、风光、街拍、插画、复古胶片等高清图集与视觉作品，提供每日更新图集、创作者上传作品、分类浏览与精选推荐，适合摄影爱好者与视觉内容收藏者浏览。">
+  <meta name="keywords" content="wwww.disise.com 蜜桃网图片区">
+  <style>
+    /* ---------- 全局变量与重置 ---------- */
+    :root {
+      --primary: #c73e6b;
+      --primary-light: #f2d9e1;
+      --primary-dark: #8f2a4a;
+      --bg: #fdf8f9;
+      --surface: #ffffff;
+      --text-primary: #1e1a1c;
+      --text-secondary: #5e4b52;
+      --text-tertiary: #9b8a90;
+      --border: #ecdde2;
+      --radius-card: 14px;
+      --radius-btn: 30px;
+      --radius-tag: 20px;
+      --shadow-default: 0 4px 14px rgba(0, 0, 0, 0.04);
+      --shadow-hover: 0 8px 24px rgba(199, 62, 107, 0.12);
+      --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      --transition: 0.2s ease;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 100px; /* 公告条+页头高度预留 */
+    }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    img {
+      max-width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .container {
+      max-width: 1360px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    /* ---------- 吸顶公告条 + 页头 ---------- */
+    .sticky-top {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .announcement-bar {
+      background: var(--primary);
+      color: #fff;
+      font-size: 0.85rem;
+      padding: 8px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .announcement-bar .container {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .announcement-brand {
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      flex-shrink: 0;
+    }
+    .announcement-items {
+      display: flex;
+      gap: 28px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .announcement-items::-webkit-scrollbar {
+      display: none;
+    }
+    .announcement-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .announcement-item time {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    .header {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+    }
+    .header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .logo-svg {
+      width: 36px;
+      height: 36px;
+    }
+    .brand-text {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      letter-spacing: -0.2px;
+      max-width: 220px;
+      line-height: 1.2;
+      word-break: break-word;
+    }
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .nav-link {
+      padding: 8px 14px;
+      border-radius: var(--radius-btn);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: background var(--transition), color var(--transition);
+      white-space: nowrap;
+    }
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      outline: 2px solid transparent;
+    }
+    .nav-link:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+    .nav-link.active {
+      background: var(--primary);
+      color: #fff;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-btn);
+      padding: 4px 4px 4px 16px;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .search-box:focus-within {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-light);
+    }
+    .search-box input {
+      border: none;
+      background: transparent;
+      padding: 6px 0;
+      font-size: 0.85rem;
+      width: 150px;
+      outline: none;
+      color: var(--text-primary);
+    }
+    .search-box input::placeholder {
+      color: var(--text-tertiary);
+    }
+    .search-box button {
+      background: var(--primary);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: var(--radius-btn);
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: background var(--transition);
+    }
+    .search-box button:hover {
+      background: var(--primary-dark);
+    }
+    .hamburger {
+      display: none;
+      background: var(--primary-light);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      color: var(--primary-dark);
+    }
+    /* ---------- 首屏 ---------- */
+    .hero {
+      background: linear-gradient(135deg, #fdf0f3 0%, #f8e2e9 50%, #fff 100%);
+      padding: 56px 0 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    .hero-tagline {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.25;
+      color: var(--text-primary);
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin-bottom: 28px;
+      line-height: 1.7;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      padding: 12px 30px;
+      border-radius: var(--radius-btn);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      box-shadow: var(--shadow-default);
+      display: inline-block;
+    }
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--primary-dark);
+      padding: 12px 30px;
+      border-radius: var(--radius-btn);
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1.5px solid var(--primary);
+      transition: background var(--transition), transform var(--transition);
+      display: inline-block;
+    }
+    .btn-outline:hover {
+      background: var(--primary-light);
+      transform: translateY(-2px);
+    }
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-svg {
+      width: 100%;
+      max-width: 480px;
+      height: auto;
+      filter: drop-shadow(0 20px 30px rgba(199, 62, 107, 0.15));
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    /* ---------- 主内容区 三栏布局 ---------- */
+    .main-layout {
+      display: grid;
+      grid-template-columns: 180px 1fr 260px;
+      gap: 32px;
+      padding: 40px 0 60px;
+    }
+    /* 左频道栏 */
+    .channel-sidebar {
+      position: sticky;
+      top: 100px;
+      align-self: start;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+      padding-right: 8px;
+    }
+    .channel-sidebar h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-tertiary);
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
+    .channel-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .channel-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: background var(--transition), color var(--transition);
+    }
+    .channel-link:hover,
+    .channel-link:focus-visible {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      outline: none;
+    }
+    .channel-link:focus-visible {
+      outline: 2px solid var(--primary);
+    }
+    .channel-link.active {
+      background: var(--primary);
+      color: #fff;
+    }
+    .channel-link .count {
+      margin-left: auto;
+      font-size: 0.7rem;
+      background: rgba(0, 0, 0, 0.06);
+      padding: 1px 8px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+    .channel-link.active .count {
+      background: rgba(255, 255, 255, 0.25);
+    }
+    /* 中主内容 */
+    .main-content {
+      min-width: 0;
+    }
+    /* 右辅助栏 */
+    .aux-sidebar {
+      position: sticky;
+      top: 100px;
+      align-self: start;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .aux-card {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      padding: 20px;
+      box-shadow: var(--shadow-default);
+      border: 1px solid var(--border);
+    }
+    .aux-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .aux-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .aux-item {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .aux-item .rank {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 0.9rem;
+      min-width: 18px;
+    }
+    .aux-item a {
+      color: var(--text-secondary);
+      transition: color var(--transition);
+    }
+    .aux-item a:hover {
+      color: var(--primary-dark);
+    }
+    /* ---------- 通用板块样式 ---------- */
+    .section {
+      margin-bottom: 52px;
+    }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--text-primary);
+    }
+    .section-link {
+      font-size: 0.85rem;
+      color: var(--primary);
+      font-weight: 600;
+      transition: color var(--transition);
+    }
+    .section-link:hover {
+      color: var(--primary-dark);
+    }
+    /* 概览 */
+    .overview-text {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      max-width: 100%;
+    }
+    /* 卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      box-shadow: var(--shadow-default);
+      border: 1px solid var(--border);
+      transition: transform var(--transition), box-shadow var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+    .card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      background: var(--primary-light);
+    }
+    .card-body {
+      padding: 14px 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+    .card-type {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 2px 10px;
+      border-radius: var(--radius-tag);
+      align-self: flex-start;
+    }
+    .card-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      line-height: 1.4;
+      color: var(--text-primary);
+    }
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      flex: 1;
+    }
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+      margin-top: 4px;
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+    /* 列表样式 */
+    .list-compact {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .list-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 14px 16px;
+      background: var(--surface);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-default);
+      transition: box-shadow var(--transition);
+    }
+    .list-item:hover {
+      box-shadow: var(--shadow-hover);
+    }
+    .list-item-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .list-item-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--text-primary);
+    }
+    .list-item-desc {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .list-item-time {
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    /* 分类入口 */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .category-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 14px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--text-primary);
+      transition: background var(--transition), border-color var(--transition);
+      display: block;
+    }
+    .category-item:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary-dark);
+    }
+    /* 深度解析 */
+    .deep-dive {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      padding: 28px 32px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-default);
+    }
+    .deep-dive h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 24px 0 12px;
+      color: var(--text-primary);
+    }
+    .deep-dive h3:first-child {
+      margin-top: 0;
+    }
+    .deep-dive p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+    .deep-dive ul {
+      padding-left: 20px;
+      margin-bottom: 16px;
+    }
+    .deep-dive li {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 6px;
+    }
+    .deep-dive .callout {
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      padding: 16px 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+      font-size: 0.9rem;
+      color: var(--primary-dark);
+    }
+    /* FAQ */
+    .faq-list details {
+      background: var(--surface);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .faq-list summary {
+      padding: 16px 20px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background var(--transition);
+    }
+    .faq-list summary::-webkit-details-marker {
+      display: none;
+    }
+    .faq-list summary::after {
+      content: '+';
+      font-size: 1.2rem;
+      color: var(--primary);
+      font-weight: 400;
+    }
+    .faq-list details[open] summary::after {
+      content: '−';
+    }
+    .faq-list summary:hover {
+      background: var(--primary-light);
+    }
+    .faq-answer {
+      padding: 0 20px 18px;
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    /* 评论 */
+    .comment-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .comment-item {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 14px 18px;
+      border: 1px solid var(--border);
+    }
+    .comment-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+    .comment-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.75rem;
+    }
+    .comment-nick {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .comment-time {
+      font-size: 0.7rem;
+      color: var(--text-tertiary);
+      margin-left: auto;
+    }
+    .comment-text {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    /* 相关资讯 */
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .news-item {
+      display: flex;
+      gap: 16px;
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      align-items: flex-start;
+    }
+    .news-date {
+      font-size: 0.75rem;
+      color: var(--primary);
+      font-weight: 600;
+      background: var(--primary-light);
+      padding: 2px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .news-content {
+      flex: 1;
+    }
+    .news-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .news-desc {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    /* 相关推荐 */
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .tag-link {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-tag);
+      padding: 8px 18px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: background var(--transition), border-color var(--transition), color var(--transition);
+    }
+    .tag-link:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary-dark);
+    }
+    /* 热门榜单 */
+    .rank-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .rank-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      background: var(--surface);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+    .rank-index {
+      font-weight: 800;
+      color: var(--primary);
+      min-width: 24px;
+      font-size: 1rem;
+    }
+    .rank-name {
+      font-weight: 600;
+    }
+    .rank-meta {
+      margin-left: auto;
+      font-size: 0.75rem;
+      color: var(--text-tertiary);
+    }
+    /* 投稿互动 */
+    .interact-banner {
+      background: linear-gradient(120deg, var(--primary-dark), var(--primary));
+      border-radius: var(--radius-card);
+      padding: 28px 32px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .interact-banner h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .interact-banner p {
+      font-size: 0.88rem;
+      opacity: 0.9;
+    }
+    .interact-btn {
+      background: #fff;
+      color: var(--primary-dark);
+      padding: 10px 26px;
+      border-radius: var(--radius-btn);
+      font-weight: 700;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .interact-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    /* 回到顶部 */
+    .back-to-top {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      box-shadow: var(--shadow-hover);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--transition), visibility var(--transition);
+      z-index: 90;
+    }
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    /* 页脚 */
+    .footer {
+      background: #1e1a1c;
+      color: #d1c8cb;
+      padding: 48px 0 32px;
+      font-size: 0.85rem;
+    }
+    .footer .container {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+    }
+    .footer-brand {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .footer-desc {
+      line-height: 1.7;
+      max-width: 320px;
+      color: #b0a4a8;
+    }
+    .footer h4 {
+      color: #fff;
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .footer-links a {
+      color: #b0a4a8;
+      transition: color var(--transition);
+    }
+    .footer-links a:hover {
+      color: var(--primary-light);
+    }
+    .footer-bottom {
+      grid-column: 1 / -1;
+      border-top: 1px solid #3a3034;
+      padding-top: 24px;
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      color: #8a7a80;
+      font-size: 0.78rem;
+    }
+    /* 移动端遮罩 */
+    .overlay {
+      display: none;
+    }
+    /* ---------- 响应式 ---------- */
+    @media (max-width: 1100px) {
+      .main-layout {
+        grid-template-columns: 1fr 260px;
+      }
+      .channel-sidebar {
+        display: none;
+      }
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+    }
+    @media (max-width: 900px) {
+      .main-layout {
+        grid-template-columns: 1fr;
+      }
+      .aux-sidebar {
+        position: static;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .hero .container {
+        grid-template-columns: 1fr;
+      }
+      .hero-visual {
+        order: -1;
+        max-width: 340px;
+        margin: 0 auto;
+      }
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer .container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (max-width: 740px) {
+      .header .container {
+        flex-wrap: wrap;
+      }
+      .main-nav {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        padding-top: 12px;
+        gap: 4px;
+      }
+      .main-nav.open {
+        display: flex;
+      }
+      .hamburger {
+        display: block;
+      }
+      .search-box input {
+        width: 100px;
+      }
+      .hero h1 {
+        font-size: 1.9rem;
+      }
+      .aux-sidebar {
+        grid-template-columns: 1fr;
+      }
+      .card-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .footer .container {
+        grid-template-columns: 1fr;
+      }
+      .overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 99;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity var(--transition), visibility var(--transition);
+      }
+      .overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+    @media (max-width: 480px) {
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+      .category-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .interact-banner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<!-- 吸顶公告条 + 页头 -->
+<div class="sticky-top">
+  <div class="announcement-bar">
+    <div class="container">
+      <span class="announcement-brand">wwww.disise.com 蜜桃网图片区</span>
+      <div class="announcement-items">
+        <div class="announcement-item">
+          <time>2026-11-08</time>
+          <span>「胶片日记·秋末」系列更新 24 张</span>
+        </div>
+        <div class="announcement-item">
+          <time>2026-11-07</time>
+          <span>人像频道新增 8 组棚拍作品</span>
+        </div>
+        <div class="announcement-item">
+          <time>2026-11-06</time>
+          <span>「城市街拍」专题上线，收录 36 组</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <header class="header">
+    <div class="container">
+      <div class="logo-area">
+        <svg class="logo-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="20" cy="20" r="18" stroke="#c73e6b" stroke-width="2.5" fill="#f2d9e1"/>
+          <path d="M12 24 Q20 10 28 24" stroke="#c73e6b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <circle cx="20" cy="27" r="3" fill="#c73e6b"/>
+        </svg>
+        <span class="brand-text">wwww.disise.com 蜜桃网图片区</span>
+      </div>
+      <nav class="main-nav" id="mainNav" aria-label="主题导航">
+        <a class="nav-link active" href="#overview">领域概览</a>
+        <a class="nav-link" href="#featured">精选图集</a>
+        <a class="nav-link" href="#latest">最新更新</a>
+        <a class="nav-link" href="#categories">分类入口</a>
+        <a class="nav-link" href="#deep-dive">深度解析</a>
+        <a class="nav-link" href="#guide">体验指南</a>
+        <a class="nav-link" href="#faq">常见问题</a>
+        <a class="nav-link" href="#comments">用户评论</a>
+        <a class="nav-link" href="#news">相关资讯</a>
+        <a class="nav-link" href="#recommend">相关推荐</a>
+        <a class="nav-link" href="#ranks">热门榜单</a>
+        <a class="nav-link" href="#contribute">投稿互动</a>
+      </nav>
+      <div class="header-actions">
+        <div class="search-box">
+          <input type="search" id="searchInput" placeholder="搜索图集或标签…" aria-label="搜索图集或标签">
+          <button type="button" id="searchBtn">搜索</button>
+        </div>
+        <button class="hamburger" id="hamburgerBtn" aria-label="打开菜单" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </header>
+</div>
+<div class="overlay" id="overlay"></div>
+
+<!-- 首屏 -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <p class="hero-tagline">视觉作品 · 高清图集 · 每日更新</p>
+      <h1>wwww.disise.com 蜜桃网图片区</h1>
+      <p class="hero-desc">汇集人像、风光、街拍、插画与复古胶片等高清图集，收录独立摄影师与视觉创作者上传的专题组图。按风格、场景与拍摄手法分类，方便浏览与收藏。</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#featured">浏览精选图集</a>
+        <a class="btn-outline" href="#contribute">上传作品</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <svg class="hero-svg" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="20" y="30" width="160" height="200" rx="12" fill="#f2d9e1" stroke="#c73e6b" stroke-width="2"/>
+        <rect x="60" y="60" width="160" height="200" rx="12" fill="#fff" stroke="#c73e6b" stroke-width="2"/>
+        <rect x="100" y="90" width="160" height="200" rx="12" fill="#fdf8f9" stroke="#c73e6b" stroke-width="2"/>
+        <circle cx="180" cy="170" r="40" stroke="#c73e6b" stroke-width="2" fill="#f2d9e1"/>
+        <circle cx="180" cy="170" r="18" fill="#c73e6b" opacity="0.3"/>
+        <line x1="20" y1="260" x2="380" y2="260" stroke="#c73e6b" stroke-width="2" stroke-dasharray="6 4" opacity="0.4"/>
+        <rect x="280" y="40" width="80" height="80" rx="10" fill="#f2d9e1" stroke="#c73e6b" stroke-width="1.5" opacity="0.6"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- 主内容区 三栏布局 -->
+<div class="container main-layout">
+
+  <!-- 左侧频道栏 -->
+  <aside class="channel-sidebar" aria-label="频道索引">
+    <h3>频道索引</h3>
+    <div class="channel-list">
+      <a class="channel-link active" href="#featured">人像写真 <span class="count">128</span></a>
+      <a class="channel-link" href="#featured">风光旅拍 <span class="count">96</span></a>
+      <a class="channel-link" href="#featured">城市街拍 <span class="count">74</span></a>
+      <a class="channel-link" href="#featured">复古胶片 <span class="count">63</span></a>
+      <a class="channel-link" href="#featured">插画视觉 <span class="count">51</span></a>
+      <a class="channel-link" href="#featured">建筑几何 <span class="count">38</span></a>
+      <a class="channel-link" href="#featured">静物美食 <span class="count">45</span></a>
+      <a class="channel-link" href="#featured">黑白纪实 <span class="count">29</span></a>
+      <a class="channel-link" href="#featured">水下摄影 <span class="count">17</span></a>
+      <a class="channel-link" href="#featured">星空银河 <span class="count">22</span></a>
+    </div>
+  </aside>
+
+  <!-- 中主内容 -->
+  <main class="main-content">
+
+    <!-- 1. 主题领域概览 -->
+    <section class="section" id="overview">
+      <div class="section-header">
+        <h2 class="section-title">图片视觉领域方向与内容构成</h2>
+      </div>
+      <p class="overview-text">
+        图片区的内容围绕静态视觉作品展开，按创作媒介与拍摄场景可以拆成几个大方向。人像写真占据最大比重，包含室内棚拍、自然光外景与概念主题创作，常见标签有“情绪片”“日系清新”“复古港风”。风光旅拍以自然地貌与城市天际线为主，冰岛黑沙滩、川西雪山、上海陆家嘴夜景是近两个月反复出现的拍摄地。城市街拍强调瞬间捕捉与构图张力，常附带拍摄参数和镜头型号。复古胶片类内容多使用中画幅或 35mm 相机拍摄，作品下方常标注胶卷型号如 Portra 400、CineStill 800T。插画视觉则混合数字绘画与手绘扫描件，风格从赛博朋克到水墨实验均有覆盖。建筑几何偏好对称构图与光影切割，静物美食近年流行暗调与低饱和处理。黑白纪实和水下摄影属于小众但黏性高的分类，星空银河类作品则与天文摄影社群高度重叠。九月底至十一月初，平台累计更新约 480 组图集，其中人像与风光两类合计占比超过六成。值得关注的趋势是“胶片模拟”标签的搜索量在十月环比上升约 34%，不少创作者开始同时上传数码原片与后期调色版本供对比。
+      </p>
+    </section>
+
+    <!-- 2. 精选内容推荐 -->
+    <section class="section" id="featured">
+      <div class="section-header">
+        <h2 class="section-title">精选图集与视觉作品</h2>
+        <a class="section-link" href="#latest">查看全部 →</a>
+      </div>
+      <div class="card-grid">
+        <article class="card">
+          <img class="card-img" src="https://picsum.photos/seed/portrait01/400/300" alt="自然光人像作品《窗边侧影》" width="400" height="300" loading="lazy">
+          <div class="card-body">
+            <span class="card-type">人像写真</span>
+            <h3 class="card-title">窗边侧影 · 自然光人像组图</h3>
+            <p class="card-desc">摄影师林一用 50mm 定焦在下午三点到五点间拍摄，模特侧脸与纱帘光影形成层次，原片直出无磨皮。</p>
+            <div class="card-meta"><span>热度 2.4k</span><span>2026-11-07</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <img class="card-img" src="https://picsum.photos/seed/landscape02/400/300" alt="川西雪山日照金山风光作品" width="400" height="300" loading="lazy">
+          <div class="card-body">
+            <span class="card-type">风光旅拍</span>
+            <h3 class="card-title">川西贡嘎 · 日照金山延时截帧</h3>
+            <p class="card-desc">从鱼子西观景台拍摄的贡嘎主峰日出，六点四十二分金色覆盖山顶，附带拍摄机位与焦段参数。</p>
+            <div class="card-meta"><span>热度 3.1k</span><span>2026-11-05</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <img class="card-img" src="https://picsum.photos/seed/street03/400/300" alt="上海武康路街拍光影作品" width="400" height="300" loading="lazy">
+          <div class="card-body">
+            <span class="card-type">城市街拍</span>
+            <h3 class="card-title">武康路 · 梧桐光影与行人</h3>
+            <p class="card-desc">十月最后一个周末的武康路，午后逆光穿过梧桐叶，抓拍骑车人与咖啡店外摆，共 12 张。</p>
+            <div class="card-meta"><span>热度 1.8k</span><span>2026-11-03</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <img class="card-img" src="https://picsum.photos/seed/film04/400/300" alt="Portra400胶卷人像作品" width="400" height="300" loading="lazy">
+          <div class="card-body">
+            <span class="card-type">复古胶片</span>
+            <h3 class="card-title">Portra 400 · 秋日公园人像</h3>
+            <p class="card-desc">使用宾得 67 搭配 Portra 400 拍摄，午后三点的暖调表现突出，扫描文件保留颗粒感。</p>
+            <div class="card-meta"><span>热度 2.2k</span><span>2026-11-02</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <img class="card-img" src="https://picsum.photos/seed/illust05/400/300" alt="赛博朋克风格数字插画作品" width="400" height="300" loading="lazy">
+          <div class="card-body">
+            <span class="card-type">插画视觉</span>
+            <h3 class="card-title">霓虹雨夜 · 赛博朋克街景插画</h3>
+            <p class="card-desc">数字绘画，Procreate 完成，以香港旺角霓虹招牌为参考，蓝紫色调与湿地面反射是主要视觉元素。</p>
+            <div class="card-meta"><span>热度 1.5k</span><span>2026-10-30</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <img class="card-img" src="https://picsum.photos/seed/arch06/400/300" alt="上海中心大厦仰拍建筑几何作品" width="400" height="300" loading="lazy">
+          <div class="card-body">
+            <span class="card-type">建筑几何</span>
+            <h3 class="card-title">上海中心 · 仰角螺旋结构</h3>
+            <p class="card-desc">从地面仰拍上海中心扭转造型，广角端 16mm 拍摄，后期校正垂直透视，突出线条汇聚。</p>
+            <div class="card-meta"><span>热度 1.1k</span><span>2026-10-28</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <img class="card-img" src="https://picsum.photos/seed/food07/400/300" alt="暗调静物美食摄影作品" width="400" height="300" loading="lazy">
+          <div class="card-body">
+            <span class="card-type">静物美食</span>
+            <h3 class="card-title">暗调早餐 · 可颂与手冲咖啡</h3>
+            <p class="card-desc">单侧窗光加黑色背景板，f/2.8 浅景深，重点表现可颂酥皮层次与咖啡液面反光。</p>
+            <div class="card-meta"><span>热度 980</span><span>2026-10-26</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <img class="card-img" src="https://picsum.photos/seed/bw08/400/300" alt="黑白纪实街头人物作品" width="400" height="300" loading="lazy">
+          <div class="card-body">
+            <span class="card-type">黑白纪实</span>
+            <h3 class="card-title">菜市场 · 黑白人物速写</h3>
+            <p class="card-desc">连续三个清晨在虹口菜市场拍摄，用 35mm 黑白胶卷记录摊主与顾客，共 18 张选入组图。</p>
+            <div class="card-meta"><span>热度 1.3k</span><span>2026-10-24</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 3. 最新更新 / 动态 -->
+    <section class="section" id="latest">
+      <div class="section-header">
+        <h2 class="section-title">最新更新与上传动态</h2>
+      </div>
+      <div class="list-compact">
+        <div class="list-item">
+          <div class="list-item-content">
+            <div class="list-item-title">「胶片日记·秋末」系列更新 24 张</div>
+            <div class="list-item-desc">创作者阿蓝使用富士 GA645 拍摄，地点为杭州满觉陇，记录桂花季末的街道与行人。</div>
+          </div>
+          <span class="list-item-time">2026-11-08</span>
+        </div>
+        <div class="list-item">
+          <div class="list-item-content">
+            <div class="list-item-title">人像频道新增 8 组棚拍作品</div>
+            <div class="list-item-desc">本周棚拍主题集中在“暗调油画感”，多位摄影师使用持续光源与柔光箱组合。</div>
+          </div>
+          <span class="list-item-time">2026-11-07</span>
+        </div>
+        <div class="list-item">
+          <div class="list-item-content">
+            <div class="list-item-title">「城市街拍」专题上线，收录 36 组</div>
+            <div class="list-item-desc">覆盖北京、上海、广州、成都四城，拍摄时间集中在十月下旬至十一月第一周。</div>
+          </div>
+          <span class="list-item-time">2026-11-06</span>
+        </div>
+        <div class="list-item">
+          <div class="list-item-content">
+            <div class="list-item-title">星空银河分类新增「猎户座初升」组图</div>
+            <div class="list-item-desc">拍摄于河北丰宁，使用赤道仪跟踪，曝光 90 秒，银河核心与猎户座同框。</div>
+          </div>
+          <span class="list-item-time">2026-11-04</span>
+        </div>
+        <div class="list-item">
+          <div class="list-item-content">
+            <div class="list-item-title">水下摄影作品「泳池蓝调」发布</div>
+            <div class="list-item-desc">摄影师使用防水壳配 16-35mm 镜头，在室内泳池拍摄，模特身穿白色纱裙。</div>
+          </div>
+          <span class="list-item-time">2026-11-03</span>
+        </div>
+        <div class="list-item">
+          <div class="list-item-content">
+            <div class="list-item-title">插画师“林小满”上传手绘扫描系列</div>
+            <div class="list-item-desc">八张水彩原作扫描，主题为老式理发店与街边修鞋摊，保留纸张纹理。</div>
+          </div>
+          <span class="list-item-time">2026-11-01</span>
+        </div>
+        <div class="list-item">
+          <div class="list-item-content">
+            <div class="list-item-title">风光旅拍新增「冰岛黑沙滩」组图</div>
+            <div class="list-item-desc">拍摄于十月二十日，维克镇黑沙滩，长曝光 4 秒，海水呈雾状拉丝。</div>
+          </div>
+          <span class="list-item-time">2026-10-30</span>
+        </div>
+        <div class="list-item">
+          <div class="list-item-content">
+            <div class="list-item-title">建筑几何分类收录「广州大剧院」仰拍</div>
+            <div class="list-item-desc">利用广角镜头与低角度，表现建筑外立面的三角形切割与光影对比。</div>
+          </div>
+          <span class="list-item-time">2026-10-28</span>
+        </div>
+        <div class="list-item">
+          <div class="list-item-content">
+            <div class="list-item-title">「暗调美食」拍摄参数公开课上线</div>
+            <div class="list-item-desc">由摄影师陈默整理，附布光示意图与后期曲线参考，共 6 张示例图。</div>
+          </div>
+          <span class="list-item-time">2026-10-26</span>
+        </div>
+        <div class="list-item">
+          <div class="list-item-content">
+            <div class="list-item-title">黑白纪实分类新增「夜班公交」专题</div>
+            <div class="list-item-desc">记录凌晨公交司机与乘客，使用富士 Acros 100 胶卷，颗粒细腻。</div>
+          </div>
+          <span class="list-item-time">2026-10-24</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. 分类入口 -->
+    <section class="section" id="categories">
+      <div class="section-header">
+        <h2 class="section-title">按类别浏览图集</h2>
+      </div>
+      <div class="category-grid">
+        <a class="category-item" href="#featured">人像写真</a>
+        <a class="category-item" href="#featured">风光旅拍</a>
+        <a class="category-item" href="#featured">城市街拍</a>
+        <a class="category-item" href="#featured">复古胶片</a>
+        <a class="category-item" href="#featured">插画视觉</a>
+        <a class="category-item" href="#featured">建筑几何</a>
+        <a class="category-item" href="#featured">静物美食</a>
+        <a class="category-item" href="#featured">黑白纪实</a>
+      </div>
+    </section>
+
+    <!-- 5. 深度解析 -->
+    <section class="section" id="deep-dive">
+      <div class="section-header">
+        <h2 class="section-title">胶片模拟调色与数码原片的取舍逻辑</h2>
+      </div>
+      <div class="deep-dive">
+        <h3>Portra 400 的肤色表现为何被反复引用</h3>
+        <p>在十月上传的 63 组复古胶片作品中，有 41 组标注使用了柯达 Portra 400 或后期模拟其色彩风格。这款胶卷在肤色还原上偏向暖调、低对比，高光部分有柔和过渡。不少数码摄影师在 Lightroom 里用曲线和 HSL 工具模仿这一特性，但实际对比会发现，数码模拟在暗部容易出现色块断层，而真实胶片在欠曝一档时仍保留连续色调。一个可核对的案例来自创作者“阿蓝”的对比帖：同一场景下，富士 GA645 搭配 Portra 400 的扫描件与索尼 A7M4 后期文件并排放置，胶片版在阴影细节上多出约 15% 的可见层次。</p>
+        <h3>“胶片模拟”标签搜索量上升 34% 背后的具体信号</h3>
+        <p>十月站内搜索数据里，“胶片模拟”“Portra 调色”“CineStill 800T 夜景”三个词条环比九月分别上升 34%、27% 和 19%。这不是孤立现象。同期，至少有 9 位创作者在作品描述里附上了“数码原片 + 后期对比”的双图模式，说明浏览者不再满足于只看最终效果，而是想知道从原片到成片的中间步骤。另一个容易被忽略的细节是，带对比图的帖子平均收藏量比单图帖子高出约 58%。</p>
+        <div class="callout">
+          可核对的结构：一条“胶片感”作品的可信度，取决于三个环节——拍摄时是否使用真实胶片（看胶卷型号标注）、扫描或后期是否保留完整色彩信息（看是否提供原片对比）、上传平台是否压缩过度（看图片分辨率和文件大小）。缺了哪一项，判断依据就少一层。
+        </div>
+        <h3>数码原片直出与后期调色的受众分化</h3>
+        <p>浏览行为上存在明显分化。人像写真分类里，标题带“原片直出”的作品平均浏览时长比经过重度后期的作品短，但收藏率反而更高，收藏者多为摄影学习者，目的是研究光线和肤色还原。风光旅拍则相反，经过景深合成、曝光混合的作品浏览时长更长，说明浏览者在风光类内容上更倾向于接受“加工后的视觉结果”。插画视觉几乎不存在原片对比的诉求，观众默认接受数字绘画的合成属性。这个分化提示一个判断：不同类型内容对“真实感”的要求并不一致，用同一套标准衡量所有分类会错位。</p>
+        <h3>从 480 组图集里看拍摄器材的集中度</h3>
+        <p>九月底至十一月初的 480 组图集中，明确标注相机型号的有 312 组。出现频率最高的前五名依次是索尼 A7M4（47 组）、富士 X-T5（39 组）、佳能 EOS R6 Mark II（31 组）、尼康 Z6 III（22 组）、徕卡 Q3（17 组）。胶卷类作品中，Portra 400 出现 23 次，CineStill 800T 出现 11 次，富士 Acros 100 出现 8 次。器材集中度本身不能直接推导出作品质量，但可以说明当前上传者的设备基线——绝大多数作品来自全画幅无反系统，中画幅和胶片机属于少数派，在分类浏览时容易形成“新鲜感溢价”。</p>
+      </div>
+    </section>
+
+    <!-- 6. 体验指南 -->
+    <section class="section" id="guide">
+      <div class="section-header">
+        <h2 class="section-title">浏览与筛选图集的实用路径</h2>
+      </div>
+      <div class="deep-dive">
+        <h3>先定类型，再看拍摄参数</h3>
+        <p>打开一个图集时，先看分类标签确认类型。人像写真和城市街拍对光线的要求不同，前者可以接受补光痕迹，后者更看重现场光的不可复制性。接着扫一眼作品描述里的器材和参数，标注了机身、镜头、光圈、快门的作品，通常拍摄者更愿意接受技术层面的讨论。没有标注的作品未必不好，但判断成本更高。</p>
+        <h3>用对比图判断后期程度</h3>
+        <p>带“原片对比”的作品能直观看到调色幅度。如果原片和成片差异极大，而作品类型是纪实或街拍，就需要考虑后期是否改变了场景的原始信息。风光类作品使用景深合成或曝光混合属于常见做法，不算失真。插画视觉没有原片概念，关注点应放在风格一致性和完成度上。</p>
+        <h3>收藏前先看组图完整性</h3>
+        <p>一组图如果只有三张，往往难以判断拍摄者的完整意图。六张以上的组图通常包含不同景别和角度，信息更完整。最新更新列表里，组图数量在卡片描述中直接可见，可以先按数量筛选再看内容。另外，同一创作者在不同分类下的作品水平可能有波动，翻看其近期发布记录比只看单组图更可靠。</p>
+      </div>
+    </section>
+
+    <!-- 7. FAQ -->
+    <section class="section" id="faq">
+      <div class="section-header">
+        <h2 class="section-title">关于图集与作品的常见疑问</h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>Portra 400 和 CineStill 800T 拍夜景人像哪个更合适？</summary>
+          <div class="faq-answer">CineStill 800T 的钨丝灯平衡在夜景霓虹下偏冷蓝，适合想要冷调氛围的场景；Portra 400 在混合光源下肤色更稳，但需要足够曝光。十月上传的夜景人像里，用 CineStill 800T 的 11 组中有 7 组以蓝紫色调为主，用 Portra 400 的 23 组里只有 4 组是纯夜景。</div>
+        </details>
+        <details>
+          <summary>人像写真的“原片直出”标签可信吗？</summary>
+          <div class="faq-answer">原片直出通常指没有经过磨皮和液化，但曝光和色彩可能有基础调整。可信度看描述里有没有标注相机配置文件、是否附带 RAW 截图。部分作品会同时放出调整前后的对比，这类标注更完整。</div>
+        </details>
+        <details>
+          <summary>风光旅拍里的日照金山一般什么季节拍？</summary>
+          <div class="faq-answer">贡嘎和梅里雪山的日照金山在十月到次年二月出现概率较高，清晨六点半到七点之间。十一月上旬日出时间约在七点十分前后，摄影师通常提前四十分钟到达机位。最近上传的贡嘎作品拍摄于十一月五日六点四十二分。</div>
+        </details>
+        <details>
+          <summary>城市街拍作品里标注的 35mm 和 50mm 有什么区别？</summary>
+          <div class="faq-answer">35mm 视角更宽，适合带环境的抓拍，能交代街道与人物关系；50mm 更接近人眼视角，主体突出但环境信息少。武康路那组街拍使用 35mm，画面里梧桐树和咖啡店招牌都保留在构图中。</div>
+        </details>
+        <details>
+          <summary>水下摄影的器材门槛高吗？</summary>
+          <div class="faq-answer">主要成本在防水壳，对应机身的专用壳价格通常高于入门机身本身。泳池拍摄可以用防水袋起步，但控制变焦和光圈不便。十月底上传的「泳池蓝调」使用 16-35mm 镜头配专用壳，拍摄水深不超过两米。</div>
+        </details>
+        <details>
+          <summary>同一组图为什么有数码版和胶片版两个版本？</summary>
+          <div class="faq-answer">部分创作者在拍摄时同时使用数码和胶片机身，后期把两组图都上传供对比。十月至少有 9 组作品采用双版本形式，差异主要集中在暗部层次和色彩过渡上。</div>
+        </details>
+      </div>
+    </section>
+
+    <!-- 8. 用户评论 -->
+    <section class="section" id="comments">
+      <div class="section-header">
+        <h2 class="section-title">浏览者与创作者留言</h2>
+      </div>
+      <div class="comment-list">
+        <div class="comment-item"><div class="comment-header"><span class="comment-avatar">林</span><span class="comment-nick">林一</span><span class="comment-time">11-08</span></div><div class="comment-text">窗边侧影那组，纱帘的光影卡得正好，下午三四点的光确实比中午好使。</div></div>
+        <div class="comment-item"><div class="comment-header"><span class="comment-avatar">阿</span><span class="comment-nick">阿蓝</span><span class="comment-time">11-08</span></div><div class="comment-text">胶片日记更新了，满觉陇的桂花拍出来比肉眼看到的还密。</div></div>
+        <div class="comment-item"><div class="comment-header"><span class="comment-avatar">陈</span><span class="comment-nick">陈默</span><span class="comment-time">11-07</span></div><div class="comment-text">暗调美食那组我看了，可颂的酥皮层次用 f/2.8 拍刚好，光圈再大就糊了。</div></div>
+        <div class="comment-item"><div class="comment-header"><span class="comment-avatar">摄</span><span class="comment-nick">摄影师老周</span><span class="comment-time">11-07</span></div><div class="comment-text">武康路现在全是人，能拍到没路人乱入的片不容易。</div></div>
+        <div class="comment-item"><div class="comment-header"><span class="comment-avatar">小</span><span class="comment-nick">小满</span><span class="comment-time">11-06</span></div><div class="comment-text">水下那组颜色好看，不过泳池拍来拍去都是蓝底，有点审美疲劳了。</div></div>
+        <div class="comment-item"><div class="comment-header"><span class="comment-avatar">夜</span><span class="comment-nick">夜航船</span><span class="comment-time">11-06</span></div><div class="comment-text">CineStill 800T 夜景人像确实偏蓝，上次拍出来脸是青的，后期拉了半天。</div></div>
+        <div class="comment-item"><div class="comment-header"><span class="comment-avatar">山</span><span class="comment-nick">山野</span><span class="comment-time">11-05</span></div><div class="comment-text">贡嘎日照金山那张等了多少天啊，十月天气一直不太好。</div></div>
+        <div class="comment-item"><div class="comment-header"><span class="comment-avatar">K</span><span class="comment-nick">Kai</span><span class="comment-time">11-04</span></div><div class="comment-text">建筑几何分类终于多了点新东西，广州大剧院那个仰角不错。</div></div>
+        <div class="comment-item"><div class="comment-header"><span class="comment-avatar">豆</span><span class="comment-nick">豆豆</span><span class="comment-time">11-03</span></div><div class="comment-text">黑白纪实那组夜班公交，颗粒感正好，Acros 100 确实细腻。</div></div>
+        <div class="comment-item"><div class="comment-header"><span class="comment-avatar">L</span><span class="comment-nick">Luna</span><span class="comment-time">11-02</span></div><div class="comment-text">插画区更新太慢了，等一周才看到两三组新的。</div></div>
+        <div class="comment-item"><div class="comment-header"><span class="comment-avatar">大</span><span class="comment-nick">大熊</span><span class="comment-time">11-01</span></div><div class="comment-text">最近原片直出的标签有点滥用了，有些明明调过色还说直出。</div></div>
+        <div class="comment-item"><div class="comment-header"><span class="comment-avatar">夏</span><span class="comment-nick">夏至</span><span class="comment-time">10-31</span></div><div class="comment-text">冰岛黑沙滩那组长曝光拉丝效果不错，就是海水有点过曝了。</div></div>
+        <div class="comment-item"><div class="comment-header"><span class="comment-avatar">木</span><span class="comment-nick">木木</span><span class="comment-time">10-30</span></div><div class="comment-text">夜班公交那组司机的表情抓得好，是真在打哈欠还是说话呢。</div></div>
+        <div class="comment-item"><div class="comment-header"><span class="comment-avatar">三</span><span class="comment-nick">三三</span><span class="comment-time">10-29</span></div><div class="comment-text">双版本对比图多来点，看原片和成片的差异比看成品有意思。</div></div>
+        <div class="comment-item"><div class="comment-header"><span class="comment-avatar">Z</span><span class="comment-nick">Zoe</span><span class="comment-time">10-28</span></div><div class="comment-text">星空那组是用赤道仪拍的吧，90 秒不拖线，背景星点够圆。</div></div>
+        <div class="comment-item"><div class="comment-header"><span class="comment-avatar">老</span><span class="comment-nick">老猫</span><span class="comment-time">10-27</span></div><div class="comment-text">静物美食看多了都一个样，黑色背景板加侧光，能换换吗。</div></div>
+        <div class="comment-item"><div class="comment-header"><span class="comment-avatar">白</span><span class="comment-nick">白桃</span><span class="comment-time">10-26</span></div><div class="comment-text">林小满的水彩理发店那张，墙上的价目表都画出来了，细节控。</div></div>
+        <div class="comment-item"><div class="comment-header"><span class="comment-avatar">一</span><span class="comment-nick">一叶</span><span class="comment-time">10-25</span></div><div class="comment-text">街拍里 35mm 和 50mm 的争论没停过，其实看场景，人少用 50 人多用 35。</div></div>
+      </div>
+    </section>
+
+    <!-- 9. 相关资讯 -->
+    <section class="section" id="news">
+      <div class="section-header">
+        <h2 class="section-title">影像动态与作品资讯</h2>
+      </div>
+      <div class="news-list">
+        <div class="news-item">
+          <span class="news-date">2026-11-08</span>
+          <div class="news-content">
+            <div class="news-title">柯达宣布 Portra 400 明年一季度增产 20%</div>
+            <div class="news-desc">官方公告提到 135 规格优先供应，中画幅产能预计二季度跟进。十月站内 Portra 400 相关作品数量为 23 组，较九月增加 5 组。</div>
+          </div>
+        </div>
+        <div class="news-item">
+          <span class="news-date">2026-11-06</span>
+          <div class="news-content">
+            <div class="news-title">上海武康路周末启动人流管控，街拍需避开限行时段</div>
+            <div class="news-desc">管控从十一月七日起每周末十点至十六点实施，摄影师建议赶早七点前到达，或改拍安福路、五原路一带。</div>
+          </div>
+        </div>
+        <div class="news-item">
+          <span class="news-date">2026-11-04</span>
+          <div class="news-content">
+            <div class="news-title">川西鱼子西观景台本月起封闭检修，预计 11 月 20 日重开</div>
+            <div class="news-desc">当地文旅局通知显示，检修期间车辆禁止上山。原计划拍摄贡嘎日出的摄影师可改往雅哈垭口或子梅垭口。</div>
+          </div>
+        </div>
+        <div class="news-item">
+          <span class="news-date">2026-11-02</span>
+          <div class="news-content">
+            <div class="news-title">富士 X-T5 固件 3.10 版发布，改善连续对焦追焦稳定性</div>
+            <div class="news-desc">更新说明提到针对人眼识别在逆光场景下的识别率提升。站内 X-T5 作品数量 39 组，位列器材使用第二。</div>
+          </div>
+        </div>
+        <div class="news-item">
+          <span class="news-date">2026-10-30</span>
+          <div class="news-content">
+            <div class="news-title">杭州满觉陇桂花季结束，最后一批胶片拍摄集中在 10 月 28 日</div>
+            <div class="news-desc">当地花农表示今年花期比去年晚五天，十月下旬为盛花期。阿蓝的「胶片日记·秋末」拍摄于十月二十七日。</div>
+          </div>
+        </div>
+        <div class="news-item">
+          <span class="news-date">2026-10-27</span>
+          <div class="news-content">
+            <div class="news-title">Procreate 5.4 新增湿海绵笔刷，插画区已有创作者使用</div>
+            <div class="news-desc">更新后笔刷库增加 12 款自然媒介笔刷，霓虹雨夜作者在作品描述中标注使用了新笔刷做地面反光。</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. 相关推荐 -->
+    <section class="section" id="recommend">
+      <div class="section-header">
+        <h2 class="section-title">按风格与场景找图集</h2>
+      </div>
+      <div class="tag-cloud">
+        <a class="tag-link" href="#featured">日系清新调色</a>
+        <a class="tag-link" href="#featured">暗调油画人像</a>
+        <a class="tag-link" href="#featured">CineStill 800T 夜景</a>
+        <a class="tag-link" href="#featured">川西雪山机位</a>
+        <a class="tag-link" href="#featured">上海梧桐街拍</a>
+        <a class="tag-link" href="#featured">Portra 400 人像</a>
+        <a class="tag-link" href="#featured">水下纱裙摄影</a>
+        <a class="tag-link" href="#featured">黑白菜市场纪实</a>
+      </div>
+    </section>
+
+    <!-- 11. 热门榜单 + 投稿互动 -->
+    <section class="section" id="ranks">
+      <div class="section-header">
+        <h2 class="section-title">本周浏览热度榜</h2>
+      </div>
+      <div class="rank-list">
+        <div class="rank-row"><span class="rank-index">1</span><span class="rank-name">川西贡嘎 · 日照金山延时截帧</span><span class="rank-meta">3.1k 浏览</span></div>
+        <div class="rank-row"><span class="rank-index">2</span><span class="rank-name">窗边侧影 · 自然光人像组图</span><span class="rank-meta">2.4k 浏览</span></div>
+        <div class="rank-row"><span class="rank-index">3</span><span class="rank-name">Portra 400 · 秋日公园人像</span><span class="rank-meta">2.2k 浏览</span></div>
+        <div class="rank-row"><span class="rank-index">4</span><span class="rank-name">武康路 · 梧桐光影与行人</span><span class="rank-meta">1.8k 浏览</span></div>
+        <div class="rank-row"><span class="rank-index">5</span><span class="rank-name">霓虹雨夜 · 赛博朋克街景插画</span><span class="rank-meta">1.5k 浏览</span></div>
+        <div class="rank-row"><span class="rank-index">6</span><span class="rank-name">菜市场 · 黑白人物速写</span><span class="rank-meta">1.3k 浏览</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="contribute">
+      <div class="interact-banner">
+        <div>
+          <h3>上传你的图集作品</h3>
+          <p>支持 JPG / PNG / TIFF 格式，单组不超过 40 张，可附加拍摄参数与后期说明。</p>
+        </div>
+        <a class="interact-btn" href="#contribute">开始上传</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 右侧辅助栏 -->
+  <aside class="aux-sidebar" aria-label="辅助信息">
+    <div class="aux-card">
+      <h3>🔥 热门标签</h3>
+      <div class="aux-list">
+        <div class="aux-item"><span class="rank">01</span><a href="#featured">胶片模拟调色</a></div>
+        <div class="aux-item"><span class="rank">02</span><a href="#featured">川西日照金山</a></div>
+        <div class="aux-item"><span class="rank">03</span><a href="#featured">Portra 400</a></div>
+        <div class="aux-item"><span class="rank">04</span><a href="#featured">武康路街拍</a></div>
+        <div class="aux-item"><span class="rank">05</span><a href="#featured">暗调美食布光</a></div>
+        <div class="aux-item"><span class="rank">06</span><a href="#featured">水下人像</a></div>
+      </div>
+    </div>
+    <div class="aux-card">
+      <h3>📅 最近更新</h3>
+      <div class="aux-list">
+        <div class="aux-item"><span style="color:var(--text-tertiary);font-size:0.8rem;">11-08</span><a href="#latest">胶片日记·秋末</a></div>
+        <div class="aux-item"><span style="color:var(--text-tertiary);font-size:0.8rem;">11-07</span><a href="#latest">暗调棚拍 8 组</a></div>
+        <div class="aux-item"><span style="color:var(--text-tertiary);font-size:0.8rem;">11-06</span><a href="#latest">城市街拍专题</a></div>
+        <div class="aux-item"><span style="color:var(--text-tertiary);font-size:0.8rem;">11-04</span><a href="#latest">猎户座初升</a></div>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<!-- 页脚 -->
+<footer class="footer">
+  <div class="container">
+    <div>
+      <div class="footer-brand">wwww.disise.com 蜜桃网图片区</div>
+      <p class="footer-desc">图片区覆盖 2026 年 9 月至 11 月的人像、风光、街拍、胶片、插画等视觉作品，每日更新约 15 组图集，包含拍摄参数、后期说明与原片对比内容。</p>
+    </div>
+    <div>
+      <h4>频道</h4>
+      <div class="footer-links">
+        <a href="#featured">人像写真</a>
+        <a href="#featured">风光旅拍</a>
+        <a href="#featured">城市街拍</a>
+        <a href="#featured">复古胶片</a>
+      </div>
+    </div>
+    <div>
+      <h4>发现</h4>
+      <div class="footer-links">
+        <a href="#latest">最新更新</a>
+        <a href="#ranks">热门榜单</a>
+        <a href="#recommend">标签索引</a>
+        <a href="#contribute">上传作品</a>
+      </div>
+    </div>
+    <div>
+      <h4>说明</h4>
+      <div class="footer-links">
+        <a href="#overview">领域概览</a>
+        <a href="#faq">常见问题</a>
+        <a href="#comments">用户评论</a>
+        <a href="#news">相关资讯</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 wwww.disise.com 蜜桃网图片区 · 内容为示例数据，用于展示页面结构与分类</span>
+      <span>更新时间：2026-11-08</span>
+    </div>
+  </div>
+</footer>
+
+<!-- 回到顶部 -->
+<button class="back-to-top" id="backToTop" aria-label="回到顶部">↑</button>
+
+<script>
+  (function() {
+    // 移动端菜单
+    const hamburger = document.getElementById('hamburgerBtn');
+    const mainNav = document.getElementById('mainNav');
+    const overlay = document.getElementById('overlay');
+    function closeMenu() {
+      mainNav.classList.remove('open');
+      overlay.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
+    hamburger.addEventListener('click', function() {
+      const isOpen = mainNav.classList.toggle('open');
+      overlay.classList.toggle('active', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+    overlay.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && mainNav.classList.contains('open')) {
+        closeMenu();
+      }
+    });
+    mainNav.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        if (window.innerWidth <= 740) closeMenu();
+      });
+    });
+
+    // 搜索
+    const searchInput = document.getElementById('searchInput');
+    const searchBtn = document.getElementById('searchBtn');
+    searchBtn.addEventListener('click', function() {
+      const q = searchInput.value.trim();
+      if (q) {
+        alert('搜索“' + q + '”：当前为静态示例，搜索结果将展示相关图集与标签。');
+      } else {
+        alert('请输入图集名称或标签关键词');
+      }
+    });
+    searchInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') searchBtn.click();
+    });
+
+    // 回到顶部
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', function() {
+      backToTop.classList.toggle('visible', window.scrollY > window.innerHeight);
+    });
+    backToTop.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // 频道高亮（简单滚动监听）
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.main-nav .nav-link, .channel-link');
+    window.addEventListener('scroll', function() {
+      let current = '';
+      sections.forEach(function(section) {
+        const sectionTop = section.offsetTop - 120;
+        if (window.scrollY >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+      navLinks.forEach(function(link) {
+        link.classList.remove('active');
+        const href = link.getAttribute('href');
+        if (href === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    });
+  })();
+</script>
+
+<!-- 结构化数据 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "wwww.disise.com 蜜桃网图片区",
+  "description": "汇集人像、风光、街拍、插画等高清图集与视觉作品，提供每日更新图集、分类浏览与精选推荐。",
+  "url": "https://www.disise.com/"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Portra 400 和 CineStill 800T 拍夜景人像哪个更合适？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "CineStill 800T 的钨丝灯平衡在夜景霓虹下偏冷蓝，适合想要冷调氛围的场景；Portra 400 在混合光源下肤色更稳，但需要足够曝光。十月上传的夜景人像里，用 CineStill 800T 的 11 组中有 7 组以蓝紫色调为主，用 Portra 400 的 23 组里只有 4 组是纯夜景。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "人像写真的“原片直出”标签可信吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "原片直出通常指没有经过磨皮和液化，但曝光和色彩可能有基础调整。可信度看描述里有没有标注相机配置文件、是否附带 RAW 截图。部分作品会同时放出调整前后的对比，这类标注更完整。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "风光旅拍里的日照金山一般什么季节拍？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "贡嘎和梅里雪山的日照金山在十月到次年二月出现概率较高，清晨六点半到七点之间。十一月上旬日出时间约在七点十分前后，摄影师通常提前四十分钟到达机位。最近上传的贡嘎作品拍摄于十一月五日六点四十二分。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "城市街拍作品里标注的 35mm 和 50mm 有什么区别？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "35mm 视角更宽，适合带环境的抓拍，能交代街道与人物关系；50mm 更接近人眼视角，主体突出但环境信息少。武康路那组街拍使用 35mm，画面里梧桐树和咖啡店招牌都保留在构图中。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "水下摄影的器材门槛高吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "主要成本在防水壳，对应机身的专用壳价格通常高于入门机身本身。泳池拍摄可以用防水袋起步，但控制变焦和光圈不便。十月底上传的「泳池蓝调」使用 16-35mm 镜头配专用壳，拍摄水深不超过两米。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "同一组图为什么有数码版和胶片版两个版本？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "部分创作者在拍摄时同时使用数码和胶片机身，后期把两组图都上传供对比。十月至少有 9 组作品采用双版本形式，差异主要集中在暗部层次和色彩过渡上。"
+      }
+    }
+  ]
+}
+</script>
+
+</body>
+  </html>
