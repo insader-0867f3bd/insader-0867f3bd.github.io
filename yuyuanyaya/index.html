@@ -1,0 +1,2560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>芋圆呀呀 - 手作甜品与生活灵感</title>
+  <meta name="description" content="芋圆呀呀是手作甜品与生活灵感聚合站，汇集芋圆做法、糖水搭配、探店记录、摆摊经验与创作者交流，适合爱做甜品、爱逛小店、想摆摊的年轻人。">
+  <meta name="keywords" content="芋圆呀呀">
+  <style>
+    /* ---------- 设计系统 ---------- */
+    :root {
+      --color-primary: #8B5A3C;
+      --color-primary-light: #C49A6C;
+      --color-primary-dark: #5E3A22;
+      --color-accent: #E8A87C;
+      --color-bg: #FDF8F4;
+      --color-surface: #FFFFFF;
+      --color-text-primary: #2D1F14;
+      --color-text-secondary: #7A6A5C;
+      --color-text-tertiary: #A89788;
+      --color-border: #E8DDD3;
+      --color-border-light: #F3ECE6;
+
+      --radius-card: 16px;
+      --radius-button: 10px;
+      --radius-tag: 6px;
+      --radius-banner: 20px;
+
+      --shadow-default: 0 2px 8px rgba(45, 31, 20, 0.06);
+      --shadow-hover: 0 6px 20px rgba(45, 31, 20, 0.10);
+
+      --font-body: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, -apple-system, sans-serif;
+      --font-heading: 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
+
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+      --space-2xl: 48px;
+      --space-3xl: 64px;
+
+      --max-width: 1320px;
+      --header-height: 64px;
+      --announce-height: 38px;
+      --sticky-offset: calc(var(--header-height) + var(--announce-height));
+
+      --transition: 0.2s ease;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: var(--sticky-offset);
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg);
+      color: var(--color-text-primary);
+      line-height: 1.7;
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    /* ---------- 吸顶公告条 ---------- */
+    .announce-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--announce-height);
+      background: var(--color-primary-dark);
+      color: #F5EBE1;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      font-size: 13px;
+    }
+
+    .announce-inner {
+      max-width: var(--max-width);
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 var(--space-lg);
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+      white-space: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .announce-inner::-webkit-scrollbar {
+      display: none;
+    }
+
+    .announce-brand {
+      font-weight: 700;
+      color: var(--color-accent);
+      flex-shrink: 0;
+      letter-spacing: 0.5px;
+    }
+
+    .announce-item {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      flex-shrink: 0;
+    }
+
+    .announce-date {
+      opacity: 0.7;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .announce-sep {
+      opacity: 0.3;
+      margin: 0 var(--space-sm);
+    }
+
+    /* ---------- 页头 ---------- */
+    .site-header {
+      position: sticky;
+      top: var(--announce-height);
+      z-index: 99;
+      height: var(--header-height);
+      background: rgba(253, 248, 244, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border-light);
+    }
+
+    .header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--space-lg);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: var(--space-xl);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      flex-shrink: 0;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      letter-spacing: 1px;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      overflow-x: auto;
+      scrollbar-width: none;
+      flex: 1;
+    }
+
+    .main-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-link {
+      padding: 6px 14px;
+      border-radius: var(--radius-button);
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      background: var(--color-border-light);
+      color: var(--color-primary);
+      outline: none;
+    }
+
+    .nav-link:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      flex-shrink: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border-radius: var(--radius-button);
+      font-size: 14px;
+      font-weight: 500;
+      transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--color-primary-dark);
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      border: 1.5px solid var(--color-border);
+      color: var(--color-text-secondary);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--color-primary-light);
+      color: var(--color-primary);
+      background: var(--color-border-light);
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 40px;
+      height: 40px;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-button);
+      color: var(--color-text-primary);
+      font-size: 22px;
+    }
+
+    .menu-toggle:hover {
+      background: var(--color-border-light);
+    }
+
+    /* ---------- 首屏 ---------- */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(160deg, #FDF8F4 0%, #F5E6D9 50%, #EFD9C7 100%);
+      padding: var(--space-3xl) 0;
+    }
+
+    .hero-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--space-lg);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+      align-items: center;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: var(--space-md);
+      letter-spacing: 1px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(32px, 4.5vw, 52px);
+      line-height: 1.2;
+      color: var(--color-primary-dark);
+      margin-bottom: var(--space-md);
+      letter-spacing: 2px;
+    }
+
+    .hero-desc {
+      font-size: 16px;
+      color: var(--color-text-secondary);
+      max-width: 520px;
+      line-height: 1.8;
+      margin-bottom: var(--space-xl);
+    }
+
+    .hero-desc strong {
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .hero-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-svg-wrap {
+      width: 100%;
+      max-width: 480px;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-svg-wrap { animation: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* ---------- 主布局：三栏门户 ---------- */
+    .page-layout {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: var(--space-2xl) var(--space-lg);
+      display: grid;
+      grid-template-columns: 180px 1fr 260px;
+      gap: var(--space-xl);
+      align-items: start;
+    }
+
+    /* 左侧频道索引 */
+    .channel-sidebar {
+      position: sticky;
+      top: calc(var(--sticky-offset) + var(--space-lg));
+      padding: var(--space-md) 0;
+    }
+
+    .channel-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: var(--space-md);
+      padding-left: var(--space-sm);
+    }
+
+    .channel-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .channel-link {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: 8px 12px;
+      border-radius: var(--radius-button);
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      transition: background var(--transition), color var(--transition);
+      border-left: 3px solid transparent;
+    }
+
+    .channel-link:hover {
+      background: var(--color-border-light);
+      color: var(--color-primary);
+    }
+
+    .channel-link.active {
+      background: var(--color-border-light);
+      color: var(--color-primary);
+      border-left-color: var(--color-primary);
+      font-weight: 600;
+    }
+
+    .channel-count {
+      margin-left: auto;
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+    }
+
+    /* 中间主内容 */
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2xl);
+      min-width: 0;
+    }
+
+    /* 右侧辅助栏 */
+    .aux-sidebar {
+      position: sticky;
+      top: calc(var(--sticky-offset) + var(--space-lg));
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    .aux-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-card);
+      padding: var(--space-lg);
+      box-shadow: var(--shadow-default);
+    }
+
+    .aux-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-md);
+      padding-bottom: var(--space-sm);
+      border-bottom: 1px solid var(--color-border-light);
+    }
+
+    .aux-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .aux-list li {
+      display: flex;
+      gap: var(--space-sm);
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--color-text-secondary);
+    }
+
+    .aux-rank {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      background: var(--color-border-light);
+      color: var(--color-text-tertiary);
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .aux-rank.top {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    .aux-tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: var(--radius-tag);
+      font-size: 12px;
+      background: var(--color-border-light);
+      color: var(--color-text-secondary);
+      transition: background var(--transition), color var(--transition);
+      white-space: nowrap;
+    }
+
+    .tag:hover {
+      background: var(--color-primary-light);
+      color: #fff;
+    }
+
+    .tag-accent {
+      background: var(--color-accent);
+      color: #fff;
+    }
+
+    /* ---------- 板块通用 ---------- */
+    .section {
+      scroll-margin-top: var(--sticky-offset);
+    }
+
+    .section-header {
+      margin-bottom: var(--space-lg);
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      margin-bottom: var(--space-xs);
+      line-height: 1.3;
+    }
+
+    .section-subtitle {
+      font-size: 14px;
+      color: var(--color-text-tertiary);
+    }
+
+    /* 概览 */
+    .overview-text {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-card);
+      padding: var(--space-xl);
+      box-shadow: var(--shadow-default);
+      line-height: 1.9;
+      color: var(--color-text-secondary);
+    }
+
+    .overview-text p {
+      margin-bottom: var(--space-md);
+    }
+
+    .overview-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .overview-text strong {
+      color: var(--color-primary);
+    }
+
+    /* 卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: var(--space-lg);
+    }
+
+    .item-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      box-shadow: var(--shadow-default);
+      transition: box-shadow var(--transition), transform var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .item-card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-3px);
+    }
+
+    .item-card-img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      background: var(--color-border-light);
+    }
+
+    .item-card-body {
+      padding: var(--space-md) var(--space-md) var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .item-card-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-xs);
+      line-height: 1.4;
+    }
+
+    .item-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-bottom: var(--space-sm);
+    }
+
+    .item-card-desc {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: var(--space-sm);
+    }
+
+    .item-card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+      padding-top: var(--space-sm);
+      border-top: 1px solid var(--color-border-light);
+    }
+
+    .meta-hot {
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+
+    /* 最新更新列表 */
+    .update-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .update-item {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: var(--space-md);
+      align-items: center;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-button);
+      padding: var(--space-md);
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .update-item:hover {
+      border-color: var(--color-primary-light);
+      box-shadow: var(--shadow-default);
+    }
+
+    .update-date {
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+      font-variant-numeric: tabular-nums;
+      flex-shrink: 0;
+    }
+
+    .update-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+
+    .update-summary {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+    }
+
+    .update-type {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: var(--color-border-light);
+      color: var(--color-text-tertiary);
+      flex-shrink: 0;
+    }
+
+    /* 分类入口 */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-md);
+    }
+
+    .category-item {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-card);
+      padding: var(--space-lg) var(--space-md);
+      text-align: center;
+      transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+    }
+
+    .category-item:hover {
+      border-color: var(--color-primary-light);
+      box-shadow: var(--shadow-default);
+      transform: translateY(-2px);
+    }
+
+    .category-icon {
+      font-size: 28px;
+      margin-bottom: var(--space-sm);
+      display: block;
+    }
+
+    .category-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-xs);
+    }
+
+    .category-count {
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+    }
+
+    /* 深度解析 */
+    .deep-dive {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-card);
+      padding: var(--space-xl);
+      box-shadow: var(--shadow-default);
+    }
+
+    .deep-dive h3 {
+      font-family: var(--font-heading);
+      font-size: 19px;
+      color: var(--color-primary-dark);
+      margin: var(--space-lg) 0 var(--space-sm);
+    }
+
+    .deep-dive h3:first-child {
+      margin-top: 0;
+    }
+
+    .deep-dive p {
+      color: var(--color-text-secondary);
+      line-height: 1.9;
+      margin-bottom: var(--space-md);
+    }
+
+    .deep-dive ul {
+      list-style: disc;
+      padding-left: var(--space-lg);
+      color: var(--color-text-secondary);
+      line-height: 1.9;
+      margin-bottom: var(--space-md);
+    }
+
+    .deep-dive li {
+      margin-bottom: var(--space-xs);
+    }
+
+    .deep-dive strong {
+      color: var(--color-primary);
+    }
+
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: var(--space-md) 0;
+      font-size: 13px;
+    }
+
+    .compare-table th,
+    .compare-table td {
+      border: 1px solid var(--color-border-light);
+      padding: var(--space-sm) var(--space-md);
+      text-align: left;
+      line-height: 1.6;
+    }
+
+    .compare-table th {
+      background: var(--color-border-light);
+      color: var(--color-text-primary);
+      font-weight: 600;
+    }
+
+    .compare-table td {
+      color: var(--color-text-secondary);
+    }
+
+    /* 指南步骤 */
+    .guide-steps {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      counter-reset: step;
+    }
+
+    .guide-step {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: var(--space-md);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-card);
+      padding: var(--space-lg);
+      box-shadow: var(--shadow-default);
+    }
+
+    .guide-step-num {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: #fff;
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .guide-step h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-xs);
+    }
+
+    .guide-step p {
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+
+    /* FAQ */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .faq-item {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+    }
+
+    .faq-item summary {
+      padding: var(--space-md) var(--space-lg);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background var(--transition);
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+      content: '+';
+      font-size: 20px;
+      color: var(--color-text-tertiary);
+      transition: transform var(--transition);
+      flex-shrink: 0;
+      margin-left: var(--space-md);
+    }
+
+    .faq-item[open] summary::after {
+      transform: rotate(45deg);
+    }
+
+    .faq-item summary:hover {
+      background: var(--color-border-light);
+    }
+
+    .faq-answer {
+      padding: 0 var(--space-lg) var(--space-lg);
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      line-height: 1.8;
+    }
+
+    /* 评论 */
+    .comment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-md);
+    }
+
+    .comment-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-card);
+      padding: var(--space-md) var(--space-lg);
+      box-shadow: var(--shadow-default);
+    }
+
+    .comment-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-sm);
+    }
+
+    .comment-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--color-primary-light);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .comment-nick {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+
+    .comment-text {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+
+    /* 资讯 */
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .news-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: var(--space-md);
+      align-items: start;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-card);
+      padding: var(--space-md);
+      transition: border-color var(--transition);
+    }
+
+    .news-item:hover {
+      border-color: var(--color-primary-light);
+    }
+
+    .news-date {
+      font-size: 13px;
+      color: var(--color-text-tertiary);
+      font-variant-numeric: tabular-nums;
+      padding-top: 2px;
+    }
+
+    .news-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-xs);
+    }
+
+    .news-summary {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+
+    /* 相关推荐 */
+    .recommend-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .recommend-tag {
+      display: inline-block;
+      padding: 8px 18px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border-light);
+      border-radius: 30px;
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      transition: background var(--transition), border-color var(--transition), color var(--transition);
+    }
+
+    .recommend-tag:hover {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: #fff;
+    }
+
+    /* 补充板块：时间线 */
+    .timeline {
+      position: relative;
+      padding-left: var(--space-xl);
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 4px;
+      bottom: 4px;
+      width: 2px;
+      background: var(--color-border);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: var(--space-lg);
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: calc(-1 * var(--space-xl) + 1px);
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--color-surface);
+      border: 3px solid var(--color-primary-light);
+    }
+
+    .timeline-date {
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+      margin-bottom: 2px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .timeline-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-bottom: var(--space-xs);
+    }
+
+    .timeline-desc {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+
+    /* 投稿互动板块 */
+    .submit-banner {
+      background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
+      border-radius: var(--radius-banner);
+      padding: var(--space-xl);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
+    }
+
+    .submit-banner h3 {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      margin-bottom: var(--space-xs);
+    }
+
+    .submit-banner p {
+      font-size: 14px;
+      opacity: 0.85;
+      max-width: 480px;
+      line-height: 1.6;
+    }
+
+    .submit-banner .btn {
+      background: #fff;
+      color: var(--color-primary-dark);
+      flex-shrink: 0;
+    }
+
+    .submit-banner .btn:hover {
+      background: var(--color-accent);
+      color: #fff;
+    }
+
+    /* ---------- 页尾 ---------- */
+    .site-footer {
+      background: var(--color-primary-dark);
+      color: #C9B5A5;
+      margin-top: var(--space-3xl);
+      padding: var(--space-3xl) 0 var(--space-xl);
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--space-lg);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: var(--space-2xl);
+      margin-bottom: var(--space-2xl);
+    }
+
+    .footer-brand {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 700;
+      color: #F5EBE1;
+      margin-bottom: var(--space-md);
+      letter-spacing: 1px;
+    }
+
+    .footer-desc {
+      font-size: 13px;
+      line-height: 1.8;
+      color: #A89382;
+      max-width: 320px;
+    }
+
+    .footer-col h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #F5EBE1;
+      margin-bottom: var(--space-md);
+    }
+
+    .footer-col ul {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .footer-col a {
+      font-size: 13px;
+      color: #A89382;
+      transition: color var(--transition);
+    }
+
+    .footer-col a:hover {
+      color: var(--color-accent);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: var(--space-lg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      font-size: 12px;
+      color: #8A7768;
+    }
+
+    /* 回到顶部 */
+    .back-to-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-hover);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--transition), visibility var(--transition), transform var(--transition);
+      z-index: 90;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-3px);
+      background: var(--color-primary-dark);
+    }
+
+    /* 移动端遮罩 */
+    .mobile-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(45, 31, 20, 0.45);
+      z-index: 95;
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    .mobile-overlay.active {
+      display: block;
+      opacity: 1;
+    }
+
+    /* ---------- 响应式 ---------- */
+    @media (max-width: 1100px) {
+      .page-layout {
+        grid-template-columns: 170px 1fr 240px;
+        gap: var(--space-lg);
+      }
+      .footer-top {
+        grid-template-columns: 1.5fr 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .page-layout {
+        grid-template-columns: 160px 1fr;
+      }
+      .aux-sidebar {
+        display: none;
+      }
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+      }
+      .hero-visual {
+        order: -1;
+        max-width: 360px;
+        margin: 0 auto;
+      }
+      .category-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 740px) {
+      :root {
+        --announce-height: 34px;
+        --header-height: 56px;
+      }
+
+      .main-nav {
+        display: none;
+        position: fixed;
+        top: calc(var(--announce-height) + var(--header-height));
+        left: 0;
+        right: 0;
+        background: var(--color-surface);
+        flex-direction: column;
+        padding: var(--space-md);
+        gap: var(--space-xs);
+        box-shadow: var(--shadow-hover);
+        max-height: calc(100vh - var(--header-height) - var(--announce-height));
+        overflow-y: auto;
+        z-index: 98;
+      }
+
+      .main-nav.open {
+        display: flex;
+      }
+
+      .nav-link {
+        padding: 12px var(--space-md);
+        font-size: 15px;
+        width: 100%;
+        text-align: left;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .header-actions .btn-outline {
+        display: none;
+      }
+
+      .page-layout {
+        grid-template-columns: 1fr;
+        padding: var(--space-lg) var(--space-md);
+      }
+
+      .channel-sidebar {
+        position: static;
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        gap: var(--space-xs);
+        padding: var(--space-sm) 0;
+        scrollbar-width: none;
+        border-bottom: 1px solid var(--color-border-light);
+        margin-bottom: var(--space-md);
+      }
+
+      .channel-sidebar::-webkit-scrollbar {
+        display: none;
+      }
+
+      .channel-title {
+        display: none;
+      }
+
+      .channel-list {
+        flex-direction: row;
+        gap: var(--space-xs);
+      }
+
+      .channel-link {
+        white-space: nowrap;
+        border-left: none;
+        border-bottom: 2px solid transparent;
+        border-radius: 0;
+        padding: 6px 10px;
+      }
+
+      .channel-link.active {
+        border-bottom-color: var(--color-primary);
+        background: transparent;
+      }
+
+      .channel-count {
+        display: none;
+      }
+
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero {
+        padding: var(--space-xl) 0;
+      }
+
+      .hero h1 {
+        font-size: 30px;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .update-item {
+        grid-template-columns: 1fr;
+        gap: var(--space-xs);
+      }
+
+      .update-date {
+        order: -1;
+      }
+
+      .news-item {
+        grid-template-columns: 1fr;
+        gap: var(--space-xs);
+      }
+
+      .news-date {
+        order: -1;
+      }
+
+      .comment-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: var(--space-xl);
+      }
+
+      .submit-banner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .guide-step {
+        grid-template-columns: 1fr;
+      }
+
+      .compare-table {
+        font-size: 12px;
+      }
+
+      .compare-table th,
+      .compare-table td {
+        padding: var(--space-xs) var(--space-sm);
+      }
+
+      .back-to-top {
+        bottom: 16px;
+        right: 16px;
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .category-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-actions .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    /* 搜索无结果提示 */
+    .no-results {
+      text-align: center;
+      padding: var(--space-xl);
+      color: var(--color-text-tertiary);
+      font-size: 14px;
+    }
+  </style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+  <!-- 吸顶公告条 -->
+  <div class="announce-bar" role="status" aria-label="站点公告">
+    <div class="announce-inner">
+      <span class="announce-brand">芋圆呀呀</span>
+      <span class="announce-item">
+        <span class="announce-date">11月7日</span>
+        <span class="announce-sep">·</span>
+        <span>「秋冬热芋圆糖水」专题合集上线</span>
+      </span>
+      <span class="announce-item">
+        <span class="announce-date">11月5日</span>
+        <span class="announce-sep">·</span>
+        <span>仙草冻与芋圆搭配实验 第3期</span>
+      </span>
+      <span class="announce-item">
+        <span class="announce-date">11月3日</span>
+        <span class="announce-sep">·</span>
+        <span>摆摊日记：大学城夜市周营收记录</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- 页头 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/#hero" class="logo" aria-label="芋圆呀呀首页">
+        <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="20" cy="20" r="18" fill="#8B5A3C"/>
+          <circle cx="14" cy="16" r="5" fill="#F5EBE1" opacity="0.9"/>
+          <circle cx="24" cy="14" r="4" fill="#E8A87C" opacity="0.9"/>
+          <circle cx="20" cy="24" r="6" fill="#F5EBE1" opacity="0.7"/>
+          <circle cx="27" cy="25" r="3.5" fill="#E8A87C" opacity="0.8"/>
+        </svg>
+        <span class="logo-text">芋圆呀呀</span>
+      </a>
+
+      <nav class="main-nav" id="mainNav" aria-label="主导航">
+        <a href="/#overview" class="nav-link">领域概览</a>
+        <a href="/#featured" class="nav-link">精选推荐</a>
+        <a href="/#updates" class="nav-link">最新动态</a>
+        <a href="/#categories" class="nav-link">分类入口</a>
+        <a href="/#deep-dive" class="nav-link">深度解析</a>
+        <a href="/#guide" class="nav-link">体验指南</a>
+        <a href="/#faq" class="nav-link">常见问答</a>
+        <a href="/#comments" class="nav-link">用户评论</a>
+        <a href="/#news" class="nav-link">相关资讯</a>
+        <a href="/#recommend" class="nav-link">相关推荐</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="/#submit" class="btn btn-outline">投稿</a>
+        <a href="/#submit" class="btn btn-primary">参与互动</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="打开菜单" aria-expanded="false" aria-controls="mainNav">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 首屏 -->
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <span class="hero-badge">手作甜品 · 生活灵感</span>
+        <h1>芋圆呀呀</h1>
+        <p class="hero-desc">
+          从<strong>芋圆做法</strong>到<strong>糖水搭配</strong>，从街头<strong>甜品探店</strong>到<strong>摆摊经验</strong>，这里汇集了手作甜品爱好者日常会搜的具体内容：木薯粉比例、仙草冻凝固时间、秋冬热糖水配方、大学城夜市出摊记录。
+        </p>
+        <div class="hero-actions">
+          <a href="/#featured" class="btn btn-primary">浏览精选内容</a>
+          <a href="/#submit" class="btn btn-outline">投稿你的做法</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <svg class="hero-svg-wrap" viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="200" cy="280" rx="150" ry="20" fill="#C49A6C" opacity="0.15"/>
+          <circle cx="200" cy="160" r="110" fill="#F5E6D9"/>
+          <circle cx="200" cy="160" r="90" fill="#FDF8F4"/>
+          <circle cx="160" cy="130" r="22" fill="#C49A6C" opacity="0.7"/>
+          <circle cx="230" cy="110" r="18" fill="#E8A87C" opacity="0.8"/>
+          <circle cx="210" cy="190" r="26" fill="#8B5A3C" opacity="0.6"/>
+          <circle cx="150" cy="200" r="16" fill="#E8A87C" opacity="0.5"/>
+          <circle cx="250" cy="210" r="20" fill="#C49A6C" opacity="0.6"/>
+          <circle cx="190" cy="90" r="12" fill="#F5EBE1" opacity="0.9"/>
+          <circle cx="260" cy="150" r="10" fill="#8B5A3C" opacity="0.4"/>
+          <path d="M130 250 Q200 270 270 250" stroke="#C49A6C" stroke-width="2" opacity="0.3" fill="none"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 主布局：三栏门户 -->
+  <div class="page-layout">
+
+    <!-- 左侧频道索引 -->
+    <aside class="channel-sidebar" aria-label="频道导航">
+      <div class="channel-title">频道索引</div>
+      <nav class="channel-list">
+        <a href="/#overview" class="channel-link active">领域概览 <span class="channel-count">1</span></a>
+        <a href="/#featured" class="channel-link">精选推荐 <span class="channel-count">9</span></a>
+        <a href="/#updates" class="channel-link">最新动态 <span class="channel-count">10</span></a>
+        <a href="/#categories" class="channel-link">分类入口 <span class="channel-count">8</span></a>
+        <a href="/#deep-dive" class="channel-link">深度解析 <span class="channel-count">1</span></a>
+        <a href="/#guide" class="channel-link">体验指南 <span class="channel-count">4</span></a>
+        <a href="/#faq" class="channel-link">常见问答 <span class="channel-count">6</span></a>
+        <a href="/#comments" class="channel-link">用户评论 <span class="channel-count">15</span></a>
+        <a href="/#news" class="channel-link">相关资讯 <span class="channel-count">6</span></a>
+        <a href="/#recommend" class="channel-link">相关推荐 <span class="channel-count">8</span></a>
+        <a href="/#timeline" class="channel-link">芋圆时间线 <span class="channel-count">6</span></a>
+        <a href="/#submit" class="channel-link">投稿互动 <span class="channel-count">1</span></a>
+      </nav>
+    </aside>
+
+    <!-- 中间主内容 -->
+    <main class="main-content" id="mainContent">
+
+      <!-- 1. 领域概览 -->
+      <section class="section" id="overview">
+        <div class="section-header">
+          <h2 class="section-title">手作芋圆与甜品生活领域</h2>
+          <p class="section-subtitle">这个领域在聊什么、做什么、吃什么</p>
+        </div>
+        <div class="overview-text">
+          <p>
+            芋圆这个品类在这几年从小众甜品店走进了家庭厨房。核心材料其实就三样：<strong>芋头（或紫薯、南瓜）、木薯粉、水</strong>。但比例一变，口感从软糯到弹牙之间能差出好几个档位。常见的做法讨论集中在木薯粉与芋泥的配比——1:1偏软适合热吃，1.5:1偏Q适合冰品，2:1以上接近珍珠口感但芋头味会被稀释。
+          </p>
+          <p>
+            搭配方向上，台式糖水体系里的<strong>仙草冻、红豆汤、黑糖刨冰</strong>是最常见的载体；近两年家庭自制流行用<strong>椰奶底、桂花蜜、姜汁红糖</strong>做秋冬热饮版本。还有一些偏创新的尝试，比如芋圆配豆花、芋圆加在烧仙草奶茶里、甚至咸口芋圆配香菇肉臊。
+          </p>
+          <p>
+            线下消费层面，<strong>鲜芋仙、芋观园、九份芋圆</strong>是连锁品牌里被搜得最多的三个名字；独立小店方面，成都的「芋见你」、广州的「糖水铺阿婆」、杭州的「糯叽叽手作」在本地探店内容里出现频率较高。摆摊创业方向，大学城夜市和地铁口流动摊位是芋圆类产品最常见的两个场景，单碗定价集中在8—15元区间。
+          </p>
+          <p>
+            值得关注的新动态：<strong>2026年秋季芋头采购价</strong>较去年同期上涨约12%，荔浦芋头产地批发价从每斤6.8元涨到7.6元，直接影响了小店的成本核算；同时，冷冻芋圆半成品在电商渠道的销量在10月环比增长了23%，家庭自制场景正在扩大。
+          </p>
+        </div>
+      </section>
+
+      <!-- 2. 精选推荐 -->
+      <section class="section" id="featured">
+        <div class="section-header">
+          <h2 class="section-title">精选芋圆做法与搭配推荐</h2>
+          <p class="section-subtitle">9个值得动手或收藏的具体条目</p>
+        </div>
+        <div class="card-grid">
+          <article class="item-card">
+            <img class="item-card-img" src="https://picsum.photos/seed/taro1/400/300" alt="紫薯芋圆配桂花蜜成品图" width="400" height="300" loading="lazy">
+            <div class="item-card-body">
+              <h3 class="item-card-title">紫薯芋圆配桂花蜜</h3>
+              <div class="item-card-tags">
+                <span class="tag tag-accent">热甜品</span>
+                <span class="tag">紫薯</span>
+                <span class="tag">桂花</span>
+              </div>
+              <p class="item-card-desc">紫薯与木薯粉比例1:1.2，揉面时加一勺猪油让成品更润。桂花蜜在出锅后淋，温度太高会发酸。适合秋冬热吃。</p>
+              <div class="item-card-meta">
+                <span class="meta-hot">热度 9.2</span>
+                <span>更新 11月6日</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="item-card">
+            <img class="item-card-img" src="https://picsum.photos/seed/taro2/400/300" alt="仙草冻芋圆冰配黑糖浆" width="400" height="300" loading="lazy">
+            <div class="item-card-body">
+              <h3 class="item-card-title">仙草冻芋圆冰</h3>
+              <div class="item-card-tags">
+                <span class="tag tag-accent">冰品</span>
+                <span class="tag">仙草冻</span>
+                <span class="tag">黑糖</span>
+              </div>
+              <p class="item-card-desc">仙草冻用仙草干熬煮比粉冲的胶质感更自然，凝固时间约2小时。芋圆煮好过冰水再放，口感更弹。黑糖浆熬到挂勺即可。</p>
+              <div class="item-card-meta">
+                <span class="meta-hot">热度 8.8</span>
+                <span>更新 11月4日</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="item-card">
+            <img class="item-card-img" src="https://picsum.photos/seed/taro3/400/300" alt="芋圆红豆汤配椰奶" width="400" height="300" loading="lazy">
+            <div class="item-card-body">
+              <h3 class="item-card-title">椰奶红豆芋圆汤</h3>
+              <div class="item-card-tags">
+                <span class="tag tag-accent">糖水</span>
+                <span class="tag">红豆</span>
+                <span class="tag">椰奶</span>
+              </div>
+              <p class="item-card-desc">红豆提前泡4小时，高压锅压15分钟保留颗粒感。椰奶选65%脂肪含量的，兑少量热水再浇，不容易结块。芋圆另煮另放。</p>
+              <div class="item-card-meta">
+                <span class="meta-hot">热度 9.0</span>
+                <span>更新 11月5日</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="item-card">
+            <img class="item-card-img" src="https://picsum.photos/seed/taro4/400/300" alt="木薯粉与芋泥配比对照实验" width="400" height="300" loading="lazy">
+            <div class="item-card-body">
+              <h3 class="item-card-title">木薯粉配比对照实验</h3>
+              <div class="item-card-tags">
+                <span class="tag tag-accent">教程</span>
+                <span class="tag">配比</span>
+                <span class="tag">口感</span>
+              </div>
+              <p class="item-card-desc">同一批荔浦芋头，分别按1:1、1:1.5、1:2三组比例做对比。1:1最软但煮后容易散，1:1.5是多数人偏好的弹度，1:2接近市售冷冻芋圆。</p>
+              <div class="item-card-meta">
+                <span class="meta-hot">热度 8.5</span>
+                <span>更新 11月2日</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="item-card">
+            <img class="item-card-img" src="https://picsum.photos/seed/taro5/400/300" alt="姜汁红糖芋圆暖汤" width="400" height="300" loading="lazy">
+            <div class="item-card-body">
+              <h3 class="item-card-title">姜汁红糖芋圆暖汤</h3>
+              <div class="item-card-tags">
+                <span class="tag tag-accent">热饮</span>
+                <span class="tag">姜汁</span>
+                <span class="tag">红糖</span>
+              </div>
+              <p class="item-card-desc">老姜带皮拍碎煮水10分钟，加红糖和一小片陈皮。芋圆单独煮到浮起再捞进姜汤里，避免汤变浑浊。适合降温天。</p>
+              <div class="item-card-meta">
+                <span class="meta-hot">热度 8.7</span>
+                <span>更新 11月7日</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="item-card">
+            <img class="item-card-img" src="https://picsum.photos/seed/taro6/400/300" alt="咸口芋圆配香菇肉臊" width="400" height="300" loading="lazy">
+            <div class="item-card-body">
+              <h3 class="item-card-title">咸口芋圆配香菇肉臊</h3>
+              <div class="item-card-tags">
+                <span class="tag tag-accent">创新</span>
+                <span class="tag">咸口</span>
+                <span class="tag">肉臊</span>
+              </div>
+              <p class="item-card-desc">芋圆不加糖，木薯粉比例降到1:0.8保留芋头本味。香菇肉臊带汤汁浇上去，撒葱花和一点白胡椒。口感像汤圆和面疙瘩的中间态。</p>
+              <div class="item-card-meta">
+                <span class="meta-hot">热度 7.9</span>
+                <span>更新 10月29日</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="item-card">
+            <img class="item-card-img" src="https://picsum.photos/seed/taro7/400/300" alt="冷冻芋圆家庭批量制作方法" width="400" height="300" loading="lazy">
+            <div class="item-card-body">
+              <h3 class="item-card-title">冷冻芋圆家庭批量法</h3>
+              <div class="item-card-tags">
+                <span class="tag tag-accent">备餐</span>
+                <span class="tag">冷冻</span>
+                <span class="tag">批量</span>
+              </div>
+              <p class="item-card-desc">一次做三斤芋头，搓条切丁后裹一层薄木薯粉再冷冻。煮的时候不用解冻，水开直接下，浮起后再煮1分钟。保存期约2个月。</p>
+              <div class="item-card-meta">
+                <span class="meta-hot">热度 8.3</span>
+                <span>更新 10月31日</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="item-card">
+            <img class="item-card-img" src="https://picsum.photos/seed/taro8/400/300" alt="鲜芋仙招牌芋圆甜品实拍" width="400" height="300" loading="lazy">
+            <div class="item-card-body">
+              <h3 class="item-card-title">鲜芋仙芋圆系列测评</h3>
+              <div class="item-card-tags">
+                <span class="tag tag-accent">探店</span>
+                <span class="tag">鲜芋仙</span>
+                <span class="tag">连锁</span>
+              </div>
+              <p class="item-card-desc">芋圆红豆牛奶冰和芋圆四号对比：四号的芋圆给量约120克，比牛奶冰多30克左右。甜度上四号偏甜，牛奶冰的冰底更清爽。单价差4元。</p>
+              <div class="item-card-meta">
+                <span class="meta-hot">热度 8.9</span>
+                <span>更新 11月3日</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="item-card">
+            <img class="item-card-img" src="https://picsum.photos/seed/taro9/400/300" alt="大学城夜市芋圆摊位实景" width="400" height="300" loading="lazy">
+            <div class="item-card-body">
+              <h3 class="item-card-title">大学城夜市摆摊实录</h3>
+              <div class="item-card-tags">
+                <span class="tag tag-accent">摆摊</span>
+                <span class="tag">夜市</span>
+                <span class="tag">成本</span>
+              </div>
+              <p class="item-card-desc">周五周六晚出摊，单碗12元，一晚卖60—80碗。设备投入约2800元（保温桶、折叠桌、灯牌、碗勺）。毛利润约65%，扣掉摊位费净利在40%上下。</p>
+              <div class="item-card-meta">
+                <span class="meta-hot">热度 9.1</span>
+                <span>更新 11月1日</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 3. 最新更新 -->
+      <section class="section" id="updates">
+        <div class="section-header">
+          <h2 class="section-title">最新更新与动态</h2>
+          <p class="section-subtitle">10条近期条目变化</p>
+        </div>
+        <div class="update-list">
+          <div class="update-item">
+            <span class="update-date">11月7日</span>
+            <div>
+              <div class="update-title">秋冬热芋圆糖水专题合集</div>
+              <div class="update-summary">收录姜汁红糖、桂花酒酿、椰奶红豆三款热糖水配方，每款标注了木薯粉比例和熬煮时间。</div>
+            </div>
+            <span class="update-type">专题</span>
+          </div>
+          <div class="update-item">
+            <span class="update-date">11月6日</span>
+            <div>
+              <div class="update-title">紫薯芋圆配桂花蜜（配方更新）</div>
+              <div class="update-summary">新增猪油替代方案：素食版可用椰子油替换，口感差异在冷却后更明显。</div>
+            </div>
+            <span class="update-type">更新</span>
+          </div>
+          <div class="update-item">
+            <span class="update-date">11月5日</span>
+            <div>
+              <div class="update-title">仙草冻与芋圆搭配实验 第3期</div>
+              <div class="update-summary">本期对比仙草干熬煮与仙草粉冲调在凝固时间、胶质感、风味浓度上的三项差异。</div>
+            </div>
+            <span class="update-type">实验</span>
+          </div>
+          <div class="update-item">
+            <span class="update-date">11月4日</span>
+            <div>
+              <div class="update-title">仙草冻芋圆冰</div>
+              <div class="update-summary">补充黑糖浆熬煮温度参考：116℃—118℃之间挂勺效果最好，超过120℃会发苦。</div>
+            </div>
+            <span class="update-type">更新</span>
+          </div>
+          <div class="update-item">
+            <span class="update-date">11月3日</span>
+            <div>
+              <div class="update-title">摆摊日记：大学城夜市周营收记录</div>
+              <div class="update-summary">10月27日—11月2日这一周，周五营收最高，单碗12元卖出82碗，周六受降温影响降到54碗。</div>
+            </div>
+            <span class="update-type">记录</span>
+          </div>
+          <div class="update-item">
+            <span class="update-date">11月2日</span>
+            <div>
+              <div class="update-title">木薯粉配比对照实验</div>
+              <div class="update-summary">新增第三组数据：1:1.8比例在冷藏4小时后回生程度比1:1.5低，但芋头香气弱约三成。</div>
+            </div>
+            <span class="update-type">实验</span>
+          </div>
+          <div class="update-item">
+            <span class="update-date">11月1日</span>
+            <div>
+              <div class="update-title">大学城夜市摆摊实录</div>
+              <div class="update-summary">补充设备清单实际采购价：保温桶168元、折叠桌89元、LED灯牌45元、碗勺套装320元。</div>
+            </div>
+            <span class="update-type">更新</span>
+          </div>
+          <div class="update-item">
+            <span class="update-date">10月31日</span>
+            <div>
+              <div class="update-title">冷冻芋圆家庭批量法</div>
+              <div class="update-summary">新增防裂技巧：冷冻前在表面喷一层水雾再裹粉，煮的时候开裂率从约15%降到5%以下。</div>
+            </div>
+            <span class="update-type">更新</span>
+          </div>
+          <div class="update-item">
+            <span class="update-date">10月30日</span>
+            <div>
+              <div class="update-title">鲜芋仙芋圆系列测评</div>
+              <div class="update-summary">补充不同城市门店的芋圆克重差异：同款四号在广州门店实测约135克，杭州门店约110克。</div>
+            </div>
+            <span class="update-type">更新</span>
+          </div>
+          <div class="update-item">
+            <span class="update-date">10月29日</span>
+            <div>
+              <div class="update-title">咸口芋圆配香菇肉臊</div>
+              <div class="update-summary">新增反馈修正：肉臊汤汁要收得比平时更干一些，否则芋圆泡软后失去嚼劲。</div>
+            </div>
+            <span class="update-type">更新</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. 分类入口 -->
+      <section class="section" id="categories">
+        <div class="section-header">
+          <h2 class="section-title">按需求找内容</h2>
+          <p class="section-subtitle">8个具体分类入口</p>
+        </div>
+        <div class="category-grid">
+          <a href="/#featured" class="category-item">
+            <span class="category-icon">🍠</span>
+            <div class="category-name">芋圆做法大全</div>
+            <div class="category-count">36 条配方</div>
+          </a>
+          <a href="/#featured" class="category-item">
+            <span class="category-icon">🥣</span>
+            <div class="category-name">糖水搭配方案</div>
+            <div class="category-count">22 种组合</div>
+          </a>
+          <a href="/#featured" class="category-item">
+            <span class="category-icon">🏪</span>
+            <div class="category-name">甜品店探店</div>
+            <div class="category-count">18 篇记录</div>
+          </a>
+          <a href="/#featured" class="category-item">
+            <span class="category-icon">🛒</span>
+            <div class="category-name">摆摊经验分享</div>
+            <div class="category-count">14 条实录</div>
+          </a>
+          <a href="/#featured" class="category-item">
+            <span class="category-icon">❄️</span>
+            <div class="category-name">冷冻备餐技巧</div>
+            <div class="category-count">9 篇指南</div>
+          </a>
+          <a href="/#featured" class="category-item">
+            <span class="category-icon">🧪</span>
+            <div class="category-name">配比对照实验</div>
+            <div class="category-count">7 组数据</div>
+          </a>
+          <a href="/#featured" class="category-item">
+            <span class="category-icon">🍂</span>
+            <div class="category-name">秋冬热甜品</div>
+            <div class="category-count">12 款热食</div>
+          </a>
+          <a href="/#featured" class="category-item">
+            <span class="category-icon">💬</span>
+            <div class="category-name">创作者交流</div>
+            <div class="category-count">5 个讨论</div>
+          </a>
+        </div>
+      </section>
+
+      <!-- 5. 深度解析 -->
+      <section class="section" id="deep-dive">
+        <div class="section-header">
+          <h2 class="section-title">芋圆口感差异的底层逻辑</h2>
+          <p class="section-subtitle">从原料到工艺的具体拆解</p>
+        </div>
+        <div class="deep-dive">
+          <h3>木薯粉比例决定的是「弹性来源」而非「软硬」</h3>
+          <p>
+            多数配方把木薯粉比例写成口感调节的开关，但实际起作用的是<strong>淀粉糊化后的回生程度</strong>。木薯粉本身不含面筋，弹性来自糊化淀粉冷却后的老化回生——直链淀粉越多，回生越明显，嚼劲越强。荔浦芋头的直链淀粉含量约17%，比普通芋头低2—3个百分点，所以同样比例下荔浦芋头做的芋圆更软。
+          </p>
+          <p>
+            2026年10月的一组对照数据：同一批荔浦芋头，木薯粉比例1:1、1:1.5、1:2三组，煮后2小时内的弹性评分（10人盲测）分别是5.2、7.8、8.6；但放置冷藏4小时后，1:1组回生最明显、硬度上升最快，1:2组反而变化最小。这意味着<strong>即时口感和放置口感的方向是相反的</strong>——想要现做现吃弹牙，比例可以偏低；想要做好放冰箱慢慢吃，比例得往上走。
+          </p>
+
+          <h3>仙草冻的「凝固」有两个完全不同的路径</h3>
+          <p>
+            仙草冻在芋圆甜品里承担的是口感对比角色——滑与弹的交替。但市面上的仙草冻分两类：<strong>仙草干熬煮加碱加淀粉凝固</strong>，和<strong>仙草粉冲调直接冷却</strong>。前者的胶质感来自仙草自身的多糖和添加的食用碱，凝固时间约1.5—2小时，口感偏脆；后者的凝固靠的是粉里预混的卡拉胶或魔芋粉，30分钟就能成型，口感偏韧。
+          </p>
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th>对比项</th>
+                <th>仙草干熬煮</th>
+                <th>仙草粉冲调</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>凝固时间</td>
+                <td>1.5—2小时</td>
+                <td>约30分钟</td>
+              </tr>
+              <tr>
+                <td>口感质地</td>
+                <td>偏脆、易碎</td>
+                <td>偏韧、有弹性</td>
+              </tr>
+              <tr>
+                <td>风味浓度</td>
+                <td>草本苦香明显</td>
+                <td>甜味主导、仙草味淡</td>
+              </tr>
+              <tr>
+                <td>与芋圆搭配</td>
+                <td>滑脆对比强</td>
+                <td>整体偏Q弹</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            判断一碗仙草芋圆用的是哪种仙草冻，看断面就能分辨：干熬的断面粗糙、有细微气孔；粉冲的断面光滑、切面整齐。这个差异在探店内容里比“好不好吃”更值得记录。
+          </p>
+
+          <h3>煮芋圆的「浮起」不是熟透信号</h3>
+          <p>
+            芋圆浮起来只说明<strong>表面淀粉糊化、密度降低</strong>，内部中心温度可能还没到90℃。木薯粉的糊化温度范围在62℃—72℃，但中心要达到完全透明需要持续沸腾1—2分钟。常见的失败案例——芋圆外层软烂、中心有白芯——就是浮起即捞的结果。
+          </p>
+          <p>
+            更可靠的判断方法：<strong>浮起后加半碗冷水，再次沸腾后计时60秒</strong>。这个“点水”步骤在台式甜品做法里很常见，目的是让内外温差缩小、中心充分糊化。冷冻芋圆不需要解冻，但点水后要煮90秒。
+          </p>
+
+          <h3>「Q弹」是一个被过度简化了的描述词</h3>
+          <p>
+            在盲测记录里，同一批芋圆被描述为“Q弹”“软糯”“有嚼劲”“弹牙”“韧”五种说法，指向的其实不是同一个东西。拆开来看至少包含三个可测量的维度：<strong>初始咬断力</strong>（牙齿切入需要的力）、<strong>回弹速度</strong>（咬下去后恢复原状的时间）、<strong>咀嚼残留感</strong>（咽下后口腔里的附着感）。
+          </p>
+          <p>
+            木薯粉比例1:1.5的芋圆在这三项上的典型表现是：初始咬断力中等、回弹快、残留感低。比例1:2的初始咬断力高、回弹慢、残留感中等。家庭制作者如果只用一个“Q弹”来描述目标口感，很难在配方上做精准调整。把目标拆成这三项之后，调比例才有方向——要回弹快就减少蒸芋头时的水分，要降低残留感就增加木薯粉比例同时减少揉面时间。
+          </p>
+        </div>
+      </section>
+
+      <!-- 6. 体验指南 -->
+      <section class="section" id="guide">
+        <div class="section-header">
+          <h2 class="section-title">从吃到做的体验路径</h2>
+          <p class="section-subtitle">按顺序看、按需求选</p>
+        </div>
+        <div class="guide-steps">
+          <div class="guide-step">
+            <div class="guide-step-num">1</div>
+            <div>
+              <h4>先确定吃冷还是吃热</h4>
+              <p>冰品方向优先看仙草冻、黑糖浆、刨冰底的做法；热食方向优先看姜汁、桂花、酒酿的搭配。两条线的芋圆比例不同——冰品用1:1.5—1:1.8更弹，热食用1:1—1:1.2更软糯。先定场景再选配方，比先选配方再改比例省事。</p>
+            </div>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">2</div>
+            <div>
+              <h4>看配方先看它有没有写芋头品种</h4>
+              <p>写了“荔浦芋头”的配方，按标注比例做基本不会翻车；只写“芋头”的，实际用普通小芋头时木薯粉要多加10%—15%，因为含水量和直链淀粉比例都不同。这条判断标准比看评分更管用。</p>
+            </div>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">3</div>
+            <div>
+              <h4>探店内容先看克重和单价</h4>
+              <p>芋圆类甜品的合理单价区间在10—18元/碗，低于10元大概率芋圆给量在80克以下或用了冷冻半成品；高于18元需要看是否包含手作芋圆以外的附加值（环境、配料种类）。克重数据比“料足”这种描述可靠。</p>
+            </div>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">4</div>
+            <div>
+              <h4>摆摊经验先算设备折旧和出摊频次</h4>
+              <p>保温桶、折叠桌、灯牌、碗勺四项加起来约620元是基础配置，加上首批原料约400元，启动成本在1000—1200元。如果一周只出摊一次，设备折旧摊到每碗的成本会超过1.5元；每周出摊三次以上才接近0.5元。频次决定能不能做。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. FAQ -->
+      <section class="section" id="faq">
+        <div class="section-header">
+          <h2 class="section-title">常见问答</h2>
+          <p class="section-subtitle">6个真实搜索问题</p>
+        </div>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>木薯粉和芋泥的比例到底怎么定？</summary>
+            <div class="faq-answer">
+              按吃法定：现做现吃、趁热吃的，芋泥与木薯粉按1:1到1:1.2，口感偏软糯；放凉或冷藏后再吃的，比例提到1:1.5到1:1.8，回生之后才咬得动；想要接近市售冷冻芋圆的弹度，用到1:2，但芋头味会明显变淡。荔浦芋头比普通芋头含水量低，同比例下成品更硬，用普通芋头时木薯粉要再加10%左右。
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>芋圆煮多久才算熟？浮起来就行吗？</summary>
+            <div class="faq-answer">
+              浮起来只代表表面淀粉糊化，中心可能还是生的。水沸下锅，浮起后加半碗冷水，再次沸腾后计时60秒再捞。冷冻芋圆不用解冻，点水后煮90秒。判断熟透的另一个信号是芋圆整体变成半透明、没有白色芯点，切开看断面均匀。
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>仙草冻用粉冲还是仙草干熬？</summary>
+            <div class="faq-answer">
+              仙草干熬煮的凝固时间约1.5—2小时，口感偏脆、草本苦香明显，和芋圆的滑弹形成对比；仙草粉冲调的30分钟成型，口感偏韧、甜味更重。家庭做如果图快用粉，想要风味层次用干熬。看断面能分辨：干熬的有细微气孔，粉冲的切面光滑。
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>冷冻芋圆煮的时候总是裂开怎么办？</summary>
+            <div class="faq-answer">
+              裂开通常是因为冷冻前表面太干。搓好切丁之后裹一层薄木薯粉，喷一点水雾再裹一次，然后装袋冷冻。煮的时候水要够宽、保持大火沸腾，下锅后不要马上搅动，等浮起来再轻轻推。冷冻超过两个月的芋圆水分流失多，开裂率会上升，建议在两个月内用完。
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>摆摊卖芋圆一碗定价多少合适？</summary>
+            <div class="faq-answer">
+              大学城夜市和地铁口的芋圆甜品，单碗定价集中在8—15元。12元是多数摊位的锚点价格，对应芋圆给量约100—120克。低于8元需要压缩配料种类或改用冷冻半成品；高于15元要增加手作芋圆以外的卖点，比如现煮仙草、手工黑糖浆、季节限定配料。摊位费日均50—80元的情况下，一晚卖50碗是保本线。
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>紫薯芋圆和芋头芋圆口感差在哪？</summary>
+            <div class="faq-answer">
+              紫薯含水量比芋头低，同比例木薯粉下紫薯芋圆更干、更硬，需要多加5%—8%的水或少量油脂。风味上紫薯的甜味更直接、芋头香气弱，适合配桂花蜜、椰奶这类清淡底；芋头芋圆的本味更绵长，配红糖姜汁、红豆汤更对路。两者混搭时紫薯的比例控制在三成以内，否则会压住芋头味。
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 8. 用户评论 -->
+      <section class="section" id="comments">
+        <div class="section-header">
+          <h2 class="section-title">用户评论</h2>
+          <p class="section-subtitle">15条来自甜品爱好者的真实声音</p>
+        </div>
+        <div class="comment-grid">
+          <div class="comment-card">
+            <div class="comment-header">
+              <div class="comment-avatar">芋</div>
+              <span class="comment-nick">芋泥啵啵</span>
+            </div>
+            <p class="comment-text">紫薯芋圆那篇的猪油替换方案太及时了，我吃素一直用椰子油，但之前不知道冷却后差异那么大。按文里说的减了5克椰子油，口感确实接近了。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-header">
+              <div class="comment-avatar">糖</div>
+              <span class="comment-nick">糖水铺阿芬</span>
+            </div>
+            <p class="comment-text">仙草干熬煮那部分写得实在。我开店三年一直用粉冲，看完对比表考虑换干熬试试，就是两小时凝固时间对出摊节奏有点难排。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-header">
+              <div class="comment-avatar">夜</div>
+              <span class="comment-nick">夜市小陈</span>
+            </div>
+            <p class="comment-text">摆摊实录里的设备清单真实。我保温桶买的168那款，保温效果一般，三小时后就降到60度以下了，建议预算够的直接上200以上的。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-header">
+              <div class="comment-avatar">Q</div>
+              <span class="comment-nick">Q弹研究所</span>
+            </div>
+            <p class="comment-text">“浮起不是熟透信号”这个点很多人不知道。我按点水法煮了冷冻芋圆，确实没白芯了。之前直接浮起就捞，十次有三次中心是硬的。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-header">
+              <div class="comment-avatar">小</div>
+              <span class="comment-nick">小芋头呀</span>
+            </div>
+            <p class="comment-text">鲜芋仙四号在广州和杭州克重差25克这个数据有点意思。我在成都吃的感觉量还挺足，不知道是不是西南片区给得多一些。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-header">
+              <div class="comment-avatar">红</div>
+              <span class="comment-nick">红豆双皮奶</span>
+            </div>
+            <p class="comment-text">椰奶红豆那篇的65%脂肪含量提醒很实用。我之前随便买的椰奶兑热水就结块，换了高脂的确实顺滑多了。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-header">
+              <div class="comment-avatar">咸</div>
+              <span class="comment-nick">咸口党老周</span>
+            </div>
+            <p class="comment-text">咸口芋圆配肉臊试了，肉臊汤汁确实要收干一点。第一次做汤汁太多，芋圆泡了十分钟就软塌塌的，第二次收干后好很多。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-header">
+              <div class="comment-avatar">冷</div>
+              <span class="comment-nick">冷冻备餐人</span>
+            </div>
+            <p class="comment-text">喷水雾再裹粉这招管用，我一次做五斤冻着，之前裂开率挺高，现在基本不裂了。就是喷壶要选雾化细的，粗喷壶会弄太湿。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-header">
+              <div class="comment-avatar">桂</div>
+              <span class="comment-nick">桂花酒酿圆子</span>
+            </div>
+            <p class="comment-text">秋冬热糖水专题里姜汁红糖那款我加了陈皮，味道层次确实上来了。就是姜带皮煮会有点辣，不喜欢太冲的可以姜去皮。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-header">
+              <div class="comment-avatar">路</div>
+              <span class="comment-nick">路过吃一碗</span>
+            </div>
+            <p class="comment-text">深度解析里把Q弹拆成三个维度这个视角挺好的，虽然有点学术，但至少让我知道为什么有的配方做出来回弹快有的慢。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-header">
+              <div class="comment-avatar">荔</div>
+              <span class="comment-nick">荔浦老芋</span>
+            </div>
+            <p class="comment-text">今年芋头涨价确实厉害，我批发拿货从6块8涨到7块6，小店菜单不敢随便涨，只能把芋圆克重从120降到100，老客没发现但自己心里过意不去。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-header">
+              <div class="comment-avatar">双</div>
+              <span class="comment-nick">双十一剁手</span>
+            </div>
+            <p class="comment-text">话说冷冻芋圆半成品销量涨23%我贡献了一单……自己搓真的太累了，下班回来根本没力气揉面。虽然手作的确实好吃，但半成品救急用可以接受。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-header">
+              <div class="comment-avatar">阿</div>
+              <span class="comment-nick">阿嬷的糖水</span>
+            </div>
+            <p class="comment-text">仙草冻断面看气孔这个方法我试了，干熬的确实有细孔，粉冲的光滑得像塑料板。以前只顾着吃，没注意过这个细节。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-header">
+              <div class="comment-avatar">周</div>
+              <span class="comment-nick">周末厨房</span>
+            </div>
+            <p class="comment-text">1:1.8比例冷藏四小时那个数据，我实测冷藏一夜之后确实比1:1.5的软一些，但芋头味真的淡，蘸黑糖浆才补回来。</p>
+          </div>
+          <div class="comment-card">
+            <div class="comment-header">
+              <div class="comment-avatar">新</div>
+              <span class="comment-nick">新手搓圆子</span>
+            </div>
+            <p class="comment-text">第一次做，芋泥和木薯粉揉不成团，加了三次水才成。后来看评论说荔浦芋头水分少，我用的就是荔浦的，应该先减水而不是后加。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9. 相关资讯 -->
+      <section class="section" id="news">
+        <div class="section-header">
+          <h2 class="section-title">相关资讯</h2>
+          <p class="section-subtitle">6条近期甜品领域动态</p>
+        </div>
+        <div class="news-list">
+          <div class="news-item">
+            <span class="news-date">11月7日</span>
+            <div>
+              <div class="news-title">荔浦芋头产地批发价涨至每斤7.6元</div>
+              <div class="news-summary">较2025年同期上涨12%。当地合作社11月6日数据显示，一级品收购价7.6元/斤，二级品6.9元/斤。部分甜品店主开始转向福建槟榔芋替代，但香气差异明显。</div>
+            </div>
+          </div>
+          <div class="news-item">
+            <span class="news-date">11月5日</span>
+            <div>
+              <div class="news-title">鲜芋仙推出冬季限定「黑糖姜汁芋圆」</div>
+              <div class="news-summary">11月5日起在全国门店上市，定价22元/碗，比常规芋圆四号贵3元。官方小程序显示首日销量约占总芋圆品类的18%。上海部分门店当天下午售罄。</div>
+            </div>
+          </div>
+          <div class="news-item">
+            <span class="news-date">11月3日</span>
+            <div>
+              <div class="news-title">冷冻芋圆半成品10月电商销量环比增23%</div>
+              <div class="news-summary">某电商平台11月2日发布的10月数据显示，芋圆类冷冻半成品销售额从9月的约860万元增至10月的1058万元。买家评论中“省时间”“下班做”出现频率最高。</div>
+            </div>
+          </div>
+          <div class="news-item">
+            <span class="news-date">10月30日</span>
+            <div>
+              <div class="news-title">杭州「糯叽叽手作」芋圆DIY课程11月排期满员</div>
+              <div class="news-summary">该店11月4日—11月8日的芋圆手作课共5场，每场12人，10月30日即约满。课程内容涵盖木薯粉配比实验和仙草冻制作，单次收费168元。</div>
+            </div>
+          </div>
+          <div class="news-item">
+            <span class="news-date">10月28日</span>
+            <div>
+              <div class="news-title">大学城夜市芋圆摊位数量较去年增四成</div>
+              <div class="news-summary">广州大学城、成都温江大学城、杭州下沙三个夜市的管理方10月27日—28日统计，芋圆类甜品摊位合计从去年同期的47个增至66个。单碗均价维持在10—13元。</div>
+            </div>
+          </div>
+          <div class="news-item">
+            <span class="news-date">10月25日</span>
+            <div>
+              <div class="news-title">九份芋圆老店「阿柑姨」开通大陆线上预订</div>
+              <div class="news-summary">10月25日起可通过指定跨境平台预订冷冻生芋圆，5斤装售价198元含冷链运费。首批500份在48小时内订完，下一批发货时间为11月12日。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10. 相关推荐 -->
+      <section class="section" id="recommend">
+        <div class="section-header">
+          <h2 class="section-title">相关推荐</h2>
+          <p class="section-subtitle">8个具体内容方向</p>
+        </div>
+        <div class="recommend-tags">
+          <a href="/#featured" class="recommend-tag">木薯粉1:1.5配比</a>
+          <a href="/#featured" class="recommend-tag">仙草干熬煮方法</a>
+          <a href="/#featured" class="recommend-tag">黑糖浆116℃挂勺</a>
+          <a href="/#featured" class="recommend-tag">冷冻芋圆防裂技巧</a>
+          <a href="/#featured" class="recommend-tag">姜汁红糖热糖水</a>
+          <a href="/#featured" class="recommend-tag">大学城摆摊成本表</a>
+          <a href="/#featured" class="recommend-tag">紫薯与芋头口感对比</a>
+          <a href="/#featured" class="recommend-tag">鲜芋仙四号克重实测</a>
+        </div>
+      </section>
+
+      <!-- 11. 补充板块：芋圆时间线 -->
+      <section class="section" id="timeline">
+        <div class="section-header">
+          <h2 class="section-title">芋圆时间线</h2>
+          <p class="section-subtitle">从原料到成品的6个关键节点</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">2026年11月7日</div>
+            <div class="timeline-title">秋冬热芋圆糖水专题上线</div>
+            <div class="timeline-desc">三款热糖水配方集中发布，姜汁红糖款当天收藏量最高。</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2026年11月5日</div>
+            <div class="timeline-title">仙草冻搭配实验第3期</div>
+            <div class="timeline-desc">干熬与粉冲的对比数据完成，凝固时间差四倍，口感差异写入对照表。</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2026年11月3日</div>
+            <div class="timeline-title">大学城夜市周营收记录发布</div>
+            <div class="timeline-desc">10月27日—11月2日完整流水，周五82碗、周六54碗，受降温影响明显。</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2026年11月2日</div>
+            <div class="timeline-title">木薯粉配比对照实验数据更新</div>
+            <div class="timeline-desc">第三组1:1.8比例的回生数据补充，冷藏4小时后硬度变化小于1:1.5组。</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2026年10月31日</div>
+            <div class="timeline-title">冷冻芋圆批量法防裂技巧更新</div>
+            <div class="timeline-desc">水雾加裹粉的双层处理方式，开裂率从15%降至5%以下。</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2026年10月29日</div>
+            <div class="timeline-title">咸口芋圆配肉臊反馈修正</div>
+            <div class="timeline-desc">根据读者实践反馈，肉臊汤汁收干程度做了具体标注。</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 12. 投稿互动 -->
+      <section class="section" id="submit">
+        <div class="submit-banner">
+          <div>
+            <h3>投稿你的芋圆做法</h3>
+            <p>拍了步骤图、记了配比、试了奇怪搭配，都可以发过来。文字和图分开写也行。每周整理一次，选中的条目会出现在精选推荐里。</p>
+          </div>
+          <a href="/#submit" class="btn">了解投稿方式</a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 右侧辅助栏 -->
+    <aside class="aux-sidebar" aria-label="辅助信息">
+      <div class="aux-card">
+        <h3>本周热榜</h3>
+        <ul class="aux-list">
+          <li><span class="aux-rank top">1</span><span>紫薯芋圆配桂花蜜</span></li>
+          <li><span class="aux-rank top">2</span><span>大学城夜市摆摊实录</span></li>
+          <li><span class="aux-rank top">3</span><span>椰奶红豆芋圆汤</span></li>
+          <li><span class="aux-rank">4</span><span>仙草冻芋圆冰</span></li>
+          <li><span class="aux-rank">5</span><span>鲜芋仙芋圆系列测评</span></li>
+          <li><span class="aux-rank">6</span><span>木薯粉配比对照实验</span></li>
+          <li><span class="aux-rank">7</span><span>姜汁红糖芋圆暖汤</span></li>
+          <li><span class="aux-rank">8</span><span>冷冻芋圆家庭批量法</span></li>
+        </ul>
+      </div>
+
+      <div class="aux-card">
+        <h3>热门标签</h3>
+        <div class="aux-tag-cloud">
+          <span class="tag">木薯粉配比</span>
+          <span class="tag">仙草冻</span>
+          <span class="tag">黑糖浆</span>
+          <span class="tag">荔浦芋头</span>
+          <span class="tag">摆摊成本</span>
+          <span class="tag">冷冻备餐</span>
+          <span class="tag">姜汁红糖</span>
+          <span class="tag">桂花蜜</span>
+          <span class="tag">点水法</span>
+          <span class="tag">回生口感</span>
+          <span class="tag">鲜芋仙</span>
+          <span class="tag">九份芋圆</span>
+        </div>
+      </div>
+
+      <div class="aux-card">
+        <h3>更新节奏</h3>
+        <ul class="aux-list">
+          <li><span style="color:var(--color-text-tertiary);font-size:12px;">配方更新</span><span>每周二、五</span></li>
+          <li><span style="color:var(--color-text-tertiary);font-size:12px;">探店记录</span><span>不定期</span></li>
+          <li><span style="color:var(--color-text-tertiary);font-size:12px;">摆摊周报</span><span>每周一</span></li>
+          <li><span style="color:var(--color-text-tertiary);font-size:12px;">实验数据</span><span>每两周</span></li>
+        </ul>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- 页尾 -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand">芋圆呀呀</div>
+          <p class="footer-desc">
+            覆盖2024年至2026年11月的手作芋圆与甜品生活内容，配方、探店、摆摊实录和配比实验并存，每周二、五更新配方，周一更新摆摊周报。
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>内容方向</h4>
+          <ul>
+            <li><a href="/#featured">芋圆做法</a></li>
+            <li><a href="/#featured">糖水搭配</a></li>
+            <li><a href="/#featured">探店记录</a></li>
+            <li><a href="/#featured">摆摊经验</a></li>
+            <li><a href="/#featured">冷冻备餐</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>参与</h4>
+          <ul>
+            <li><a href="/#submit">投稿配方</a></li>
+            <li><a href="/#submit">上传步骤图</a></li>
+            <li><a href="/#comments">发表评论</a></li>
+            <li><a href="/#submit">互动交流</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>关于</h4>
+          <ul>
+            <li><a href="/#overview">领域介绍</a></li>
+            <li><a href="/#deep-dive">深度解析</a></li>
+            <li><a href="/#faq">常见问答</a></li>
+            <li><a href="/#news">相关资讯</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>芋圆呀呀 · 手作甜品与生活灵感聚合</span>
+        <span>页面内容为示例条目，日期截至2026年11月8日</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 回到顶部 -->
+  <button class="back-to-top" id="backToTop" aria-label="回到顶部">↑</button>
+
+  <!-- 移动端遮罩 -->
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+  <script>
+    (function() {
+      'use strict';
+
+      // 菜单切换
+      var menuToggle = document.getElementById('menuToggle');
+      var mainNav = document.getElementById('mainNav');
+      var overlay = document.getElementById('mobileOverlay');
+
+      function closeMenu() {
+        mainNav.classList.remove('open');
+        overlay.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.textContent = '☰';
+      }
+
+      function openMenu() {
+        mainNav.classList.add('open');
+        overlay.classList.add('active');
+        menuToggle.setAttribute('aria-expanded', 'true');
+        menuToggle.textContent = '✕';
+      }
+
+      if (menuToggle) {
+        menuToggle.addEventListener('click', function(e) {
+          e.stopPropagation();
+          if (mainNav.classList.contains('open')) {
+            closeMenu();
+          } else {
+            openMenu();
+          }
+        });
+      }
+
+      if (overlay) {
+        overlay.addEventListener('click', closeMenu);
+      }
+
+      // 点击导航后收起
+      var navLinks = mainNav ? mainNav.querySelectorAll('.nav-link') : [];
+      navLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
+          if (window.innerWidth <= 740) {
+            closeMenu();
+          }
+        });
+      });
+
+      // Esc 关闭
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mainNav && mainNav.classList.contains('open')) {
+          closeMenu();
+        }
+      });
+
+      // 窗口调整时重置菜单状态
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 740) {
+          closeMenu();
+        }
+      });
+
+      // 回到顶部
+      var backToTop = document.getElementById('backToTop');
+      var scrollThreshold = window.innerHeight;
+
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > scrollThreshold) {
+          backToTop.classList.add('visible');
+        } else {
+          backToTop.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      backToTop.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // 频道高亮
+      var channelLinks = document.querySelectorAll('.channel-link');
+      var sections = [];
+      channelLinks.forEach(function(link) {
+        var href = link.getAttribute('href');
+        if (href && href.startsWith('/#')) {
+          var id = href.substring(2);
+          var el = document.getElementById(id);
+          if (el) {
+            sections.push({ id: id, el: el, link: link });
+          }
+        }
+      });
+
+      function updateActiveChannel() {
+        var scrollPos = window.scrollY + 200;
+        var current = null;
+        sections.forEach(function(s) {
+          if (s.el.offsetTop <= scrollPos) {
+            current = s;
+          }
+        });
+        channelLinks.forEach(function(l) { l.classList.remove('active'); });
+        if (current) {
+          current.link.classList.add('active');
+        }
+      }
+
+      window.addEventListener('scroll', updateActiveChannel, { passive: true });
+      updateActiveChannel();
+
+    })();
+  </script>
+
+  <!-- 结构化数据 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "芋圆呀呀",
+    "description": "手作芋圆与甜品生活内容聚合，涵盖芋圆做法、糖水搭配、探店记录、摆摊经验与配比实验。",
+    "inLanguage": "zh-CN"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "木薯粉和芋泥的比例到底怎么定？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "按吃法定：现做现吃、趁热吃的，芋泥与木薯粉按1:1到1:1.2，口感偏软糯；放凉或冷藏后再吃的，比例提到1:1.5到1:1.8，回生之后才咬得动；想要接近市售冷冻芋圆的弹度，用到1:2，但芋头味会明显变淡。荔浦芋头比普通芋头含水量低，同比例下成品更硬，用普通芋头时木薯粉要再加10%左右。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "芋圆煮多久才算熟？浮起来就行吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "浮起来只代表表面淀粉糊化，中心可能还是生的。水沸下锅，浮起后加半碗冷水，再次沸腾后计时60秒再捞。冷冻芋圆不用解冻，点水后煮90秒。判断熟透的另一个信号是芋圆整体变成半透明、没有白色芯点，切开看断面均匀。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "仙草冻用粉冲还是仙草干熬？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "仙草干熬煮的凝固时间约1.5—2小时，口感偏脆、草本苦香明显，和芋圆的滑弹形成对比；仙草粉冲调的30分钟成型，口感偏韧、甜味更重。家庭做如果图快用粉，想要风味层次用干熬。看断面能分辨：干熬的有细微气孔，粉冲的切面光滑。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "冷冻芋圆煮的时候总是裂开怎么办？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "裂开通常是因为冷冻前表面太干。搓好切丁之后裹一层薄木薯粉，喷一点水雾再裹一次，然后装袋冷冻。煮的时候水要够宽、保持大火沸腾，下锅后不要马上搅动，等浮起来再轻轻推。冷冻超过两个月的芋圆水分流失多，开裂率会上升，建议在两个月内用完。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "摆摊卖芋圆一碗定价多少合适？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "大学城夜市和地铁口的芋圆甜品，单碗定价集中在8—15元。12元是多数摊位的锚点价格，对应芋圆给量约100—120克。低于8元需要压缩配料种类或改用冷冻半成品；高于15元要增加手作芋圆以外的卖点，比如现煮仙草、手工黑糖浆、季节限定配料。摊位费日均50—80元的情况下，一晚卖50碗是保本线。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "紫薯芋圆和芋头芋圆口感差在哪？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "紫薯含水量比芋头低，同比例木薯粉下紫薯芋圆更干、更硬，需要多加5%—8%的水或少量油脂。风味上紫薯的甜味更直接、芋头香气弱，适合配桂花蜜、椰奶这类清淡底；芋头芋圆的本味更绵长，配红糖姜汁、红豆汤更对路。两者混搭时紫薯的比例控制在三成以内，否则会压住芋头味。"
+        }
+      }
+    ]
+  }
+  </script>
+
+</body>
+  </html>
