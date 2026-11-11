@@ -1,0 +1,2666 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>性感美女大奶 - 写真图包与视频动态聚合</title>
+  <meta name="description" content="性感美女大奶内容聚合，收录写真图包、视频片段、模特资料与更新动态，包含分类筛选、热度榜单和用户评论，适合浏览视觉内容与追踪更新节奏。">
+  <meta name="keywords" content="性感美女大奶">
+  <style>
+    /* ---------- 基础重置与变量 ---------- */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary: #b81d4e;
+      --primary-light: #d94a78;
+      --primary-dark: #8a0f36;
+      --primary-bg: #fdf0f4;
+      --bg: #faf7f8;
+      --surface: #ffffff;
+      --surface-alt: #f9f4f6;
+      --text-primary: #1c1418;
+      --text-secondary: #5e4d55;
+      --text-tertiary: #8a7a82;
+      --border: #eadde2;
+      --border-light: #f2ebee;
+      --radius-card: 14px;
+      --radius-btn: 8px;
+      --radius-tag: 6px;
+      --radius-banner: 20px;
+      --shadow-default: 0 1px 3px rgba(28, 20, 24, 0.06), 0 1px 2px rgba(28, 20, 24, 0.04);
+      --shadow-hover: 0 6px 16px rgba(28, 20, 24, 0.1), 0 2px 6px rgba(28, 20, 24, 0.06);
+      --font-sans: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      --header-height: 64px;
+      --announce-height: 36px;
+      --sticky-offset: calc(var(--header-height) + var(--announce-height));
+      --max-width: 1360px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: var(--sticky-offset);
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding-top: var(--sticky-offset);
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--primary-dark);
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    /* ---------- 吸顶公告条 ---------- */
+    .announce-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1001;
+      height: var(--announce-height);
+      background: var(--primary-dark);
+      color: #fff;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      padding: 0 16px;
+      overflow: hidden;
+    }
+
+    .announce-bar .brand-mark {
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #ffd9e3;
+      flex-shrink: 0;
+    }
+
+    .announce-track {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .announce-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.92;
+    }
+
+    .announce-item .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      flex-shrink: 0;
+    }
+
+    .announce-date {
+      font-variant-numeric: tabular-nums;
+      color: #ffc0d0;
+    }
+
+    /* ---------- 吸顶页头 ---------- */
+    .site-header {
+      position: fixed;
+      top: var(--announce-height);
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      height: var(--header-height);
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+    }
+
+    .header-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      width: 100%;
+    }
+
+    .logo-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .logo-svg {
+      width: 34px;
+      height: 34px;
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    /* 主导航 */
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex: 1;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .main-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .main-nav a {
+      padding: 6px 12px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      border-radius: var(--radius-btn);
+      white-space: nowrap;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .main-nav a:hover,
+    .main-nav a:focus-visible {
+      background: var(--primary-bg);
+      color: var(--primary-dark);
+      outline: none;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 12px;
+      transition: border-color 0.2s;
+    }
+
+    .search-box:focus-within {
+      border-color: var(--primary-light);
+    }
+
+    .search-box input {
+      border: none;
+      background: transparent;
+      font-size: 13px;
+      width: 140px;
+      outline: none;
+      color: var(--text-primary);
+      font-family: inherit;
+    }
+
+    .search-box input::placeholder {
+      color: var(--text-tertiary);
+    }
+
+    .search-box button {
+      border: none;
+      background: transparent;
+      padding: 2px;
+      color: var(--text-tertiary);
+      display: flex;
+      align-items: center;
+    }
+
+    .search-box button:hover {
+      color: var(--primary);
+    }
+
+    /* 汉堡按钮（移动端） */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      background: none;
+      border: none;
+      padding: 8px;
+      cursor: pointer;
+      z-index: 1100;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: var(--sticky-offset);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--surface);
+      z-index: 999;
+      padding: 20px 24px;
+      overflow-y: auto;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      padding: 12px 0;
+      font-size: 16px;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .mobile-menu a:hover {
+      color: var(--primary);
+    }
+
+    .menu-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 998;
+    }
+
+    .menu-overlay.open {
+      display: block;
+    }
+
+    /* ---------- 主容器 ---------- */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ---------- 首屏 ---------- */
+    .hero {
+      position: relative;
+      padding: 48px 0 40px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -80px;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184, 29, 78, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 48px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-content h1 {
+      font-size: 42px;
+      font-weight: 900;
+      color: var(--primary-dark);
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      max-width: 540px;
+      margin-bottom: 24px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 22px;
+      border-radius: var(--radius-btn);
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+      border: 1.5px solid var(--primary);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary-bg);
+      transform: translateY(-1px);
+    }
+
+    /* 首屏视觉 */
+    .hero-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-visual svg {
+      width: 100%;
+      max-width: 380px;
+      height: auto;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 28px;
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-num {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+
+    /* ---------- 三栏布局 ---------- */
+    .layout-3col {
+      display: grid;
+      grid-template-columns: 180px 1fr 250px;
+      gap: 28px;
+      padding: 8px 0 64px;
+      align-items: start;
+    }
+
+    /* 左频道栏 */
+    .channel-sidebar {
+      position: sticky;
+      top: calc(var(--sticky-offset) + 16px);
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-light);
+      padding: 16px 0;
+      box-shadow: var(--shadow-default);
+    }
+
+    .channel-sidebar h2 {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 0 16px 10px;
+    }
+
+    .channel-nav {
+      list-style: none;
+    }
+
+    .channel-nav li a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      border-left: 3px solid transparent;
+    }
+
+    .channel-nav li a:hover,
+    .channel-nav li a.active {
+      background: var(--primary-bg);
+      color: var(--primary-dark);
+      border-left-color: var(--primary);
+    }
+
+    /* 中间主内容 */
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      min-width: 0;
+    }
+
+    /* 右辅助栏 */
+    .aux-sidebar {
+      position: sticky;
+      top: calc(var(--sticky-offset) + 16px);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .sidebar-card {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-light);
+      padding: 18px;
+      box-shadow: var(--shadow-default);
+    }
+
+    .sidebar-card h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .hot-list {
+      list-style: none;
+      counter-reset: hot;
+    }
+
+    .hot-list li {
+      counter-increment: hot;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 0;
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .hot-list li::before {
+      content: counter(hot);
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      background: var(--surface-alt);
+      color: var(--text-tertiary);
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .hot-list li:nth-child(-n+3)::before {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .hot-list li a {
+      color: var(--text-secondary);
+      transition: color 0.15s;
+    }
+
+    .hot-list li a:hover {
+      color: var(--primary);
+    }
+
+    /* ---------- 公共板块样式 ---------- */
+    .section {
+      scroll-margin-top: var(--sticky-offset);
+    }
+
+    .section-header {
+      margin-bottom: 20px;
+    }
+
+    .section-header h2 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.3px;
+      margin-bottom: 4px;
+    }
+
+    .section-header p {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    /* ---------- 1. 领域概览 ---------- */
+    .overview-text {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.85;
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-light);
+      padding: 24px 28px;
+      box-shadow: var(--shadow-default);
+    }
+
+    .overview-text p + p {
+      margin-top: 12px;
+    }
+
+    /* ---------- 2. 精选卡片网格 ---------- */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .content-card {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-light);
+      overflow: hidden;
+      box-shadow: var(--shadow-default);
+      transition: box-shadow 0.2s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .content-card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    .card-img-wrap {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: var(--surface-alt);
+    }
+
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .content-card:hover .card-img-wrap img {
+      transform: scale(1.03);
+    }
+
+    .card-type-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: var(--radius-tag);
+      letter-spacing: 0.3px;
+    }
+
+    .card-body {
+      padding: 12px 14px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-desc {
+      font-size: 12.5px;
+      color: var(--text-tertiary);
+      line-height: 1.55;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: auto;
+      padding-top: 4px;
+    }
+
+    .tag {
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: var(--radius-tag);
+      background: var(--surface-alt);
+      color: var(--text-tertiary);
+      border: 1px solid var(--border-light);
+    }
+
+    .tag-hot {
+      background: var(--primary-bg);
+      color: var(--primary-dark);
+      border-color: transparent;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11.5px;
+      color: var(--text-tertiary);
+      padding-top: 6px;
+      border-top: 1px solid var(--border-light);
+      margin-top: 4px;
+    }
+
+    .card-meta .heat {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* ---------- 3. 最新更新列表 ---------- */
+    .update-list {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-light);
+      overflow: hidden;
+      box-shadow: var(--shadow-default);
+    }
+
+    .update-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-light);
+      transition: background 0.15s;
+    }
+
+    .update-item:last-child {
+      border-bottom: none;
+    }
+
+    .update-item:hover {
+      background: var(--surface-alt);
+    }
+
+    .update-date {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      font-variant-numeric: tabular-nums;
+      flex-shrink: 0;
+      width: 64px;
+      padding-top: 2px;
+    }
+
+    .update-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .update-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .update-summary {
+      font-size: 12.5px;
+      color: var(--text-tertiary);
+      line-height: 1.5;
+    }
+
+    /* ---------- 4. 分类入口 ---------- */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .category-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 18px 10px;
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-default);
+      transition: box-shadow 0.2s, transform 0.15s, border-color 0.2s;
+      text-align: center;
+    }
+
+    .category-item:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+      border-color: var(--primary-light);
+    }
+
+    .category-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--primary-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .category-name {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .category-count {
+      font-size: 11px;
+      color: var(--text-tertiary);
+    }
+
+    /* ---------- 5. 深度解析 ---------- */
+    .deep-dive {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-light);
+      padding: 28px 32px;
+      box-shadow: var(--shadow-default);
+      font-size: 14.5px;
+      color: var(--text-secondary);
+      line-height: 1.85;
+    }
+
+    .deep-dive h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 24px 0 10px;
+      padding-left: 12px;
+      border-left: 3px solid var(--primary);
+    }
+
+    .deep-dive h3:first-of-type {
+      margin-top: 0;
+    }
+
+    .deep-dive p {
+      margin-bottom: 12px;
+    }
+
+    .deep-dive ul {
+      margin: 8px 0 14px 20px;
+      list-style: disc;
+    }
+
+    .deep-dive li {
+      margin-bottom: 6px;
+    }
+
+    .deep-dive strong {
+      color: var(--text-primary);
+    }
+
+    .deep-dive .callout {
+      background: var(--primary-bg);
+      border-radius: var(--radius-btn);
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-size: 13.5px;
+      border-left: 3px solid var(--primary);
+      color: var(--text-secondary);
+    }
+
+    /* ---------- 6. 体验指南 ---------- */
+    .guide-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-light);
+      overflow: hidden;
+      box-shadow: var(--shadow-default);
+    }
+
+    .guide-step {
+      display: flex;
+      gap: 16px;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .guide-step:last-child {
+      border-bottom: none;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-content h4 {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .step-content p {
+      font-size: 13.5px;
+      color: var(--text-tertiary);
+      line-height: 1.65;
+    }
+
+    /* ---------- 7. FAQ ---------- */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .faq-item {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-default);
+      overflow: hidden;
+    }
+
+    .faq-item summary {
+      padding: 14px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: background 0.15s;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+      content: '+';
+      font-size: 18px;
+      color: var(--text-tertiary);
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+
+    .faq-item[open] summary::after {
+      content: '−';
+    }
+
+    .faq-item summary:hover {
+      background: var(--surface-alt);
+    }
+
+    .faq-answer {
+      padding: 0 18px 14px;
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ---------- 8. 用户评论 ---------- */
+    .comment-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .comment-item {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-light);
+      padding: 14px 16px;
+      box-shadow: var(--shadow-default);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .comment-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .comment-avatar {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--primary-bg);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .comment-nickname {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .comment-time {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      margin-left: auto;
+    }
+
+    .comment-text {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ---------- 9. 相关资讯 ---------- */
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-light);
+      overflow: hidden;
+      box-shadow: var(--shadow-default);
+    }
+
+    .news-item {
+      display: flex;
+      gap: 16px;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .news-item:last-child {
+      border-bottom: none;
+    }
+
+    .news-thumb {
+      flex-shrink: 0;
+      width: 100px;
+      height: 70px;
+      border-radius: var(--radius-btn);
+      overflow: hidden;
+      background: var(--surface-alt);
+    }
+
+    .news-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .news-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .news-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 3px;
+    }
+
+    .news-date {
+      font-size: 11.5px;
+      color: var(--primary);
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .news-summary {
+      font-size: 12.5px;
+      color: var(--text-tertiary);
+      line-height: 1.5;
+    }
+
+    /* ---------- 10. 相关推荐 ---------- */
+    .recommend-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .recommend-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 7px 14px;
+      border-radius: 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-secondary);
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+
+    .recommend-tag:hover {
+      background: var(--primary-bg);
+      border-color: var(--primary-light);
+      color: var(--primary-dark);
+    }
+
+    /* ---------- 11. 补充板块：时间线 ---------- */
+    .timeline {
+      position: relative;
+      padding-left: 28px;
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-light);
+      padding: 24px 24px 24px 44px;
+      box-shadow: var(--shadow-default);
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 22px;
+      top: 24px;
+      bottom: 24px;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 20px;
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -28px;
+      top: 5px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--primary);
+      border: 2px solid var(--surface);
+      box-shadow: 0 0 0 2px var(--primary-light);
+    }
+
+    .timeline-date {
+      font-size: 12px;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .timeline-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .timeline-desc {
+      font-size: 12.5px;
+      color: var(--text-tertiary);
+      line-height: 1.5;
+    }
+
+    /* ---------- 投稿互动板块 ---------- */
+    .interact-banner {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      border-radius: var(--radius-banner);
+      padding: 28px 32px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .interact-banner h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .interact-banner p {
+      font-size: 13px;
+      opacity: 0.85;
+      line-height: 1.5;
+    }
+
+    .interact-banner .btn {
+      background: #fff;
+      color: var(--primary-dark);
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    .interact-banner .btn:hover {
+      background: var(--primary-bg);
+    }
+
+    /* ---------- 页脚 ---------- */
+    .site-footer {
+      background: var(--text-primary);
+      color: rgba(255, 255, 255, 0.7);
+      padding: 48px 0 0;
+      margin-top: 24px;
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr 1fr;
+      gap: 32px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-brand .logo-text {
+      color: #fff;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .footer-brand p {
+      font-size: 13px;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.55);
+      max-width: 300px;
+    }
+
+    .footer-col h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-col a {
+      display: block;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.55);
+      padding: 3px 0;
+      transition: color 0.15s;
+    }
+
+    .footer-col a:hover {
+      color: #fff;
+    }
+
+    .footer-bottom {
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* ---------- 回到顶部 ---------- */
+    .back-to-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      box-shadow: var(--shadow-hover);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s, visibility 0.25s, background 0.2s;
+      z-index: 900;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background: var(--primary-dark);
+    }
+
+    /* ---------- 响应式 ---------- */
+    @media (max-width: 1024px) {
+      .layout-3col {
+        grid-template-columns: 1fr 260px;
+      }
+
+      .channel-sidebar {
+        display: none;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .hero-visual {
+        display: none;
+      }
+
+      .hero-content h1 {
+        font-size: 32px;
+      }
+
+      .category-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .main-nav {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .header-inner {
+        justify-content: space-between;
+      }
+
+      .search-box {
+        display: none;
+      }
+    }
+
+    @media (max-width: 740px) {
+      .layout-3col {
+        grid-template-columns: 1fr;
+      }
+
+      .aux-sidebar {
+        position: static;
+        order: 2;
+      }
+
+      .main-content {
+        order: 1;
+      }
+
+      .hero {
+        padding: 32px 0 24px;
+      }
+
+      .hero-content h1 {
+        font-size: 26px;
+      }
+
+      .hero-desc {
+        font-size: 14px;
+      }
+
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .card-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      }
+
+      .comment-list {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .news-item {
+        flex-direction: column;
+      }
+
+      .news-thumb {
+        width: 100%;
+        height: 120px;
+      }
+
+      .announce-track {
+        gap: 16px;
+        font-size: 12px;
+      }
+
+      .announce-bar .brand-mark {
+        display: none;
+      }
+
+      .header-inner {
+        padding: 0 16px;
+      }
+
+      .container {
+        padding: 0 16px;
+      }
+
+      .deep-dive {
+        padding: 20px 18px;
+      }
+
+      .hero-stats {
+        gap: 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* 可见焦点 */
+    :focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    /* 无搜索结果提示 */
+    .no-results {
+      display: none;
+      padding: 16px;
+      font-size: 14px;
+      color: var(--text-tertiary);
+      text-align: center;
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      border: 1px dashed var(--border);
+    }
+
+    .no-results.show {
+      display: block;
+    }
+  </style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+  <!-- 吸顶公告条 -->
+  <div class="announce-bar" role="banner">
+    <span class="brand-mark">性感美女大奶</span>
+    <div class="announce-track">
+      <span class="announce-item">
+        <span class="dot"></span>
+        <span class="announce-date">11月7日</span>
+        新增「林小雅 · 蕾丝私房」写真图包 32P
+      </span>
+      <span class="announce-item">
+        <span class="dot"></span>
+        <span class="announce-date">11月6日</span>
+        「夏沐晴 · 泳装特辑」4K 视频片段上线
+      </span>
+      <span class="announce-item">
+        <span class="dot"></span>
+        <span class="announce-date">11月5日</span>
+        本周热度榜更新：苏晚晚升至第 2 位
+      </span>
+    </div>
+  </div>
+
+  <!-- 吸顶页头 -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo-group">
+        <svg class="logo-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="20" cy="20" r="18" stroke="#b81d4e" stroke-width="2.5" fill="#fdf0f4"/>
+          <path d="M12 22c2-5 6-9 8-9s6 4 8 9" stroke="#b81d4e" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <circle cx="20" cy="16" r="2.5" fill="#b81d4e"/>
+          <path d="M14 27h12" stroke="#d94a78" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-text">性感美女大奶</span>
+      </div>
+
+      <nav class="main-nav" aria-label="主导航">
+        <a href="/#channel-photo">写真图包</a>
+        <a href="/#channel-video">视频片段</a>
+        <a href="/#channel-model">模特资料</a>
+        <a href="/#channel-rank">热度榜单</a>
+        <a href="/#channel-update">更新动态</a>
+        <a href="/#channel-guide">浏览指南</a>
+        <a href="/#channel-faq">常见问答</a>
+        <a href="/#channel-comment">用户评论</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="search-box">
+          <input type="search" id="searchInput" placeholder="搜索条目或标签…" aria-label="搜索内容">
+          <button type="button" id="searchBtn" aria-label="搜索">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          </button>
+        </div>
+        <button class="hamburger" id="hamburgerBtn" aria-label="打开菜单" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 移动端菜单 -->
+  <div class="menu-overlay" id="menuOverlay"></div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="移动端导航">
+    <a href="/#channel-photo">写真图包</a>
+    <a href="/#channel-video">视频片段</a>
+    <a href="/#channel-model">模特资料</a>
+    <a href="/#channel-rank">热度榜单</a>
+    <a href="/#channel-update">更新动态</a>
+    <a href="/#channel-guide">浏览指南</a>
+    <a href="/#channel-faq">常见问答</a>
+    <a href="/#channel-comment">用户评论</a>
+  </nav>
+
+  <!-- 首屏 -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <h1>性感美女大奶</h1>
+          <p class="hero-desc">
+            汇集写真图包、视频片段与模特资料，覆盖私房、泳装、蕾丝、日常等视觉风格。
+            提供分类浏览、热度筛选和更新追踪，适合按类型查找具体条目、对比模特作品集。
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="/#channel-photo">浏览写真图包</a>
+            <a class="btn btn-outline" href="/#channel-rank">查看热度榜单</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-num">1,240</span>
+              <span class="stat-label">收录图包</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">386</span>
+              <span class="stat-label">视频片段</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">57</span>
+              <span class="stat-label">模特档案</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <svg viewBox="0 0 360 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="heroGrad1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#fdf0f4"/>
+                <stop offset="100%" stop-color="#f2d5e0"/>
+              </linearGradient>
+              <linearGradient id="heroGrad2" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#d94a78"/>
+                <stop offset="100%" stop-color="#b81d4e"/>
+              </linearGradient>
+            </defs>
+            <rect x="20" y="20" width="320" height="280" rx="20" fill="url(#heroGrad1)" opacity="0.6"/>
+            <rect x="60" y="50" width="160" height="200" rx="14" fill="#fff" stroke="#eadde2" stroke-width="1.5"/>
+            <rect x="76" y="66" width="128" height="90" rx="8" fill="#f2d5e0"/>
+            <circle cx="140" cy="102" r="24" fill="#d94a78" opacity="0.5"/>
+            <path d="M100 140c8-16 24-24 40-24s32 8 40 24" stroke="#b81d4e" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.6"/>
+            <rect x="76" y="172" width="90" height="8" rx="4" fill="#eadde2"/>
+            <rect x="76" y="188" width="60" height="8" rx="4" fill="#eadde2"/>
+            <rect x="76" y="208" width="40" height="20" rx="6" fill="#fdf0f4" stroke="#d94a78" stroke-width="1"/>
+            <rect x="230" y="80" width="90" height="120" rx="12" fill="#fff" stroke="#eadde2" stroke-width="1.5"/>
+            <rect x="244" y="94" width="62" height="60" rx="6" fill="#f2d5e0"/>
+            <circle cx="275" cy="120" r="14" fill="#b81d4e" opacity="0.4"/>
+            <rect x="244" y="164" width="40" height="6" rx="3" fill="#eadde2"/>
+            <rect x="244" y="176" width="30" height="6" rx="3" fill="#eadde2"/>
+            <rect x="230" y="220" width="90" height="50" rx="12" fill="url(#heroGrad2)" opacity="0.15"/>
+            <text x="245" y="250" font-family="system-ui" font-size="12" fill="#b81d4e" font-weight="600">11月热榜</text>
+            <circle cx="300" cy="260" r="22" fill="url(#heroGrad2)" opacity="0.9"/>
+            <text x="293" y="265" font-family="system-ui" font-size="14" fill="#fff" font-weight="700">TOP</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 主内容区：三栏布局 -->
+  <div class="container">
+    <div class="layout-3col">
+
+      <!-- 左频道索引 -->
+      <aside class="channel-sidebar" aria-label="频道索引">
+        <h2>频道索引</h2>
+        <ul class="channel-nav">
+          <li><a href="/#channel-photo" class="active">写真图包</a></li>
+          <li><a href="/#channel-video">视频片段</a></li>
+          <li><a href="/#channel-model">模特资料</a></li>
+          <li><a href="/#channel-rank">热度榜单</a></li>
+          <li><a href="/#channel-update">更新动态</a></li>
+          <li><a href="/#channel-guide">浏览指南</a></li>
+          <li><a href="/#channel-faq">常见问答</a></li>
+          <li><a href="/#channel-comment">用户评论</a></li>
+          <li><a href="/#channel-news">相关资讯</a></li>
+          <li><a href="/#channel-recommend">相关推荐</a></li>
+        </ul>
+      </aside>
+
+      <!-- 中间主内容 -->
+      <main class="main-content">
+
+        <!-- 1. 主题领域概览 -->
+        <section class="section" id="channel-overview">
+          <div class="section-header">
+            <h2>写真与视频内容方向</h2>
+            <p>当前收录的视觉类型与值得关注的条目</p>
+          </div>
+          <div class="overview-text">
+            <p>
+              这一领域的内容主要分几个方向：<strong>私房写真</strong>以室内自然光、家居场景为主，强调身体线条和情绪氛围；
+              <strong>泳装特辑</strong>多在户外泳池或海边拍摄，注重光线和肤色呈现；
+              <strong>蕾丝内衣</strong>系列偏向精致细节和材质特写，通常以图包形式发布，单套 20 到 40 张不等。
+              视频片段则分短剪辑（15—60 秒）和完整花絮（3—8 分钟）两类，前者多在社交平台流转，后者需要进入图包合集查看。
+            </p>
+            <p>
+              模特资料页按作品类型、拍摄风格和更新频率整理。近期值得留意的条目包括林小雅 11 月 7 日发布的「蕾丝私房」32P 图包，
+              夏沐晴 11 月 6 日上线的泳装 4K 片段，以及苏晚晚本周热度上升至第 2 位的日常系写真合集。
+              图包的判断标准集中在光线运用、构图密度和套图完整度，视频则看画质规格、镜头时长和是否有剪辑断裂。
+            </p>
+          </div>
+        </section>
+
+        <!-- 2. 精选内容推荐 -->
+        <section class="section" id="channel-photo">
+          <div class="section-header">
+            <h2>精选写真图包与视频</h2>
+            <p>按条目名、类型标签和热度值排列</p>
+          </div>
+          <div class="card-grid" id="cardGrid">
+
+            <article class="content-card" data-title="林小雅 蕾丝私房 32P">
+              <div class="card-img-wrap">
+                <img src="https://picsum.photos/seed/linxiaoya-01/400/300" alt="林小雅蕾丝私房写真室内暖光构图" width="400" height="300" loading="lazy">
+                <span class="card-type-badge">图包</span>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">林小雅 · 蕾丝私房 32P</h3>
+                <p class="card-desc">室内窗边自然光，黑色蕾丝与米色床品对比，第 12—18 张为半身特写，构图偏紧凑。</p>
+                <div class="card-tags">
+                  <span class="tag">私房</span>
+                  <span class="tag">蕾丝</span>
+                  <span class="tag tag-hot">32P</span>
+                </div>
+                <div class="card-meta">
+                  <span>11月7日</span>
+                  <span class="heat">热度 9,420</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="content-card" data-title="夏沐晴 泳装特辑 4K">
+              <div class="card-img-wrap">
+                <img src="https://picsum.photos/seed/xiamuqing-02/400/300" alt="夏沐晴泳装特辑户外泳池拍摄" width="400" height="300" loading="lazy">
+                <span class="card-type-badge">视频</span>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">夏沐晴 · 泳装特辑 4K 片段</h3>
+                <p class="card-desc">户外泳池下午 3 点侧逆光，4K/30fps，总长 4 分 12 秒，包含 3 组镜头切换和一段水下拍摄。</p>
+                <div class="card-tags">
+                  <span class="tag">泳装</span>
+                  <span class="tag">4K</span>
+                  <span class="tag tag-hot">新上线</span>
+                </div>
+                <div class="card-meta">
+                  <span>11月6日</span>
+                  <span class="heat">热度 8,760</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="content-card" data-title="苏晚晚 日常系合集">
+              <div class="card-img-wrap">
+                <img src="https://picsum.photos/seed/suwanwan-03/400/300" alt="苏晚晚日常系写真白色T恤居家场景" width="400" height="300" loading="lazy">
+                <span class="card-type-badge">图包</span>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">苏晚晚 · 日常系合集 48P</h3>
+                <p class="card-desc">白色 T 恤与牛仔短裤，咖啡馆和街角场景，整体色调偏暖，适合看自然状态下的表情管理。</p>
+                <div class="card-tags">
+                  <span class="tag">日常</span>
+                  <span class="tag">街拍</span>
+                  <span class="tag tag-hot">热搜第2</span>
+                </div>
+                <div class="card-meta">
+                  <span>11月5日</span>
+                  <span class="heat">热度 11,280</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="content-card" data-title="陈可欣 黑色吊带 24P">
+              <div class="card-img-wrap">
+                <img src="https://picsum.photos/seed/chenkexin-04/400/300" alt="陈可欣黑色吊带裙暗调棚拍" width="400" height="300" loading="lazy">
+                <span class="card-type-badge">图包</span>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">陈可欣 · 黑色吊带 24P</h3>
+                <p class="card-desc">暗调棚拍，单侧柔光箱，黑色吊带裙与深灰背景，第 8—14 张对锁骨和肩线有重点呈现。</p>
+                <div class="card-tags">
+                  <span class="tag">棚拍</span>
+                  <span class="tag">暗调</span>
+                  <span class="tag">吊带</span>
+                </div>
+                <div class="card-meta">
+                  <span>11月4日</span>
+                  <span class="heat">热度 6,850</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="content-card" data-title="周雨桐 海边比基尼">
+              <div class="card-img-wrap">
+                <img src="https://picsum.photos/seed/zhouyutong-05/400/300" alt="周雨桐海边比基尼黄昏逆光拍摄" width="400" height="300" loading="lazy">
+                <span class="card-type-badge">图包</span>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">周雨桐 · 海边比基尼 36P</h3>
+                <p class="card-desc">黄昏逆光，浪花和沙滩背景，部分照片有轻微过曝但整体氛围感强，适合看自然光下的肤色过渡。</p>
+                <div class="card-tags">
+                  <span class="tag">海边</span>
+                  <span class="tag">比基尼</span>
+                  <span class="tag">逆光</span>
+                </div>
+                <div class="card-meta">
+                  <span>11月3日</span>
+                  <span class="heat">热度 7,320</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="content-card" data-title="顾盼盼 浴室雾气">
+              <div class="card-img-wrap">
+                <img src="https://picsum.photos/seed/gupanpan-06/400/300" alt="顾盼盼浴室雾气氛围写真" width="400" height="300" loading="lazy">
+                <span class="card-type-badge">图包</span>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">顾盼盼 · 浴室雾气 28P</h3>
+                <p class="card-desc">浴室蒸汽环境，镜面反射与磨砂玻璃遮挡，第 20 张之后有几张高对比剪影，构图偏实验性。</p>
+                <div class="card-tags">
+                  <span class="tag">浴室</span>
+                  <span class="tag">雾气</span>
+                  <span class="tag tag-hot">编辑推荐</span>
+                </div>
+                <div class="card-meta">
+                  <span>11月2日</span>
+                  <span class="heat">热度 5,940</span>
+                </div>
+              </div>
+            </article>
+
+          </div>
+          <div class="no-results" id="noResults">没有匹配的条目，试试其他关键词。</div>
+        </section>
+
+        <!-- 3. 最新更新 -->
+        <section class="section" id="channel-update">
+          <div class="section-header">
+            <h2>近 7 天更新动态</h2>
+            <p>条目名与具体发布内容</p>
+          </div>
+          <div class="update-list">
+            <div class="update-item">
+              <span class="update-date">11月7日</span>
+              <div class="update-content">
+                <div class="update-title">林小雅「蕾丝私房」32P 图包</div>
+                <div class="update-summary">下午 2 点发布，首日下载量 1,840 次，评论区集中在第 12—18 张的光线处理。</div>
+              </div>
+            </div>
+            <div class="update-item">
+              <span class="update-date">11月6日</span>
+              <div class="update-content">
+                <div class="update-title">夏沐晴泳装特辑 4K 片段</div>
+                <div class="update-summary">4 分 12 秒版本上线，包含泳池边和水下两段，文件大小 1.2GB，需在合集页查看。</div>
+              </div>
+            </div>
+            <div class="update-item">
+              <span class="update-date">11月5日</span>
+              <div class="update-content">
+                <div class="update-title">苏晚晚日常系合集 48P 升热度第 2</div>
+                <div class="update-summary">本周热度值从 8,900 升至 11,280，超过陈可欣，仅次于林小雅。</div>
+              </div>
+            </div>
+            <div class="update-item">
+              <span class="update-date">11月4日</span>
+              <div class="update-content">
+                <div class="update-title">陈可欣黑色吊带 24P</div>
+                <div class="update-summary">棚拍暗调系列，单套 24 张，第 8—14 张为肩线特写，发布当天评论 63 条。</div>
+              </div>
+            </div>
+            <div class="update-item">
+              <span class="update-date">11月3日</span>
+              <div class="update-content">
+                <div class="update-title">周雨桐海边比基尼 36P</div>
+                <div class="update-summary">黄昏逆光拍摄，文件包含 36 张原图，其中 6 张有轻度过曝，作者在说明中标注了。</div>
+              </div>
+            </div>
+            <div class="update-item">
+              <span class="update-date">11月2日</span>
+              <div class="update-content">
+                <div class="update-title">顾盼盼浴室雾气 28P</div>
+                <div class="update-summary">实验性构图，磨砂玻璃和剪影各占一半，编辑推荐标签在 11 月 2 日傍晚加上。</div>
+              </div>
+            </div>
+            <div class="update-item">
+              <span class="update-date">11月1日</span>
+              <div class="update-content">
+                <div class="update-title">模特资料库新增 4 位档案</div>
+                <div class="update-summary">包括沈梦瑶、李初瑶、赵一诺和方婷，每位含作品列表和合作摄影师标注。</div>
+              </div>
+            </div>
+            <div class="update-item">
+              <span class="update-date">10月31日</span>
+              <div class="update-content">
+                <div class="update-title">10 月热度总榜结算</div>
+                <div class="update-summary">林小雅以 42,600 总热度居首，夏沐晴 38,200 第二，苏晚晚月内上升 4 位。</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. 分类入口 -->
+        <section class="section" id="channel-category">
+          <div class="section-header">
+            <h2>按风格与形式分类</h2>
+            <p>点击分类查看对应条目集合</p>
+          </div>
+          <div class="category-grid">
+            <a class="category-item" href="/#channel-photo">
+              <span class="category-icon">📷</span>
+              <span class="category-name">私房写真</span>
+              <span class="category-count">386 套</span>
+            </a>
+            <a class="category-item" href="/#channel-video">
+              <span class="category-icon">🎬</span>
+              <span class="category-name">视频片段</span>
+              <span class="category-count">386 条</span>
+            </a>
+            <a class="category-item" href="/#channel-photo">
+              <span class="category-icon">👙</span>
+              <span class="category-name">泳装特辑</span>
+              <span class="category-count">142 套</span>
+            </a>
+            <a class="category-item" href="/#channel-photo">
+              <span class="category-icon">🖤</span>
+              <span class="category-name">蕾丝内衣</span>
+              <span class="category-count">98 套</span>
+            </a>
+            <a class="category-item" href="/#channel-model">
+              <span class="category-icon">👤</span>
+              <span class="category-name">模特资料</span>
+              <span class="category-count">57 位</span>
+            </a>
+            <a class="category-item" href="/#channel-photo">
+              <span class="category-icon">🌿</span>
+              <span class="category-name">日常系</span>
+              <span class="category-count">210 套</span>
+            </a>
+            <a class="category-item" href="/#channel-rank">
+              <span class="category-icon">🔥</span>
+              <span class="category-name">热度榜单</span>
+              <span class="category-count">周榜</span>
+            </a>
+            <a class="category-item" href="/#channel-update">
+              <span class="category-icon">🆕</span>
+              <span class="category-name">最新更新</span>
+              <span class="category-count">7 天</span>
+            </a>
+          </div>
+        </section>
+
+        <!-- 5. 深度解析 -->
+        <section class="section" id="channel-deep">
+          <div class="section-header">
+            <h2>图包与视频的筛选判断</h2>
+            <p>从光线、构图、规格和连贯性四个层面拆解</p>
+          </div>
+          <div class="deep-dive">
+            <h3>光线质量决定图包上限</h3>
+            <p>
+              同一模特在不同光线条件下出片差距明显。林小雅 11 月 7 日「蕾丝私房」32P 用的是窗边自然光，
+              第 12—18 张的半身特写里，锁骨到肩头的过渡没有硬阴影，皮肤质感保留完整。
+              对比 10 月 18 日她发布的另一套室内棚拍，单侧柔光箱加反光板，面部高光偏硬，
+              评论区有 12 条提到“鼻梁过曝”。两套图包的拍摄设备都是 5D4 加 50mm f/1.4，差异在布光方式。
+            </p>
+            <p>
+              泳装类更依赖时段选择。夏沐晴 11 月 6 日的泳装特辑标注拍摄时间为下午 3 点，侧逆光，
+              水面的反光被控制在她腰部以下，不干扰上身线条。周雨桐 11 月 3 日的海边比基尼在黄昏拍摄，
+              36 张里有 6 张过曝，作者自己在说明里标注了，这种主动标注反而让可信度提高。
+            </p>
+
+            <h3>构图密度与套图完整度</h3>
+            <p>
+              一套 24P 的图包，如果全景、中景、特写的比例接近 1:1:1，浏览节奏会比较平。
+              陈可欣 11 月 4 日「黑色吊带」24P 的做法是：前 7 张全景交代环境，第 8—14 张集中半身和肩线特写，
+              最后 10 张回到半身但换了角度。这种“前段铺陈、中段集中、后段收束”的结构，
+              在实际浏览时比平均分配更耐看。顾盼盼 11 月 2 日「浴室雾气」28P 则是另一种思路——
+              磨砂玻璃遮挡和剪影交替出现，第 20 张之后几乎全是高对比剪影，实验性强但完整度打折扣。
+            </p>
+
+            <h3>视频规格与镜头连续性</h3>
+            <p>
+              4K/30fps 是目前泳装和私房视频的常见规格。夏沐晴 11 月 6 日的片段总长 4 分 12 秒，
+              包含 3 组镜头切换和一段水下拍摄，水下部分大约 40 秒，码率标注为 45Mbps。
+              判断一个视频片段值不值得看，可以核对三个点：
+            </p>
+            <ul>
+              <li><strong>帧率与码率</strong>：30fps 在慢动作回放时会有轻微卡顿，60fps 更顺但文件体积翻倍。</li>
+              <li><strong>剪辑断裂</strong>：转场如果超过 3 处且没有逻辑，通常是素材不够硬切凑时长。</li>
+              <li><strong>音频轨</strong>：部分片段只有环境音或静音，有配乐的版本一般经过二次处理。</li>
+            </ul>
+
+            <div class="callout">
+              <strong>可核对结构：</strong>判断一条视频“画质好”可以拆成——分辨率（4K/1080p）、
+              码率（40Mbps 以上为高）、帧率（30 或 60）、是否有压缩伪影（暗部是否出现色块）。
+              四项里缺两项以上，实际观感就会打折扣。
+            </div>
+
+            <h3>模特资料页的参考价值</h3>
+            <p>
+              57 位模特的档案里，有价值的信息包括：常合作的摄影师（影响风格稳定性）、
+              历史作品类型分布（判断是否专攻某一类）、更新频率（月更还是周更）。
+              苏晚晚的档案显示她 10 月更新了 4 套图包，频率稳定，类型集中在日常系和街拍；
+              林小雅则是双周更，但单套体量更大（32P 以上）。两种节奏对应不同的消费预期——
+              追更频繁的适合关注苏晚晚，看单套完整度的适合林小雅。
+            </p>
+          </div>
+        </section>
+
+        <!-- 6. 体验指南 -->
+        <section class="section" id="channel-guide">
+          <div class="section-header">
+            <h2>浏览顺序与投入判断</h2>
+            <p>先看什么、怎么比较、什么时候可以跳过</p>
+          </div>
+          <div class="guide-steps">
+            <div class="guide-step">
+              <span class="step-num">1</span>
+              <div class="step-content">
+                <h4>先按类型锁定范围</h4>
+                <p>私房、泳装、蕾丝、日常四类的拍摄条件差异大。想看光线和构图细节，从私房和蕾丝入手；想看户外氛围和肤色表现，选泳装和海边。不要混着比，标准不一样。</p>
+              </div>
+            </div>
+            <div class="guide-step">
+              <span class="step-num">2</span>
+              <div class="step-content">
+                <h4>看套图数量与结构</h4>
+                <p>24P 以下的图包适合快速浏览，32P 以上才有空间做镜头节奏。陈可欣 24P 的“前中后”结构是一个参考样本，顾盼盼 28P 的实验性版本则适合想看不同构图的人。</p>
+              </div>
+            </div>
+            <div class="guide-step">
+              <span class="step-num">3</span>
+              <div class="step-content">
+                <h4>核对视频规格标注</h4>
+                <p>片段页如果标了 4K、码率和时长，先看这三项。夏沐晴 4 分 12 秒 / 45Mbps 属于中上水平，如果只有 1080p / 15Mbps 且时长超过 5 分钟，通常是压缩过的合集。</p>
+              </div>
+            </div>
+            <div class="guide-step">
+              <span class="step-num">4</span>
+              <div class="step-content">
+                <h4>用模特档案做交叉判断</h4>
+                <p>同一个模特的两套图包，光线和构图差异往往比不同模特之间更大。先看档案里的合作摄影师和拍摄时间，再决定要不要打开第二套。</p>
+              </div>
+            </div>
+            <div class="guide-step">
+              <span class="step-num">5</span>
+              <div class="step-content">
+                <h4>热度值只作参考</h4>
+                <p>热度高不代表适合每个人。苏晚晚日常系热度 11,280，但如果你关注的是棚拍和暗调，陈可欣 6,850 的吊带系列反而更对路。把热度和类型标签一起看。</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. FAQ -->
+        <section class="section" id="channel-faq">
+          <div class="section-header">
+            <h2>常见问题</h2>
+            <p>围绕图包、视频和模特资料的细节问答</p>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>一套 32P 的写真图包大概要拍多久？</summary>
+              <div class="faq-answer">
+                室内私房通常 2—3 小时，包含布光和换装。林小雅 11 月 7 日的 32P 图包从下午 1 点拍到 4 点，中间换了三套蕾丝，窗边自然光在 3 点后开始偏弱，最后 8 张用的是补光。户外泳装视场地而定，夏沐晴的 4K 片段拍摄跨度是半天，素材剪成 4 分 12 秒。
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>4K 视频片段和 1080p 在手机上看差别大吗？</summary>
+              <div class="faq-answer">
+                手机屏幕尺寸下，4K 和 1080p 的静态画面差距有限，但 4K 的码率通常更高（40Mbps 以上），在暗部细节和慢动作回放时更少出现色块。夏沐晴 11 月 6 日的片段码率 45Mbps，水下部分的暗部过渡比 1080p/15Mbps 的版本干净。如果只看截图，两者接近；看动态镜头，4K 优势明显。
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>私房写真里“自然光”和“棚拍布光”哪个更好看？</summary>
+              <div class="faq-answer">
+                两种没有绝对优劣。自然光的肤色过渡更柔和，但受时段限制——林小雅 11 月 7 日的窗边系列在下午 2—3 点拍摄，过了 3 点半光线就偏暖偏弱。棚拍布光可控性强，陈可欣 11 月 4 日的暗调吊带用单侧柔光箱，肩线轮廓更清晰，但面部高光需要额外控制。看个人偏好：要氛围选自然光，要结构选棚拍。
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>图包里的“原图”和“压缩版”怎么区分？</summary>
+              <div class="faq-answer">
+                看文件体积和分辨率。一套 32P 的原图，单张 JPEG 通常在 8—15MB，总包 300MB 以上；压缩版单张 1—3MB，总包 60—100MB。周雨桐 11 月 3 日的海边 36P 标注了“原图包”，文件体积 420MB，压缩版是 88MB。另外原图保留 EXIF，能看到快门、光圈和 ISO，压缩版通常剥离了这些信息。
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>为什么有些视频片段只有 1 分钟，有些 5 分钟以上？</summary>
+              <div class="faq-answer">
+                1 分钟左右的通常是社交平台剪辑版，去掉冗余镜头只保留高光；5 分钟以上的是完整花絮，包含走位、换装和 NG 片段。夏沐晴 11 月 6 日的泳装片段属于完整版，4 分 12 秒里有一段水下拍摄的完整过程。剪辑版适合快速判断风格，完整版适合看拍摄节奏。
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary>热度榜单的排名依据是什么？</summary>
+              <div class="faq-answer">
+                按周内下载量、浏览时长和评论数加权计算。苏晚晚 11 月 5 日升到第 2 位，主要拉动项是评论数——48P 日常系合集发布当天评论 137 条，是陈可欣吊带系列的 2 倍多。林小雅居首靠的是下载量（首日 1,840 次）和浏览时长（人均 6 分 20 秒）。榜单每周一更新，10 月总榜在 10 月 31 日结算。
+              </div>
+            </details>
+          </div>
+        </section>
+
+        <!-- 8. 用户评论 -->
+        <section class="section" id="channel-comment">
+          <div class="section-header">
+            <h2>用户评论</h2>
+            <p>来自浏览者的真实反馈，含中性评价</p>
+          </div>
+          <div class="comment-list">
+            <div class="comment-item">
+              <div class="comment-header">
+                <span class="comment-avatar">阿</span>
+                <span class="comment-nickname">阿哲不熬夜</span>
+                <span class="comment-time">11月7日</span>
+              </div>
+              <p class="comment-text">林小雅那套蕾丝私房第 14 张真的绝，窗边光打在锁骨上一点硬边都没有。前面几张反而一般，有点凑数。</p>
+            </div>
+            <div class="comment-item">
+              <div class="comment-header">
+                <span class="comment-avatar">小</span>
+                <span class="comment-nickname">小鹿乱撞_</span>
+                <span class="comment-time">11月7日</span>
+              </div>
+              <p class="comment-text">夏沐晴的水下那段值回票价，4 分钟里就这 40 秒反复看了三遍。其他镜头切得有点碎。</p>
+            </div>
+            <div class="comment-item">
+              <div class="comment-header">
+                <span class="comment-avatar">K</span>
+                <span class="comment-nickname">Karry_1024</span>
+                <span class="comment-time">11月6日</span>
+              </div>
+              <p class="comment-text">苏晚晚日常系能冲到第二我是没想到的，48P 里有一半是街拍，咖啡馆那几张还行，剩下的光太散。</p>
+            </div>
+            <div class="comment-item">
+              <div class="comment-header">
+                <span class="comment-avatar">路</span>
+                <span class="comment-nickname">路过看片</span>
+                <span class="comment-time">11月6日</span>
+              </div>
+              <p class="comment-text">陈可欣暗调那套 24P 太短了，刚看出感觉就没了。吊带裙的质感拍出来了，但场景就一个，有点单调。</p>
+            </div>
+            <div class="comment-item">
+              <div class="comment-header">
+                <span class="comment-avatar">海</span>
+                <span class="comment-nickname">海风咸咸的</span>
+                <span class="comment-time">11月5日</span>
+              </div>
+              <p class="comment-text">周雨桐海边那套过曝的 6 张作者自己标了，反而觉得挺诚实。黄昏光本来就难控。</p>
+            </div>
+            <div class="comment-item">
+              <div class="comment-header">
+                <span class="comment-avatar">柠</span>
+                <span class="comment-nickname">柠檬不酸</span>
+                <span class="comment-time">11月5日</span>
+              </div>
+              <p class="comment-text">顾盼盼浴室雾气那套剪影太多了，看到第 20 张后面就一个样。前面磨砂玻璃的几张比较有意思。</p>
+            </div>
+            <div class="comment-item">
+              <div class="comment-header">
+                <span class="comment-avatar">大</span>
+                <span class="comment-nickname">大橘为重</span>
+                <span class="comment-time">11月4日</span>
+              </div>
+              <p class="comment-text">模特资料页要是能按摄影师筛就好了，现在只能一个个翻。</p>
+            </div>
+            <div class="comment-item">
+              <div class="comment-header">
+                <span class="comment-avatar">深</span>
+                <span class="comment-nickname">深夜看片组</span>
+                <span class="comment-time">11月4日</span>
+              </div>
+              <p class="comment-text">热度榜前十我基本都看过，苏晚晚的日常系确实适合下饭，不用动脑子。</p>
+            </div>
+            <div class="comment-item">
+              <div class="comment-header">
+                <span class="comment-avatar">M</span>
+                <span class="comment-nickname">Mia在摸鱼</span>
+                <span class="comment-time">11月3日</span>
+              </div>
+              <p class="comment-text">为什么泳装特辑都是下午拍？我关注的一个摄影师说上午 10 点的光更干净，有人试过吗。</p>
+            </div>
+            <div class="comment-item">
+              <div class="comment-header">
+                <span class="comment-avatar">老</span>
+                <span class="comment-nickname">老猫烧须</span>
+                <span class="comment-time">11月3日</span>
+              </div>
+              <p class="comment-text">4K 片段 1.2GB 确实有点大，手机存不了几部。建议出个 1080p 版本，画质够用就行。</p>
+            </div>
+            <div class="comment-item">
+              <div class="comment-header">
+                <span class="comment-avatar">一</span>
+                <span class="comment-nickname">一只小透明</span>
+                <span class="comment-time">11月2日</span>
+              </div>
+              <p class="comment-text">林小雅和夏沐晴的风格完全是两个方向，一个偏静态氛围，一个偏动态表现。都收。</p>
+            </div>
+            <div class="comment-item">
+              <div class="comment-header">
+                <span class="comment-avatar">不</span>
+                <span class="comment-nickname">不吃香菜</span>
+                <span class="comment-time">11月2日</span>
+              </div>
+              <p class="comment-text">顾盼盼那套编辑推荐有点过誉了，实验性归实验性，完整度确实不如陈可欣那套。</p>
+            </div>
+            <div class="comment-item">
+              <div class="comment-header">
+                <span class="comment-avatar">周</span>
+                <span class="comment-nickname">周周周末</span>
+                <span class="comment-time">11月1日</span>
+              </div>
+              <p class="comment-text">最近模特档案加的那四个新人，沈梦瑶的作品好像只有两套，资料有点空。</p>
+            </div>
+            <div class="comment-item">
+              <div class="comment-header">
+                <span class="comment-avatar">图</span>
+                <span class="comment-nickname">图图不糊涂</span>
+                <span class="comment-time">11月1日</span>
+              </div>
+              <p class="comment-text">32P 的图包现在越来越少了，大部分 24P 就收工，林小雅这种算良心。</p>
+            </div>
+            <div class="comment-item">
+              <div class="comment-header">
+                <span class="comment-avatar">L</span>
+                <span class="comment-nickname">Luna_7</span>
+                <span class="comment-time">10月31日</span>
+              </div>
+              <p class="comment-text">10 月总榜林小雅第一没悬念，42,600 的热度比第二多了 4,400。</p>
+            </div>
+            <div class="comment-item">
+              <div class="comment-header">
+                <span class="comment-avatar">路</span>
+                <span class="comment-nickname">路过的风</span>
+                <span class="comment-time">10月31日</span>
+              </div>
+              <p class="comment-text">有些视频片段的声音轨是静音的，看之前最好确认一下，不然很出戏。</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9. 相关资讯 -->
+        <section class="section" id="channel-news">
+          <div class="section-header">
+            <h2>近期资讯</h2>
+            <p>更新时间、数字与当事方</p>
+          </div>
+          <div class="news-list">
+            <article class="news-item">
+              <div class="news-thumb">
+                <img src="https://picsum.photos/seed/news-linxiaoya/600/400" alt="林小雅蕾丝私房图包发布资讯配图" width="600" height="400" loading="lazy">
+              </div>
+              <div class="news-body">
+                <div class="news-title">林小雅蕾丝私房图包首日下载 1,840 次</div>
+                <div class="news-date">2026-11-07</div>
+                <div class="news-summary">11 月 7 日下午 2 点上线，首日下载量 1,840 次，评论区 63 条中 12 条集中讨论第 12—18 张的窗边光线处理。</div>
+              </div>
+            </article>
+            <article class="news-item">
+              <div class="news-thumb">
+                <img src="https://picsum.photos/seed/news-xiamuqing/600/400" alt="夏沐晴泳装4K视频片段上线" width="600" height="400" loading="lazy">
+              </div>
+              <div class="news-body">
+                <div class="news-title">夏沐晴泳装 4K 片段上线，码率 45Mbps</div>
+                <div class="news-date">2026-11-06</div>
+                <div class="news-summary">片段总长 4 分 12 秒，包含 3 组镜头切换和一段约 40 秒的水下拍摄，文件大小 1.2GB，需在合集页查看。</div>
+              </div>
+            </article>
+            <article class="news-item">
+              <div class="news-thumb">
+                <img src="https://picsum.photos/seed/news-suwanwan/600/400" alt="苏晚晚日常系合集升至热度第二" width="600" height="400" loading="lazy">
+              </div>
+              <div class="news-body">
+                <div class="news-title">苏晚晚日常系合集热度升至第二</div>
+                <div class="news-date">2026-11-05</div>
+                <div class="news-summary">48P 日常系合集热度值从 8,900 升至 11,280，超过陈可欣的 6,850，仅次于林小雅的 9,420（周榜口径）。</div>
+              </div>
+            </article>
+            <article class="news-item">
+              <div class="news-thumb">
+                <img src="https://picsum.photos/seed/news-chenkexin/600/400" alt="陈可欣黑色吊带24P棚拍图包" width="600" height="400" loading="lazy">
+              </div>
+              <div class="news-body">
+                <div class="news-title">陈可欣黑色吊带 24P 发布，肩线特写占 7 张</div>
+                <div class="news-date">2026-11-04</div>
+                <div class="news-summary">单侧柔光箱布光，第 8—14 张为肩线和锁骨特写，发布当天评论 63 条，其中 9 条提到面部高光偏硬。</div>
+              </div>
+            </article>
+            <article class="news-item">
+              <div class="news-thumb">
+                <img src="https://picsum.photos/seed/news-zhouyutong/600/400" alt="周雨桐海边比基尼原图包360MB" width="600" height="400" loading="lazy">
+              </div>
+              <div class="news-body">
+                <div class="news-title">周雨桐海边 36P 原图包 420MB，6 张过曝主动标注</div>
+                <div class="news-date">2026-11-03</div>
+                <div class="news-summary">黄昏拍摄，36 张原图总包 420MB，作者在说明中标注 6 张轻度过曝，压缩版 88MB 同步放出。</div>
+              </div>
+            </article>
+            <article class="news-item">
+              <div class="news-thumb">
+                <img src="https://picsum.photos/seed/news-model/600/400" alt="模特资料库新增四位档案" width="600" height="400" loading="lazy">
+              </div>
+              <div class="news-body">
+                <div class="news-title">模特资料库新增沈梦瑶等 4 位档案</div>
+                <div class="news-date">2026-11-01</div>
+                <div class="news-summary">新增沈梦瑶、李初瑶、赵一诺、方婷，每位含作品列表和合作摄影师标注，沈梦瑶目前收录 2 套作品。</div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- 10. 相关推荐 -->
+        <section class="section" id="channel-recommend">
+          <div class="section-header">
+            <h2>相关推荐</h2>
+            <p>具体条目与方向词索引</p>
+          </div>
+          <div class="recommend-tags">
+            <a class="recommend-tag" href="/#channel-photo">林小雅蕾丝私房 32P</a>
+            <a class="recommend-tag" href="/#channel-video">夏沐晴泳装 4K 片段</a>
+            <a class="recommend-tag" href="/#channel-photo">苏晚晚日常系 48P</a>
+            <a class="recommend-tag" href="/#channel-photo">陈可欣黑色吊带 24P</a>
+            <a class="recommend-tag" href="/#channel-photo">周雨桐海边比基尼 36P</a>
+            <a class="recommend-tag" href="/#channel-photo">顾盼盼浴室雾气 28P</a>
+            <a class="recommend-tag" href="/#channel-guide">自然光 vs 棚拍布光对比</a>
+            <a class="recommend-tag" href="/#channel-deep">4K 视频码率参考</a>
+          </div>
+        </section>
+
+        <!-- 11. 补充板块：时间线 -->
+        <section class="section" id="channel-timeline">
+          <div class="section-header">
+            <h2>条目时间线</h2>
+            <p>近 30 天关键节点</p>
+          </div>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-date">2026-11-07</div>
+              <div class="timeline-title">林小雅「蕾丝私房」32P 发布</div>
+              <div class="timeline-desc">首日下载 1,840 次，窗边自然光，第 12—18 张为半身特写。</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">2026-11-06</div>
+              <div class="timeline-title">夏沐晴泳装 4K 片段上线</div>
+              <div class="timeline-desc">4 分 12 秒，45Mbps，含水下拍摄约 40 秒。</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">2026-11-05</div>
+              <div class="timeline-title">苏晚晚日常系热度升至第 2</div>
+              <div class="timeline-desc">热度值从 8,900 升至 11,280，超过陈可欣。</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">2026-11-04</div>
+              <div class="timeline-title">陈可欣黑色吊带 24P 发布</div>
+              <div class="timeline-desc">暗调棚拍，单侧柔光箱，评论 63 条。</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">2026-11-01</div>
+              <div class="timeline-title">模特资料库新增 4 位档案</div>
+              <div class="timeline-desc">沈梦瑶、李初瑶、赵一诺、方婷入库。</div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">2026-10-31</div>
+              <div class="timeline-title">10 月热度总榜结算</div>
+              <div class="timeline-desc">林小雅 42,600 居首，夏沐晴 38,200 第二。</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 投稿互动板块 -->
+        <section class="section" id="channel-submit">
+          <div class="interact-banner">
+            <div>
+              <h3>投稿你的图包或视频片段</h3>
+              <p>如果你有原创写真、泳装特辑或私房系列，欢迎提交条目信息，注明拍摄时间、光线条件和套图数量。</p>
+            </div>
+            <a class="btn" href="/#channel-submit">了解投稿要求</a>
+          </div>
+        </section>
+
+      </main>
+
+      <!-- 右辅助栏 -->
+      <aside class="aux-sidebar" aria-label="辅助信息">
+        <div class="sidebar-card">
+          <h3>本周热度榜</h3>
+          <ol class="hot-list">
+            <li><a href="/#channel-photo">林小雅 · 蕾丝私房 32P</a></li>
+            <li><a href="/#channel-photo">苏晚晚 · 日常系 48P</a></li>
+            <li><a href="/#channel-video">夏沐晴 · 泳装 4K</a></li>
+            <li><a href="/#channel-photo">周雨桐 · 海边比基尼 36P</a></li>
+            <li><a href="/#channel-photo">陈可欣 · 黑色吊带 24P</a></li>
+            <li><a href="/#channel-photo">顾盼盼 · 浴室雾气 28P</a></li>
+          </ol>
+        </div>
+        <div class="sidebar-card">
+          <h3>最近更新</h3>
+          <ul class="hot-list" style="counter-reset:none;">
+            <li style="counter-increment:none;">
+              <span style="width:18px;height:18px;display:none;"></span>
+              <a href="/#channel-photo">林小雅蕾丝私房 · 11月7日</a>
+            </li>
+            <li style="counter-increment:none;">
+              <a href="/#channel-video">夏沐晴泳装4K · 11月6日</a>
+            </li>
+            <li style="counter-increment:none;">
+              <a href="/#channel-photo">陈可欣黑色吊带 · 11月4日</a>
+            </li>
+            <li style="counter-increment:none;">
+              <a href="/#channel-photo">周雨桐海边比基尼 · 11月3日</a>
+            </li>
+          </ul>
+        </div>
+        <div class="sidebar-card">
+          <h3>浏览提示</h3>
+          <p style="font-size:12.5px;color:var(--text-tertiary);line-height:1.7;">
+            图包按套图数量标注，视频按分辨率和时长标注。模特资料页含历史作品类型分布，可用于交叉对比。
+          </p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- 页脚 -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="logo-text">性感美女大奶</div>
+          <p>
+            内容覆盖近 30 天写真图包、视频片段与模特资料更新，条目类型包括私房、泳装、蕾丝、日常四类。每周一更新热度榜单，每日追踪新发布条目。
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>内容分类</h4>
+          <a href="/#channel-photo">私房写真</a>
+          <a href="/#channel-video">视频片段</a>
+          <a href="/#channel-photo">泳装特辑</a>
+          <a href="/#channel-photo">蕾丝内衣</a>
+        </div>
+        <div class="footer-col">
+          <h4>浏览辅助</h4>
+          <a href="/#channel-rank">热度榜单</a>
+          <a href="/#channel-update">更新动态</a>
+          <a href="/#channel-guide">浏览指南</a>
+          <a href="/#channel-faq">常见问答</a>
+        </div>
+        <div class="footer-col">
+          <h4>互动与说明</h4>
+          <a href="/#channel-submit">投稿要求</a>
+          <a href="/#channel-comment">用户评论</a>
+          <a href="/#channel-news">相关资讯</a>
+          <a href="/#channel-recommend">相关推荐</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>页面内容为示例条目与公开信息整理，日期以 2026 年 11 月 8 日为基准。</span>
+        <span>© 2026 性感美女大奶 · 内容聚合示例</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 回到顶部 -->
+  <button class="back-to-top" id="backToTop" aria-label="回到顶部">↑</button>
+
+  <!-- 结构化数据 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "性感美女大奶",
+    "description": "性感美女大奶内容聚合，收录写真图包、视频片段、模特资料与更新动态。",
+    "url": "https://example.com/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://example.com/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "一套 32P 的写真图包大概要拍多久？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "室内私房通常 2—3 小时，包含布光和换装。林小雅 11 月 7 日的 32P 图包从下午 1 点拍到 4 点，中间换了三套蕾丝，窗边自然光在 3 点后开始偏弱，最后 8 张用的是补光。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "4K 视频片段和 1080p 在手机上看差别大吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "手机屏幕尺寸下，4K 和 1080p 的静态画面差距有限，但 4K 的码率通常更高（40Mbps 以上），在暗部细节和慢动作回放时更少出现色块。夏沐晴 11 月 6 日的片段码率 45Mbps，水下部分的暗部过渡比 1080p/15Mbps 的版本干净。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "私房写真里“自然光”和“棚拍布光”哪个更好看？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "两种没有绝对优劣。自然光的肤色过渡更柔和，但受时段限制。棚拍布光可控性强。看个人偏好：要氛围选自然光，要结构选棚拍。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "图包里的“原图”和“压缩版”怎么区分？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "看文件体积和分辨率。一套 32P 的原图，单张 JPEG 通常在 8—15MB，总包 300MB 以上；压缩版单张 1—3MB，总包 60—100MB。原图保留 EXIF，压缩版通常剥离了这些信息。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "为什么有些视频片段只有 1 分钟，有些 5 分钟以上？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "1 分钟左右的通常是社交平台剪辑版，去掉冗余镜头只保留高光；5 分钟以上的是完整花絮，包含走位、换装和 NG 片段。剪辑版适合快速判断风格，完整版适合看拍摄节奏。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "热度榜单的排名依据是什么？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "按周内下载量、浏览时长和评论数加权计算。苏晚晚 11 月 5 日升到第 2 位，主要拉动项是评论数。榜单每周一更新，10 月总榜在 10 月 31 日结算。"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- 内联脚本 -->
+  <script>
+    (function() {
+      // 汉堡菜单
+      var hamburger = document.getElementById('hamburgerBtn');
+      var mobileMenu = document.getElementById('mobileMenu');
+      var overlay = document.getElementById('menuOverlay');
+
+      function toggleMenu(open) {
+        var isOpen = open !== undefined ? open : !mobileMenu.classList.contains('open');
+        mobileMenu.classList.toggle('open', isOpen);
+        overlay.classList.toggle('open', isOpen);
+        hamburger.classList.toggle('active', isOpen);
+        hamburger.setAttribute('aria-expanded', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      }
+
+      hamburger.addEventListener('click', function() {
+        toggleMenu();
+      });
+
+      overlay.addEventListener('click', function() {
+        toggleMenu(false);
+      });
+
+      mobileMenu.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          toggleMenu(false);
+        });
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+          toggleMenu(false);
+        }
+      });
+
+      // 搜索筛选
+      var searchInput = document.getElementById('searchInput');
+      var searchBtn = document.getElementById('searchBtn');
+      var cardGrid = document.getElementById('cardGrid');
+      var noResults = document.getElementById('noResults');
+      var allCards = Array.from(cardGrid.querySelectorAll('.content-card'));
+
+      function doSearch() {
+        var q = searchInput.value.trim().toLowerCase();
+        var visibleCount = 0;
+
+        allCards.forEach(function(card) {
+          var text = (card.getAttribute('data-title') || card.textContent).toLowerCase();
+          var match = q === '' || text.indexOf(q) !== -1;
+          card.style.display = match ? '' : 'none';
+          if (match) visibleCount++;
+        });
+
+        if (q !== '' && visibleCount === 0) {
+          noResults.classList.add('show');
+        } else {
+          noResults.classList.remove('show');
+        }
+      }
+
+      searchInput.addEventListener('input', doSearch);
+      searchBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        doSearch();
+      });
+      searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          doSearch();
+        }
+      });
+
+      // 回到顶部
+      var backBtn = document.getElementById('backToTop');
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > window.innerHeight) {
+          backBtn.classList.add('visible');
+        } else {
+          backBtn.classList.remove('visible');
+        }
+      }, { passive: true });
+
+      backBtn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // 频道导航高亮
+      var channelLinks = document.querySelectorAll('.channel-nav a');
+      var sections = [];
+      channelLinks.forEach(function(link) {
+        var href = link.getAttribute('href');
+        if (href && href.startsWith('/#')) {
+          var id = href.substring(2);
+          var el = document.getElementById(id);
+          if (el) sections.push({ el: el, link: link });
+        }
+      });
+
+      function highlightNav() {
+        var scrollPos = window.scrollY + 120;
+        var current = null;
+        sections.forEach(function(item) {
+          if (item.el.offsetTop <= scrollPos) {
+            current = item;
+          }
+        });
+        channelLinks.forEach(function(l) { l.classList.remove('active'); });
+        if (current) current.link.classList.add('active');
+      }
+
+      window.addEventListener('scroll', highlightNav, { passive: true });
+      highlightNav();
+
+      // 平滑锚点偏移（原生 CSS scroll-padding 已处理，此处做兜底）
+      document.querySelectorAll('a[href^="/#"]').forEach(function(anchor) {
+        anchor.addEventListener('click', function(e) {
+          var href = this.getAttribute('href');
+          if (!href || href === '/#') return;
+          var id = href.substring(2);
+          var target = document.getElementById(id);
+          if (target) {
+            e.preventDefault();
+            var offset = 100;
+            var top = target.getBoundingClientRect().top + window.scrollY - offset;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+            history.pushState(null, '', href);
+          }
+        });
+      });
+    })();
+  </script>
+
+</body>
+  </html>
